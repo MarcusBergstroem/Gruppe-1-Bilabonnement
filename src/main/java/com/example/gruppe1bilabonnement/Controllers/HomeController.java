@@ -3,7 +3,6 @@ package com.example.gruppe1bilabonnement.Controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.service.annotation.GetExchange;
 
 @Controller
 public class HomeController {
@@ -11,14 +10,19 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
         //model.addAttribute("madvarer", carService.fetchAll());
-        System.out.println("soerenbanjomus");
+        System.out.println("Hej med dig 1000");
+        System.out.println("Hej med dig 2000");
+        System.out.println("Hej med dig 3000");
+        System.out.println("Hej med dig VR");
         return "home/index";
     }
 
     //KAN DU SET DETTE?
 
-    @GetMapping("/createBanjomus")
+
+    @GetMapping("/createVirksomhed")
     public String createVirksomhed(){
         return "home/index";
     }
+
 }
