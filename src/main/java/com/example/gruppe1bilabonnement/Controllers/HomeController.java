@@ -10,6 +10,7 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
         //model.addAttribute("madvarer", carService.fetchAll());
+        System.out.println("Vigtig data");
         System.out.println("Hej med dig 1000");
         System.out.println("Hej med dig 2000");
         System.out.println("Hej med dig 3000");
@@ -24,5 +25,4 @@ public class HomeController {
     public String createVirksomhed(){
         return "home/index";
     }
-
 }
