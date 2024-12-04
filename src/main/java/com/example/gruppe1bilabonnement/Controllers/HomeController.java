@@ -10,6 +10,7 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
         //model.addAttribute("madvarer", carService.fetchAll());
+        System.out.println("Vigtig data");
         return "home/index";
     }
 }
