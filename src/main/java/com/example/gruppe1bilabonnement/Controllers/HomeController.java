@@ -14,6 +14,9 @@ public class HomeController {
         System.out.println("soerenbanjomus");
         return "home/index";
     }
+
+    //KAN DU SET DETTE?
+
     @GetMapping("/createBanjomus")
     public String createVirksomhed(){
         return "home/index";
