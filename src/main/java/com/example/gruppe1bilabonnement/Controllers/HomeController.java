@@ -22,7 +22,13 @@ public class HomeController {
 
 
     @GetMapping("/createVirksomhed")
-    public String createVirksomhed(){
+    public String createVirksomhed() {
         return "home/index";
     }
+
+    @GetMapping("/Create_rental_contract")
+    public String Create_rental_contract() {
+        return "home/Create_rental_contract"; // This should point to your HTML form for creating a rental contract
+    }
 }
+
