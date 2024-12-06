@@ -8,22 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        //model.addAttribute("madvarer", carService.fetchAll());
-        System.out.println("Vigtig data");
-        System.out.println("Hej med dig 1000");
-        System.out.println("Hej med dig 2000");
-        System.out.println("Hej med dig 3000");
-        System.out.println("Hej med dig VR");
+        //model.addAttribute("madvarer", carService.fetchAll())
         return "home/index";
     }
-
-    //KAN DU SET DETTE?
 
     @GetMapping("/opret_lejekontrakt")
     public String createRentalContract() {
@@ -53,3 +47,4 @@ public class HomeController {
         return "redirect:/";
     }
 }
+
