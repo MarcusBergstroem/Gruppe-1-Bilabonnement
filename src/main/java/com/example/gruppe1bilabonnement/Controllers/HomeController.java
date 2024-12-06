@@ -3,15 +3,25 @@ package com.example.gruppe1bilabonnement.Controllers;
 import com.example.gruppe1bilabonnement.Model.Car;
 import com.example.gruppe1bilabonnement.Model.RentalContract;
 import com.example.gruppe1bilabonnement.Model.Renter;
+import com.example.gruppe1bilabonnement.Service.CarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 @Controller
 public class HomeController {
+
+    private final CarService carService;
+
+    public HomeController(CarService carService) {
+        this.carService = carService;
+    }
 
     @GetMapping("/")
     public String index(Model model) {
@@ -22,6 +32,17 @@ public class HomeController {
     @GetMapping("/opret_bil")
     public String createCar() {
         return "home/opret_bil"; // This should point to your HTML form for creating a rental contract
+    }
+
+    @GetMapping("/udlejede_biler")
+    public String udlejedeBiler(Model model, @RequestParam Map<String, String> regNumber ) {
+
+        if (regNumber.containsKey("regNumber")) {
+            model.addAttribute("cars", carService.fetchAllWithReturnDate(regNumber.get("regNumber")));
+            return "home/udlejede_biler";
+        }
+        model.addAttribute("cars", carService.fetchAllWithReturnDate());
+        return "home/udlejede_biler";
     }
 
     @GetMapping("/opret_lejekontrakt")
