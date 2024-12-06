@@ -3,6 +3,8 @@ package com.example.gruppe1bilabonnement.Controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
@@ -20,15 +22,31 @@ public class HomeController {
 
     //KAN DU SET DETTE?
 
-
-    @GetMapping("/createVirksomhed")
-    public String createVirksomhed() {
-        return "home/index";
+    @GetMapping("/opret_lejekontrakt")
+    public String createRentalContract() {
+        return "home/opret_lejekontrakt";
     }
-
-    @GetMapping("/Create_rental_contract")
-    public String Create_rental_contract() {
-        return "home/Create_rental_contract"; // This should point to your HTML form for creating a rental contract
+    @PostMapping
+    public String createRentalContract(@ModelAttribute RentalContract R){
+        carService.addRentalContract(R);
+        return "redirect:/";
+    }
+    @GetMapping("/opret_lejer")
+    public String createRenter() {
+        return "home/opret_lejer";
+    }
+    @PostMapping
+    public String createRenter(@ModelAttribute CreateRenter R) {
+        carService.addRenter(R);
+        return "redirect:/";
+    }
+    @GetMapping("/opret_bil")
+    public String createCar() {
+        return "home/opret_bil";
+    }
+    @PostMapping
+    public String createCar(@ModelAttribute Car C) {
+        carService.addCar(C);
+        return "redirect:/";
     }
 }
-
