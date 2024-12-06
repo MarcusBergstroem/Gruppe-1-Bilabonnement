@@ -1,5 +1,8 @@
 package com.example.gruppe1bilabonnement.Controllers;
 
+import com.example.gruppe1bilabonnement.Model.Car;
+import com.example.gruppe1bilabonnement.Model.RentalContract;
+import com.example.gruppe1bilabonnement.Model.Renter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +39,7 @@ public class HomeController {
         return "home/opret_lejer";
     }
     @PostMapping
-    public String createRenter(@ModelAttribute CreateRenter R) {
+    public String createRenter(@ModelAttribute Renter R) {
         carService.addRenter(R);
         return "redirect:/";
     }
