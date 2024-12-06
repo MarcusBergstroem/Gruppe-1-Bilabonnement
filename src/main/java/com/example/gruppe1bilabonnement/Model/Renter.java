@@ -1,6 +1,7 @@
 package com.example.gruppe1bilabonnement.Model;
 
 public class Renter {
+    private int id;
     private int cpr;
     private String firstName;
     private String lastName;
@@ -12,7 +13,7 @@ public class Renter {
     private int phoneNumber;
 
     // Constructor
-    public Renter(int cpr, String firstName, String lastName, String address, String country,
+    public Renter(int id, int cpr, String firstName, String lastName, String address, String country,
                   String city, String zipCode, boolean blacklist, int phoneNumber) {
         this.cpr = cpr;
         this.firstName = firstName;
@@ -26,6 +27,13 @@ public class Renter {
     }
 
     // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getCpr() {
         return cpr;
     }

@@ -3,6 +3,7 @@ package com.example.gruppe1bilabonnement.Model;
 import java.time.LocalDate;
 
 public class RentalContract {
+
     private int id;
     private int renterCpr;
     private int carVehicleNumber;
@@ -34,8 +35,101 @@ public class RentalContract {
         this.customChoices = customChoices;
         this.isSigned = isSigned;
     }
+    //Getters'n'Setters
+    public int getId() {
+        return id;
+    }
 
-    // Getters and Setters
-    // (Indsæt getters og setters her)
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getRenterCpr() {
+        return renterCpr;
+    }
+
+    public void setRenterCpr(int renterCpr) {
+        this.renterCpr = renterCpr;
+    }
+
+    public int getCarVehicleNumber() {
+        return carVehicleNumber;
+    }
+
+    public void setCarVehicleNumber(int carVehicleNumber) {
+        this.carVehicleNumber = carVehicleNumber;
+    }
+
+    public int getDeliveryReturnLocationId() {
+        return deliveryReturnLocationId;
+    }
+
+    public void setDeliveryReturnLocationId(int deliveryReturnLocationId) {
+        this.deliveryReturnLocationId = deliveryReturnLocationId;
+    }
+
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(LocalDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public double getInitialPayment() {
+        return initialPayment;
+    }
+
+    public void setInitialPayment(double initialPayment) {
+        this.initialPayment = initialPayment;
+    }
+
+    public double getMonthlyPayment() {
+        return monthlyPayment;
+    }
+
+    public void setMonthlyPayment(double monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
+    }
+
+    public int getTotalKilometers() {
+        return totalKilometers;
+    }
+
+    public void setTotalKilometers(int totalKilometers) {
+        this.totalKilometers = totalKilometers;
+    }
+
+    public double getAdditionalKM() {
+        return additionalKM;
+    }
+
+    public void setAdditionalKM(double additionalKM) {
+        this.additionalKM = additionalKM;
+    }
+
+    public String getCustomChoices() {
+        return customChoices;
+    }
+
+    public void setCustomChoices(String customChoices) {
+        this.customChoices = customChoices;
+    }
+
+    public boolean isSigned() {
+        return isSigned;
+    }
+
+    public void setSigned(boolean signed) {
+        isSigned = signed;
+    }
 }
 

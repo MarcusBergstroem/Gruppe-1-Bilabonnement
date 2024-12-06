@@ -1,6 +1,8 @@
 package com.example.gruppe1bilabonnement.Model;
 
 public class Car {
+
+    private int id;
     private int vehicleNumber;
     private String carBrand;
     private String carModel;
@@ -9,8 +11,8 @@ public class Car {
     private String registrationNumber;
 
     // Constructor
-    public Car(int vehicleNumber, String carBrand, String carModel, String equipmentLevel,
-               String vin, String registrationNumber) {
+    public Car(int id, int vehicleNumber, String carBrand, String carModel, String equipmentLevel, String vin, String registrationNumber) {
+        this.id = id;
         this.vehicleNumber = vehicleNumber;
         this.carBrand = carBrand;
         this.carModel = carModel;
@@ -20,6 +22,12 @@ public class Car {
     }
 
     // Getters and Setters
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getVehicleNumber() {
         return vehicleNumber;
     }
