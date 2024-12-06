@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Opret lejekontrakt</h1>
+
+<!-- Dropdown for at vælge en lejer -->
+<label for="lejer">Vælg lejer:</label>
+<select id="lejer" name="lejer">
+    <option value="" disabled selected>-- Vælg en lejer --</option>
+    <option value="1">Lejer 1</option>
+    <option value="2">Lejer 2</option>
+    <option value="3">Lejer 3</option>
+</select>
+<br><br>
+
+<!-- Dropdown for at vælge en bil -->
+<label for="bil">Vælg bil:</label>
+<select id="bil" name="bil">
+    <option value="" disabled selected>-- Vælg en bil --</option>
+    <option value="audi">Audi A4</option>
+    <option value="bmw">BMW 320</option>
+    <option value="tesla">Tesla Model 3</option>
+</select>
+<br><br>
+
+<!-- Lejevilkår  -->
+<div class="????">
+    <h2>Rental Terms</h2>
+    <div class="????">
+        <label>Pickup Date: <input type="date" name="pickup_date" required></label>
+    </div>
+    <div class="????">
+        <label>Return Date: <input type="date" name="return_date" required></label>
+    </div>
+    <div class="????">
+        <label>Pickup Location: <input type="text" name="pickup_location" required placeholder="f.eks. "></label>
+    </div>
+    <div class="????">
+        <label>Return Location: <input type="text" name="return_location" required placeholder="f.eks. "></label>
+    </div>
+    <div class="????">
+        <label>First Payment: <input type="number" name="first_payment" required placeholder="f.eks. '30.000',-"></label>
+    </div>
+    <div class="????">
+        <label>Monthly Payment: <input type="number" name="monthly_payment" required placeholder="f.eks. '2.948',-"></label>
+    </div>
+    <div class="????">
+        <label>Total Kilometers: <input type="number" name="total_kilometers" required placeholder="f.eks. '5000 - 10000' Kilometers"></label>
+    </div>
+    <div class="????">
+        <label>Price per Excess Kilometer: <input type="number" name="price_per_km" required placeholder="f.eks. '250' or '500'"></label>
+    </div>
+    <div class="????">
+        <label>Add-ons (Free Text): <textarea name="add_ons"></textarea></label>
+    </div>
+</div>
+
+<!-- Checkbox for bekræftelse -->
+<div class="????">
+    <h2>Signatur</h2>
+    <div class="????">
+        <label>
+            <input type="checkbox" name="signed" required> I hereby sign
+        </label>
+    </div>
+</div>
+
+<!-- Knapper -->
+<div class="????">
+    <form action="/" method="GET" onsubmit="return confirm('Do you want to save?');">
+        <button type="submit">Save Rental Contract</button>
+    </form>
+    <button type="submit">Send Rental Contract to Customer</button>
+</div>
+</body>
+</html>

@@ -19,32 +19,36 @@ public class HomeController {
         return "home/index";
     }
 
-    @GetMapping("/opret_lejekontrakt")
-    public String createRentalContract() {
-        return "home/opret_lejekontrakt";
-    }
-    @PostMapping
-    public String createRentalContract(@ModelAttribute RentalContract R){
-        carService.addRentalContract(R);
-        return "redirect:/";
-    }
-    @GetMapping("/opret_lejer")
-    public String createRenter() {
-        return "home/opret_lejer";
-    }
-    @PostMapping
-    public String createRenter(@ModelAttribute Renter R) {
-        carService.addRenter(R);
-        return "redirect:/";
-    }
     @GetMapping("/opret_bil")
     public String createCar() {
-        return "home/opret_bil";
+        return "home/opret_bil"; // This should point to your HTML form for creating a rental contract
     }
-    @PostMapping
-    public String createCar(@ModelAttribute Car C) {
-        carService.addCar(C);
-        return "redirect:/";
-    }
-}
 
+    @GetMapping("/opret_lejekontrakt")
+    public String createRentalContract() {
+        return "home/opret_lejekontrakt"; // This should point to your HTML form for creating a rental contract
+    }
+
+    @GetMapping("/opret_lejer")
+    public String createRenter() {
+        return "home/opret_lejer"; // This should point to your HTML form for creating a rental contract
+    }
+
+//    @PostMapping
+//    public String createCar(@ModelAttribute Car C) {
+//        //carService.addCar(C);
+//        return "redirect:/";
+//    }
+
+//    @PostMapping
+//    public String createRentalContract(@ModelAttribute RentalContract R) {
+//        //carService.addRentalContract(R);
+//        return "redirect:/";
+//    }
+
+//    @PostMapping
+//    public String createRenter(@ModelAttribute Renter R) {
+//        //carService.addRenter(R);
+//        return "redirect:/";
+//    }
+}
