@@ -10,6 +10,11 @@ public class Car {
     private String registrationNumber;
     private String returnDate;
 
+    //Default Constructor
+    public Car(){
+
+    }
+
     // Constructor
     public Car(int id, int vehicleNumber, String carBrand, String carModel, String equipmentLevel, String vin, String registrationNumber, String returnDate) {
         this.id = id;
@@ -21,6 +26,7 @@ public class Car {
         this.registrationNumber = registrationNumber;
         this.returnDate = returnDate;
     }
+
 
     // Getters and Setters
     public int getId() {
@@ -81,5 +87,9 @@ public class Car {
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
+    }
+
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
     }
 }
