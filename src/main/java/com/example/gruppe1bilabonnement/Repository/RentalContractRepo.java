@@ -2,6 +2,7 @@ package com.example.gruppe1bilabonnement.Repository;
 
 import com.example.gruppe1bilabonnement.Model.Car;
 import com.example.gruppe1bilabonnement.Model.RentalContract;
+import com.example.gruppe1bilabonnement.Model.Renter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,14 +20,26 @@ public class RentalContractRepo {
     }
 
     public RentalContract fetchRentalContractDetails(String regNumber){
-        String sql = "SELECT * FROM rentalcontract WHERE RegistrationNumber = ?";
 
-        String sql = "SELECT * FROM car WHERE "
+        String sql = "SELECT * FROM rentalcontract WHERE RegistrationNumber = ?";
+        RowMapper<RentalContract> rowMapper1 = new BeanPropertyRowMapper<>(RentalContract.class);
+        RentalContract rentalTmp = template.queryForObject(sql, rowMapper1, regNumber);
+
+        String sqlCar = "SELECT * FROM car WHERE VehicleNumber = ?";
+        RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
+        Car carTmp = template.queryForObject(sqlCar, rowMapper2, rentalTmp.getCarVehicleNumber());
+        rentalTmp.setRentalCar(carTmp);
+
+        System.out.println(rentalTmp.getRenterID());
+
+        String sqlRenter = "SELECT * FROM renter WHERE id = ?";
+        RowMapper<Renter> rowMapper3 = new BeanPropertyRowMapper<>(Renter.class);
+        Renter renterTmp = template.queryForObject(sqlRenter, rowMapper3, rentalTmp.getRenterID());
+        rentalTmp.setRentalRenter(renterTmp);
 
         // Laver et rentalContract objekt som indeholder alle detaljer for reg nr.
-        RowMapper<RentalContract> rowMapper1 = new BeanPropertyRowMapper<>(RentalContract.class);
 
-        return template.queryForObject(sql, rowMapper1, regNumber);
+        return rentalTmp;
 
     }
 

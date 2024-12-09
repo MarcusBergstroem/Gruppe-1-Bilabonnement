@@ -2,7 +2,7 @@ package com.example.gruppe1bilabonnement.Model;
 
 public class Renter {
     private int id;
-    private int cpr;
+    private String cpr;
     private String firstName;
     private String lastName;
     private String address;
@@ -10,11 +10,14 @@ public class Renter {
     private String city;
     private String zipCode;
     private boolean blacklist;
-    private int phoneNumber;
+    private String phoneNumber;
 
     // Constructor
-    public Renter(int id, int cpr, String firstName, String lastName, String address, String country,
-                  String city, String zipCode, boolean blacklist, int phoneNumber) {
+    public Renter() {}
+
+    public Renter(int id, String cpr, String firstName, String lastName, String address, String country,
+                  String city, String zipCode, boolean blacklist, String phoneNumber) {
+        this.id = id;
         this.cpr = cpr;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,11 +37,11 @@ public class Renter {
     public void setId(int id) {
         this.id = id;
     }
-    public int getCpr() {
+    public String getCpr() {
         return cpr;
     }
 
-    public void setCpr(int cpr) {
+    public void setCpr(String cpr) {
         this.cpr = cpr;
     }
 
@@ -98,11 +101,11 @@ public class Renter {
         this.blacklist = blacklist;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }
