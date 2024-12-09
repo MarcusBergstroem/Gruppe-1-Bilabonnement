@@ -27,4 +27,7 @@ public class CarService {
     public void addCar(Car c){
         carRepo.addCar(c);
     }
+    public void addRenter(Renter r){
+        int geography = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode());
+    }
 }
