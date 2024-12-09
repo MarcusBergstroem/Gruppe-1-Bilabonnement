@@ -29,6 +29,8 @@ public class CarService {
         carRepo.addCar(c);
     }
 
+
+
     public RentalContract fetchRentalContractDetails(String regNumber){
         return rentalContractRepo.fetchRentalContractDetails(regNumber);
     }
