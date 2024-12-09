@@ -60,9 +60,12 @@ public class HomeController {
     public String createRenter() {
         return "home/opret_lejer"; // This should point to your HTML form for creating a rental contract
     }
-    //@PostMapping("/opretlejer")
-    //public String createRenter(){
-    //}
+
+    @PostMapping("/opretlejer")
+    public String createRenter(@ModelAttribute Renter r){
+        System.out.println("Renter received: " + r);
+        return "redirect:/";
+    }
 
     @GetMapping("/lejedetaljer")
     public String rentalDetails(Model model, @RequestParam String regNumber) {

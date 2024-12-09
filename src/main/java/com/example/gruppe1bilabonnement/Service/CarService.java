@@ -37,4 +37,7 @@ public class CarService {
         return rentalContractRepo.searchRentalContracts(regNumber);
     }
 
+    public void addRenter(Renter r){
+        int geography = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode());
+    }
 }
