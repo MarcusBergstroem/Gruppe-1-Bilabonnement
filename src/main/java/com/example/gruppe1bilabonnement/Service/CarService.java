@@ -33,4 +33,8 @@ public class CarService {
         return rentalContractRepo.fetchRentalContractDetails(regNumber);
     }
 
+    public List<RentalContract> searchRentalContracts(String regNumber){
+        return rentalContractRepo.searchRentalContracts(regNumber);
+    }
+
 }

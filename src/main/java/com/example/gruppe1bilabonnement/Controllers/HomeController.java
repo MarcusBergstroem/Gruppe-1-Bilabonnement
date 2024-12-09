@@ -44,7 +44,7 @@ public class HomeController {
     public String udlejedeBiler(Model model, @RequestParam Map<String, String> regNumber ) {
 
         if (regNumber.containsKey("regNumber")) {
-            model.addAttribute("rentalContracts", carService.fetchRentalContractDetails(regNumber.get("regNumber")));
+            model.addAttribute("rentalContracts", carService.searchRentalContracts(regNumber.get("regNumber")));
             return "home/udlejede_biler";
         }
         model.addAttribute("rentalContracts", carService.fetchAllRentalContracts());
