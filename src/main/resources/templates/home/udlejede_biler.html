@@ -36,23 +36,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr data-url="/lejedetaljer?regNumber=null" onclick="window.location.href=this.dataset.url">
-        <td>REG24531</td>
-        <td>Ford</td>
-        <td>Focus</td>
-        <td>2024-12-10</td>
-    </tr>
-    <tr data-url="/lejedetaljer?regNumber=null" onclick="window.location.href=this.dataset.url">
-        <td>REG54321</td>
-        <td>Tesla</td>
-        <td>Model 3</td>
-        <td>2024-12-15</td>
-    </tr>
-    <tr data-url="/lejedetaljer?regNumber=null" onclick="window.location.href=this.dataset.url">
-        <td>REG12345</td>
-        <td>Toyota</td>
-        <td>Corolla</td>
-        <td>2024-12-20</td>
+    <tr th:each="rentalContract : ${rentalContracts}" th:data-url="@{'/lejedetaljer?regNumber=' + ${rentalContractStat..registrationNumber}}" th:onclick="|window.location.href=this.dataset.url|">
+        <td th:text="${car.registrationNumber}"></td>
+        <td th:text="${car.carBrand}"></td>
+        <td th:text="${car.carModel}"></td>
+        <td th:text="${car.returnDate}"></td>
     </tr>
     </tbody>
 </table>
