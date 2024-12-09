@@ -5,9 +5,10 @@ import java.time.LocalDate;
 public class RentalContract {
 
     private int id;
-    private int renterCpr;
+    private int renterID;
     private int carVehicleNumber;
     private int deliveryReturnLocationId;
+    private String registrationNumber;
     private LocalDate deliveryDate;
     private LocalDate returnDate;
     private double initialPayment;
@@ -16,16 +17,28 @@ public class RentalContract {
     private double additionalKM;
     private String customChoices;
     private boolean isSigned;
+    private Car rentalCar;
+    private Renter rentalRenter;
+
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public RentalContract(){
+
+    }
 
     // Constructor
-    public RentalContract(int id, int renterCpr, int carVehicleNumber, int deliveryReturnLocationId,
+    public RentalContract(int id, int renterID, int carVehicleNumber, int deliveryReturnLocationId, String registrationNumber,
                           LocalDate deliveryDate, LocalDate returnDate, double initialPayment,
                           double monthlyPayment, int totalKilometers, double additionalKM,
                           String customChoices, boolean isSigned) {
         this.id = id;
-        this.renterCpr = renterCpr;
+        this.renterID = renterID;
         this.carVehicleNumber = carVehicleNumber;
         this.deliveryReturnLocationId = deliveryReturnLocationId;
+        this.registrationNumber = registrationNumber;
         this.deliveryDate = deliveryDate;
         this.returnDate = returnDate;
         this.initialPayment = initialPayment;
@@ -35,7 +48,7 @@ public class RentalContract {
         this.customChoices = customChoices;
         this.isSigned = isSigned;
     }
-    //Getters'n'Setters
+
     public int getId() {
         return id;
     }
@@ -44,12 +57,12 @@ public class RentalContract {
         this.id = id;
     }
 
-    public int getRenterCpr() {
-        return renterCpr;
+    public int getRenterID() {
+        return renterID;
     }
 
-    public void setRenterCpr(int renterCpr) {
-        this.renterCpr = renterCpr;
+    public void setRenterID(int renterID) {
+        this.renterID = renterID;
     }
 
     public int getCarVehicleNumber() {
@@ -130,6 +143,26 @@ public class RentalContract {
 
     public void setSigned(boolean signed) {
         isSigned = signed;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public Car getRentalCar() {
+        return rentalCar;
+    }
+
+    public void setRentalCar(Car rentalCar) {
+        this.rentalCar = rentalCar;
+    }
+
+    public Renter getRentalRenter() {
+        return rentalRenter;
+    }
+
+    public void setRentalRenter(Renter rentalRenter) {
+        this.rentalRenter = rentalRenter;
     }
 }
 

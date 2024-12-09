@@ -64,6 +64,14 @@ public class HomeController {
     //public String createRenter(){
     //}
 
+    @GetMapping("/lejedetaljer")
+    public String rentalDetails(Model model, @RequestParam String regNumber) {
+        model.addAttribute("rentalContractDetails", carService.fetchRentalContractDetails(regNumber));
+        return "home/lejedetaljer";
+    }
+
+
+
 //    @PostMapping
 //    public String createCar(@ModelAttribute Car C) {
 //        //carService.addCar(C);
