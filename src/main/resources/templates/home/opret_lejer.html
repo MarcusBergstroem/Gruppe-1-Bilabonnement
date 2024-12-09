@@ -17,9 +17,9 @@
 </nav>
 
 <h1>Opret en lejer </h1>
-
+<form action="/opret_lejer" method="post">
 <!-- Lejeroplysninger -->
-<div class="create-form" action="/opret_lejer" method="post">
+<div class="create-form">
     <h2>Lejer Information</h2>
     <div class="form-group">
         <label>Fornavn: <input type="text" name="firstName" placeholder="f.eks Adrian"></label>
@@ -31,10 +31,13 @@
         <label>Adresse: <input type="text" name="address" required placeholder="f.eks. Persillehaven"></label>
     </div>
     <div class="form-group">
-        <label>Postnummer: <input type="text" name="postalCode" required placeholder="f.eks. 2730"></label>
+        <label>Postnummer: <input type="text" name="zipCode" required placeholder="f.eks. 2730"></label>
     </div>
     <div class="form-group">
         <label>By: <input type="text" name="city" required placeholder="f.eks. København"></label>
+    </div>
+    <div class="form-group">
+        <label>By: <input type="text" name="country" required placeholder="f.eks. Jylland"></label>
     </div>
     <div class="form-group">
         <label>Telefonnummer: <input type="tel" name="phoneNumber" required placeholder="f.eks. +45 xx xx xx xx"></label>
@@ -56,13 +59,10 @@
             </label>
         </div>
     </div>
-</div>
-
 <!-- Knapper -->
 <div class="button-container">
-    <form action="/" method="GET" onsubmit="return confirm('Do you want to save?');">
-        <button type="submit">Gem Lejer</button>
-    </form>
+        <button type="submit" onclick="return confirm('Do you want to save?');">Gem Lejer</button>
 </div>
+    </form>
 </body>
 </html>

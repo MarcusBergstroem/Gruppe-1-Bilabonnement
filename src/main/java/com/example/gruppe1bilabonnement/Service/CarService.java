@@ -40,6 +40,7 @@ public class CarService {
     }
 
     public void addRenter(Renter r){
-        int geography = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode());
+        int geographyId = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode());
+        renterRepo.addRenter(r, geographyId);
     }
 }
