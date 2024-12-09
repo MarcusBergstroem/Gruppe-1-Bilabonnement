@@ -2,55 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Opret Lejer</title>
+    <link rel="stylesheet" href="/Styles.css">
 </head>
 <body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/" class="title">Bilabonnement.dk</a>
+    </div>
+    <div class="navbar-right">
+        <button class="logout-button">Log Out</button>
+    </div>
+</nav>
+
 <h1>Opret en lejer </h1>
-<form class="createRenter" action="/opret_lejer" method="post">
+
+<!-- Lejeroplysninger -->
+<div class="create-form" action="/opret_lejer" method="post">
     <h2>Lejer Information</h2>
-    <label>Fornavn</label>
-    <input type="text" name="firstName" required placeholder="f.eks Adrian"><br>
-    <label>Efternavn</label>
-    <input type="text" name="lastName" required placeholder="f.eks. Mortensen"><br>
-    <label>Adresse</label>
-    <input type="text" name="address" required placeholder="f.eks. Persillehaven"><br>
-    <label>Postnummer</label>
-    <input type="text" name="postalCode" required placeholder="f.eks. 2730"><br>
-    <label>By</label>
-    <input type="text" name="city" required placeholder="f.eks. København"><br>
-    <label>Telefonnummer</label>
-    <input type="text" name="phoneNumber" required placeholder="f.eks. +45 xx xx xx xx"><br>
-    <label>CPR nummer</label>
-    <input type="text" name="cpr" required placeholder="f.eks. xxxxxx-xxxx"><br>
-    <label>Blacklist</label>
-    <input type="checkbox" name="blacklist"><br>
-    <input type="checkbox" name="blacklist"><br>
-
-    <!-- Checkbox for bekræftelse -->
-    <label>
-        <input type="checkbox" name="signed" required> Jeg bekræfter hermed
-    </label><br>
-
-    <!-- Submit-knap -->
-    <input type="submit" value="Tilføj Lejer" class="submit-button">
-</form>
-
-<!-- Checkbox for bekræftelse
-<div class="????">
-    <h2>Signature</h2>
-    <div class="????">
-        <label>
-            <input type="checkbox" name="signed" required> Jeg bekræfter hermed
-        </label>
+    <div class="form-group">
+        <label>Fornavn: <input type="text" name="firstName" placeholder="f.eks Adrian"></label>
+    </div>
+    <div class="form-group">
+        <label>Efternavn: <input type="text" name="lastName" required placeholder="f.eks. Mortensen"></label>
+    </div>
+    <div class="form-group">
+        <label>Adresse: <input type="text" name="address" required placeholder="f.eks. Persillehaven"></label>
+    </div>
+    <div class="form-group">
+        <label>Postnummer: <input type="text" name="postalCode" required placeholder="f.eks. 2730"></label>
+    </div>
+    <div class="form-group">
+        <label>By: <input type="text" name="city" required placeholder="f.eks. København"></label>
+    </div>
+    <div class="form-group">
+        <label>Telefonnummer: <input type="tel" name="phoneNumber" required placeholder="f.eks. +45 xx xx xx xx"></label>
+    </div>
+    <div class="form-group">
+        <label>CPR-Nummer: <input type="text" name="cpr" required placeholder="f.eks. xxxxxx-xxxx"></label>
+    </div>
+    <div class="form-group">
+        <label>Blacklist: <input type="checkbox" name="blacklist"></label>
     </div>
 </div>
 
-     Knapper
-<div class="createRenter">
-    <form action="/" method="POST" onsubmit="return confirm('Rental contract saved! Do you want to proceed?');">
-        <button type="submit">Save Rental Contract</button>
+    <!-- Bekræftelse -->
+    <div class="signature">
+        <h2>Signatur</h2>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="signed" required> I hereby sign
+            </label>
+        </div>
+    </div>
+</div>
+
+<!-- Knapper -->
+<div class="button-container">
+    <form action="/" method="GET" onsubmit="return confirm('Do you want to save?');">
+        <button type="submit">Gem Lejer</button>
     </form>
 </div>
--->
 </body>
 </html>

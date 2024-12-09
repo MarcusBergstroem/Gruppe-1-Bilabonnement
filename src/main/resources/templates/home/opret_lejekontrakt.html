@@ -2,79 +2,94 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Opret Lejekontrakt</title>
+    <link rel="stylesheet" href="/Styles.css">
 </head>
 <body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/" class="title">Bilabonnement.dk</a>
+    </div>
+
+    <div class="navbar-right">
+        <button class="logout-button">Log Out</button>
+    </div>
+</nav>
+
 <h1>Opret lejekontrakt</h1>
 
-<!-- Dropdown for at vælge en lejer -->
-<label for="lejer">Vælg lejer:</label>
-<select id="lejer" name="lejer">
-    <option value="" disabled selected>-- Vælg en lejer --</option>
-    <option value="1">Lejer 1</option>
-    <option value="2">Lejer 2</option>
-    <option value="3">Lejer 3</option>
-</select>
-<br><br>
+<!-- Lejer Dropdown -->
+<div class="create-form">
+    <div class="form-group">
+        <label for="lejer">Vælg lejer:</label>
+        <select id="lejer" name="lejer">
+            <option value="" disabled selected>-- Vælg en lejer --</option>
+            <option value="1">Lejer 1</option>
+            <option value="2">Lejer 2</option>
+            <option value="3">Lejer 3</option>
+        </select>
+    </div>
 
-<!-- Dropdown for at vælge en bil -->
-<label for="bil">Vælg bil:</label>
-<select id="bil" name="bil">
-    <option value="" disabled selected>-- Vælg en bil --</option>
-    <option value="audi">Audi A4</option>
-    <option value="bmw">BMW 320</option>
-    <option value="tesla">Tesla Model 3</option>
-</select>
-<br><br>
+    <!-- Bil Dropdown -->
+    <div class="form-group">
+        <label for="bil">Vælg bil:</label>
+        <select id="bil" name="bil">
+            <option value="" disabled selected>-- Vælg en bil --</option>
+            <option value="audi">Audi A4</option>
+            <option value="bmw">BMW 320</option>
+            <option value="tesla">Tesla Model 3</option>
+        </select>
+    </div>
 
-<!-- Lejevilkår  -->
-<div class="????">
+    <!-- Lejevilkår -->
     <h2>Rental Terms</h2>
-    <div class="????">
+    <div class="form-group">
         <label>Pickup Date: <input type="date" name="pickup_date" required></label>
     </div>
-    <div class="????">
+    <div class="form-group">
         <label>Return Date: <input type="date" name="return_date" required></label>
     </div>
-    <div class="????">
+    <div class="form-group">
         <label>Pickup Location: <input type="text" name="pickup_location" required placeholder="f.eks. "></label>
     </div>
-    <div class="????">
+    <div class="form-group">
         <label>Return Location: <input type="text" name="return_location" required placeholder="f.eks. "></label>
     </div>
-    <div class="????">
+    <div class="form-group">
         <label>First Payment: <input type="number" name="first_payment" required placeholder="f.eks. '30.000',-"></label>
     </div>
-    <div class="????">
+    <div class="form-group">
         <label>Monthly Payment: <input type="number" name="monthly_payment" required placeholder="f.eks. '2.948',-"></label>
     </div>
-    <div class="????">
+    <div class="form-group">
         <label>Total Kilometers: <input type="number" name="total_kilometers" required placeholder="f.eks. '5000 - 10000' Kilometers"></label>
     </div>
-    <div class="????">
+    <div class="form-group">
         <label>Price per Excess Kilometer: <input type="number" name="price_per_km" required placeholder="f.eks. '250' or '500'"></label>
     </div>
-    <div class="????">
+    <div class="form-group">
         <label>Add-ons (Free Text): <textarea name="add_ons"></textarea></label>
     </div>
-</div>
 
-<!-- Checkbox for bekræftelse -->
-<div class="????">
-    <h2>Signatur</h2>
-    <div class="????">
-        <label>
-            <input type="checkbox" name="signed" required> I hereby sign
-        </label>
+    <!-- Bekræftelse -->
+    <div class="signature">
+        <h2>Signatur</h2>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="signed" required> I hereby sign
+            </label>
+        </div>
     </div>
 </div>
 
 <!-- Knapper -->
-<div class="????">
+<div class="button-container">
     <form action="/" method="GET" onsubmit="return confirm('Do you want to save?');">
-        <button type="submit">Save Rental Contract</button>
+        <button type="submit">Gem lejekontrakt</button>
     </form>
-    <button type="submit">Send Rental Contract to Customer</button>
+    <button type="submit">Send lejekontrakt til kunde</button>
 </div>
+
 </body>
 </html>

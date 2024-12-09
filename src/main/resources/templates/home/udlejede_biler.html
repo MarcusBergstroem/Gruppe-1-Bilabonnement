@@ -1,99 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Udlejede Biler</title>
+    <link rel="stylesheet" href="/Styles.css">
 </head>
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
-
-    h1 {
-        margin: 1vw auto 2vw 2vw;
-    }
-
-    form{
-        display: flex;
-        justify-content: center;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #ccc;
-        padding: 10px 20px;
-        top: 0;
-        width: 98%;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar-left {
-        display: flex;
-        align-items: center;
-    }
-
-    .title {
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .navbar-right .logout-button {
-        background-color: #f44336;
-        color: white;
-        border: none;
-        padding: 8px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 14px;
-    }
-
-    .navbar-right .logout-button:hover {
-        background-color: #d32f2f;
-    }
-
-
-    .styled-table {
-        width: 50vw;
-        border-collapse: collapse;
-        margin: 25px auto;
-        font-size: 14px;
-        text-align: left;
-    }
-
-    .styled-table thead tr {
-        background-color: #333;
-        color: #fff;
-        text-align: left;
-        font-weight: bold;
-    }
-
-    .styled-table th, .styled-table td {
-        padding: 12px 15px;
-        border: 1px solid #ddd;
-    }
-
-    .styled-table tbody tr:nth-child(odd) {
-        background-color: #f2f2f2; /* Light grey for odd rows */
-    }
-
-    .styled-table tbody tr:nth-child(even) {
-        background-color: #ffffff; /* White for even rows */
-    }
-
-    .styled-table tbody tr:hover {
-        background-color: #ddd; /* Highlight row on hover */
-        cursor: pointer;
-    }
-
-</style>
 <body>
 <nav class="navbar">
     <div class="navbar-left">
-        <span class="title">Bilabonnement.dk</span>
+        <a href="/" class="title">Bilabonnement.dk</a>
     </div>
     <div class="navbar-right">
         <button class="logout-button">Log Out</button>
@@ -112,20 +28,32 @@
 
 <table class="styled-table">
     <thead>
-        <tr>
-            <th>Registreringsnummer</th>
-            <th>Mærke</th>
-            <th>Model</th>
-            <th>Afleveringsdato</th>
-        </tr>
+    <tr>
+        <th>Registreringsnummer</th>
+        <th>Mærke</th>
+        <th>Model</th>
+        <th>Afleveringsdato</th>
+    </tr>
     </thead>
     <tbody>
-        <tr th:each="car : ${cars}" th:data-url="@{'/lejedetaljer?regNumber=' + ${car.registrationNumber}}" th:onclick="|window.location.href=this.dataset.url|">
-            <td th:text="${car.registrationNumber}"></td>
-            <td th:text="${car.carBrand}"></td>
-            <td th:text="${car.carModel}"></td>
-            <td th:text="${car.returnDate}"></td>
-        </tr>
+    <tr data-url="/lejedetaljer?regNumber=null" onclick="window.location.href=this.dataset.url">
+        <td>REG24531</td>
+        <td>Ford</td>
+        <td>Focus</td>
+        <td>2024-12-10</td>
+    </tr>
+    <tr data-url="/lejedetaljer?regNumber=null" onclick="window.location.href=this.dataset.url">
+        <td>REG54321</td>
+        <td>Tesla</td>
+        <td>Model 3</td>
+        <td>2024-12-15</td>
+    </tr>
+    <tr data-url="/lejedetaljer?regNumber=null" onclick="window.location.href=this.dataset.url">
+        <td>REG12345</td>
+        <td>Toyota</td>
+        <td>Corolla</td>
+        <td>2024-12-20</td>
+    </tr>
     </tbody>
 </table>
 

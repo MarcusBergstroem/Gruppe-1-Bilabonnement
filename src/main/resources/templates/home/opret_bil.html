@@ -2,39 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret Bil</title>
+    <link rel="stylesheet" href="/Styles.css">
 </head>
 <body>
-<h1>Opret en bil</h1>
 
-<!-- Biloplysninger-->
-<form class="createCar" action="/opret_bil" method="post">
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/" class="title">Bilabonnement.dk</a>
+    </div>
+    <div class="navbar-right">
+        <button class="logout-button">Log Out</button>
+    </div>
+</nav>
+
+<!-- Overskrift -->
+<h1 class="page-title">Opret en bil</h1>
+
+<!-- Biloplysninger -->
+<div class="create-form" action="/opret_bil" method="post">
     <h2>Bil Information</h2>
-    <label>Bilmærke:</label>
-    <input type="text" name="carBrand" required placeholder="f.eks. honda"><br>
-    <label>Bilmodel:</label>
-    <input type="text" name="carModel" required placeholder="f.eks. civic"><br>
-    <label>Udstyrsniveau:</label>
-    <input type="text" name="equipmentLevel" required placeholder="f.eks Standard"><br>
-    <label>VIN:</label>
-    <input type="text" name="vin" required placeholder="f.eks. H283HCS231H8JX2G"><br>
-        <input type="checkbox" name="signed" required> Jeg bekræfter hermed, at informationen er korrekt.
-    </label><br>
-    <input type="submit" value="Tilføj bil" class="submit-button">
-</form>
-<!-- Checkbox for bekræftelse
-<div class="????">
+
+    <!-- Hver gruppe har "form-group"-klassen -->
+    <div class="form-group">
+        <label>Bilmærke:</label>
+        <input type="text" name="carBrand" required placeholder="f.eks. Honda">
+    </div>
+    <div class="form-group">
+        <label>Bilmodel:</label>
+        <input type="text" name="carModel" required placeholder="f.eks. Civic">
+    </div>
+    <div class="form-group">
+        <label>Udstyrsniveau:</label>
+        <input type="text" name="equipmentLevel" placeholder="f.eks. Standard">
+    </div>
+    <div class="form-group">
+        <label>VIN:</label>
+        <input type="text" name="vin" required placeholder="f.eks. H283HCS231H8JX2G">
+    </div>
+</div>
+
+<!-- Bekræftelse -->
+<div class="signature">
     <h2>Signature</h2>
-    <div class="????">
+    <div class="form-group">
         <label>
             <input type="checkbox" name="signed" required> Jeg bekræfter hermed
         </label>
     </div>
-</div>-->
+</div>
 
 <!-- Knapper -->
-<div class="????">
-    <form action="/" method="POST" onsubmit="return confirm('Er du sikker på at du vil gemme bilen?');">
+<div class="button-container">
+    <form action="/opret_bil" method="POST" onsubmit="return confirm('Er du sikker på at du vil gemme bilen?');">
+        <button type="submit">Gem Bilen</button>
     </form>
 </div>
 </body>
