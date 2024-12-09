@@ -36,7 +36,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="rentalContract : ${rentalContracts}" th:data-url="@{'/lejedetaljer?regNumber=' + ${rentalContractStat..registrationNumber}}" th:onclick="|window.location.href=this.dataset.url|">
+    <tr th:each="rentalContract : ${rentalContracts}" th:data-url="@{'/lejedetaljer?regNumber=' + ${rentalContract.rentalCar.registrationNumber}" th:onclick="|window.location.href=this.dataset.url|">
         <td th:text="${car.registrationNumber}"></td>
         <td th:text="${car.carBrand}"></td>
         <td th:text="${car.carModel}"></td>
