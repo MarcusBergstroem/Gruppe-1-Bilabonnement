@@ -31,16 +31,4 @@ public class CarRepo {
         template.update(sql, c.getCarBrand(), c.getCarModel(), c.getEquipmentLevel(), c.getVin());
 
     }
-
-    public List<Car> fetchAllWithReturnDate() {
-        String sql = "SELECT rentalcontract.ReturnDate, car.*  FROM rentalcontract left join car on car.VehicleNumber = rentalcontract.CarVehicleNumber where ReturnDate is not null";
-        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
-        return template.query(sql, rowMapper);
-    }
-
-    public List<Car> fetchAllWithReturnDate(String regNumber) {
-        String sql = "SELECT rentalcontract.ReturnDate, car.*  FROM rentalcontract left join car on car.VehicleNumber = rentalcontract.CarVehicleNumber where (ReturnDate is not null and car.RegistrationNumber = ?)";
-        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
-        return template.query(sql, rowMapper, regNumber);
-    }
 }

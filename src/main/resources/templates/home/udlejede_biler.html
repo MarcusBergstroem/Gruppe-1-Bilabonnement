@@ -37,10 +37,10 @@
     </thead>
     <tbody>
     <tr th:each="rentalContract : ${rentalContracts}" th:data-url="@{'/lejedetaljer?regNumber=' + ${rentalContract.registrationNumber}}" th:onclick="|window.location.href=this.dataset.url|">
-        <td th:text="${car.registrationNumber}"></td>
-        <td th:text="${car.carBrand}"></td>
-        <td th:text="${car.carModel}"></td>
-        <td th:text="${car.returnDate}"></td>
+        <td th:text="${rentalContract.registrationNumber}"></td>
+        <td th:text="${rentalContract.rentalCar.carBrand}"></td>
+        <td th:text="${rentalContract.rentalCar.carModel}"></td>
+        <td th:text="${rentalContract.returnDate}"></td>
     </tr>
     </tbody>
 </table>

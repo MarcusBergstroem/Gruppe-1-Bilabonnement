@@ -20,6 +20,7 @@ public class Car {
         this.carBrand = carBrand;
         this.carModel = carModel;
         this.equipmentLevel = equipmentLevel;
+        this.registrationNumber = registrationNumber;
         this.vin = vin;
         this.returnDate = returnDate;
     }
@@ -47,6 +48,10 @@ public class Car {
         return vin;
     }
 
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
     public String getReturnDate() {
         return returnDate;
     }
@@ -71,8 +76,7 @@ public class Car {
         this.vin = vin;
     }
 
-
-    public void setReturnDate(String returnDate) {
-        this.returnDate = returnDate;
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 }

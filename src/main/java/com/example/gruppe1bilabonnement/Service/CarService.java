@@ -21,21 +21,15 @@ public class CarService {
     @Autowired
     RentalContractRepo rentalContractRepo;
 
-    public List<Car> fetchAllWithReturnDate(){
-        return carRepo.fetchAllWithReturnDate();
+    public List<RentalContract> fetchAllRentalContracts() {
+        return rentalContractRepo.fetchAll();
     }
 
-    public List<Car> fetchAllWithReturnDate(String regNumber){
-        return carRepo.fetchAllWithReturnDate(regNumber);
-    }
     public void addCar(Car c){
         carRepo.addCar(c);
     }
 
     public RentalContract fetchRentalContractDetails(String regNumber){
-
-        System.out.println(rentalContractRepo.fetchRentalContractDetails(regNumber));
-
         return rentalContractRepo.fetchRentalContractDetails(regNumber);
     }
 
