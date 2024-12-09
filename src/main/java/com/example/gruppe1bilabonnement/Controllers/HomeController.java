@@ -4,6 +4,7 @@ import com.example.gruppe1bilabonnement.Model.Car;
 import com.example.gruppe1bilabonnement.Model.RentalContract;
 import com.example.gruppe1bilabonnement.Model.Renter;
 import com.example.gruppe1bilabonnement.Service.CarService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,11 @@ public class HomeController {
     public String createCar() {
         return "home/opret_bil"; // This should point to your HTML form for creating a rental contract
     }
+    @PostMapping("/opret_bil")
+    public String createCar(@ModelAttribute Car C){
+        carService.addCar(C);
+        return "redirect:/";
+    }
 
     @GetMapping("/udlejede_biler")
     public String udlejedeBiler(Model model, @RequestParam Map<String, String> regNumber ) {
@@ -54,6 +60,9 @@ public class HomeController {
     public String createRenter() {
         return "home/opret_lejer"; // This should point to your HTML form for creating a rental contract
     }
+    //@PostMapping("/opretlejer")
+    //public String createRenter(){
+    //}
 
 //    @PostMapping
 //    public String createCar(@ModelAttribute Car C) {

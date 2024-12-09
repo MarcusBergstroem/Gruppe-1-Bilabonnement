@@ -8,29 +8,21 @@
 <h1>Opret en bil</h1>
 
 <!-- Biloplysninger-->
-<div class="????">
+<form class="createCar" action="/opret_bil" method="post">
     <h2>Bil Information</h2>
-    <div class="????">
-        <label>Car Brand: <input type="text" name="car_brand" required placeholder="f.eks. honda"></label>
-    </div>
-    <div class="????">
-        <label>Car Model: <input type="text" name="car_model" required placeholder="f.eks. civic"></label>
-    </div>
-    <div class="????">
-        <label>Equipment Level: <input type="text" name="equipment_level" ></label>
-    </div>
-    <div class="????">
-        <label>Vehicle Number: <input type="text" name="vehicle_number" required placeholder="f.eks. 1,2,3,4,5,6..."></label>
-    </div>
-    <div class="????">
-        <label>VIN: <input type="text" name="vin" required placeholder="f.eks. H283HCS231H8JX2G"></label>
-    </div>
-    <div class="????">
-        <label>Registration Number: <input type="text" name="registration_number" required placeholder="f.eks. HC284"></label>
-    </div>
-</div>
-
-<!-- Checkbox for bekræftelse -->
+    <label>Bilmærke:</label>
+    <input type="text" name="carBrand" required placeholder="f.eks. honda"><br>
+    <label>Bilmodel:</label>
+    <input type="text" name="carModel" required placeholder="f.eks. civic"><br>
+    <label>Udstyrsniveau:</label>
+    <input type="text" name="equipmentLevel" required placeholder="f.eks Standard"><br>
+    <label>VIN:</label>
+    <input type="text" name="vin" required placeholder="f.eks. H283HCS231H8JX2G"><br>
+        <input type="checkbox" name="signed" required> Jeg bekræfter hermed, at informationen er korrekt.
+    </label><br>
+    <input type="submit" value="Tilføj bil" class="submit-button">
+</form>
+<!-- Checkbox for bekræftelse
 <div class="????">
     <h2>Signature</h2>
     <div class="????">
@@ -38,12 +30,11 @@
             <input type="checkbox" name="signed" required> Jeg bekræfter hermed
         </label>
     </div>
-</div>
+</div>-->
 
 <!-- Knapper -->
 <div class="????">
-    <form action="/" method="POST" onsubmit="return confirm('Rental contract saved! Do you want to proceed?');">
-        <button type="submit">Save Rental Contract</button>
+    <form action="/" method="POST" onsubmit="return confirm('Er du sikker på at du vil gemme bilen?');">
     </form>
 </div>
 </body>
