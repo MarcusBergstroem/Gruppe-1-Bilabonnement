@@ -77,16 +77,14 @@
         <h2>Signatur</h2>
         <div class="form-group">
             <label>
-                <input type="checkbox" name="signed" required> I hereby sign
+                <input type="checkbox" name="signed" required> Jeg bekræfter hermed
             </label>
         </div>
     </div>
 
     <!-- Knapper -->
     <div class="button-container">
-        <form action="/" method="GET" onsubmit="return confirm('Do you want to save?');">
-            <button type="submit">Gem lejekontrakt</button>
-        </form>
+        <button type="submit" onclick="return confirm('Er du sikker på at du vil gemme?');">Gem Lejekontrakten</button>
         <button type="submit">Send lejekontrakt til kunde</button>
     </div>
 </form>
