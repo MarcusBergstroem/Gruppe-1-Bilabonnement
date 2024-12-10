@@ -173,10 +173,17 @@ select {
 /* Styling til knapper */
 .button-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Ændrer retningen til lodret */
+    align-items: center; /* Centrerer knapperne vandret */
+    justify-content: center; /* Centrerer knapperne lodret */
+    min-height: 100vh; /* Får containeren til at fylde hele skærmen lodret */
 }
 
 .button-container button {
+    margin-bottom: 30px; /* tilføjer mellemrum mellem knapperne */
+    width: 200px; /* bredden på knapperne */
+    height: auto; /* højden på knapperne */
+    box-sizing: border-box; /* padding og border i knappernes mål */
     padding: 12px 24px;
     font-size: 16px;
     font-weight: 600;
@@ -187,5 +194,4 @@ select {
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
     text-align: center;
-    width: auto;
 }
