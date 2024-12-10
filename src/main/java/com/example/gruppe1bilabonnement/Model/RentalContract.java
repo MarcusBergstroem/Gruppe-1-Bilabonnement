@@ -17,9 +17,22 @@ public class RentalContract {
     private double additionalKM;
     private String customChoices;
     private boolean isSigned;
+
+    // Følgende data hentes fra særskilte tabeller
+    private String deliveryLocationName;
+    private String deliveryLocationAddress;
+    private String deliveryLocationZipcode;
+    private String deliveryLocationCity;
+    private String deliveryLocationCountry;
+    private String returnLocationName;
+    private String returnLocationAddress;
+    private String returnLocationZipcode;
+    private String returnLocationCity;
+    private String returnLocationCountry;
+
+    // Følgende fields er ikke med i konstruktøren men sættes via setters
     private Car rentalCar;
     private Renter rentalRenter;
-
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
@@ -33,7 +46,7 @@ public class RentalContract {
     public RentalContract(int id, int renterID, int carVehicleNumber, int deliveryReturnLocationId, String registrationNumber,
                           LocalDate deliveryDate, LocalDate returnDate, double initialPayment,
                           double monthlyPayment, int totalKilometers, double additionalKM,
-                          String customChoices, boolean isSigned) {
+                          String customChoices, boolean isSigned, String deliveryLocationName, String deliveryLocationAddress, String deliveryLocationZipcode, String deliveryLocationCity, String deliveryLocationCountry, String returnLocationName, String returnLocationAddress, String returnLocationZipcode, String returnLocationCity, String returnLocationCountry) {
         this.id = id;
         this.renterID = renterID;
         this.carVehicleNumber = carVehicleNumber;
@@ -47,6 +60,16 @@ public class RentalContract {
         this.additionalKM = additionalKM;
         this.customChoices = customChoices;
         this.isSigned = isSigned;
+        this.deliveryLocationName = deliveryLocationName;
+        this.deliveryLocationAddress = deliveryLocationAddress;
+        this.deliveryLocationZipcode = deliveryLocationZipcode;
+        this.deliveryLocationCity = deliveryLocationCity;
+        this.deliveryLocationCountry = deliveryLocationCountry;
+        this.returnLocationName = returnLocationName;
+        this.returnLocationAddress = returnLocationAddress;
+        this.returnLocationZipcode = returnLocationZipcode;
+        this.returnLocationCity = returnLocationCity;
+        this.returnLocationCountry = returnLocationCountry;
     }
 
     public int getId() {
@@ -163,6 +186,86 @@ public class RentalContract {
 
     public void setRentalRenter(Renter rentalRenter) {
         this.rentalRenter = rentalRenter;
+    }
+
+    public String getDeliveryLocationName() {
+        return deliveryLocationName;
+    }
+
+    public void setDeliveryLocationName(String deliveryLocationName) {
+        this.deliveryLocationName = deliveryLocationName;
+    }
+
+    public String getDeliveryLocationAddress() {
+        return deliveryLocationAddress;
+    }
+
+    public void setDeliveryLocationAddress(String deliveryLocationAddress) {
+        this.deliveryLocationAddress = deliveryLocationAddress;
+    }
+
+    public String getDeliveryLocationZipcode() {
+        return deliveryLocationZipcode;
+    }
+
+    public void setDeliveryLocationZipcode(String deliveryLocationZipcode) {
+        this.deliveryLocationZipcode = deliveryLocationZipcode;
+    }
+
+    public String getDeliveryLocationCity() {
+        return deliveryLocationCity;
+    }
+
+    public void setDeliveryLocationCity(String deliveryLocationCity) {
+        this.deliveryLocationCity = deliveryLocationCity;
+    }
+
+    public String getDeliveryLocationCountry() {
+        return deliveryLocationCountry;
+    }
+
+    public void setDeliveryLocationCountry(String deliveryLocationCountry) {
+        this.deliveryLocationCountry = deliveryLocationCountry;
+    }
+
+    public String getReturnLocationName() {
+        return returnLocationName;
+    }
+
+    public void setReturnLocationName(String returnLocationName) {
+        this.returnLocationName = returnLocationName;
+    }
+
+    public String getReturnLocationAddress() {
+        return returnLocationAddress;
+    }
+
+    public void setReturnLocationAddress(String returnLocationAddress) {
+        this.returnLocationAddress = returnLocationAddress;
+    }
+
+    public String getReturnLocationZipcode() {
+        return returnLocationZipcode;
+    }
+
+    public void setReturnLocationZipcode(String returnLocationZipcode) {
+        this.returnLocationZipcode = returnLocationZipcode;
+    }
+
+    public String getReturnLocationCity() {
+        return returnLocationCity;
+    }
+
+    public void setReturnLocationCity(String returnLocationCity) {
+        this.returnLocationCity = returnLocationCity;
+    }
+
+    public String getReturnLocationCountry() {
+        return returnLocationCountry;
+    }
+
+    public void setReturnLocationCountry(String returnLocationCountry) {
+        this.returnLocationCountry = returnLocationCountry;
     }
 }
 
