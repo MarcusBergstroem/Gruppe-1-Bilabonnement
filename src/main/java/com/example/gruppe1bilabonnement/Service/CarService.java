@@ -29,6 +29,10 @@ public class CarService {
         carRepo.addCar(c);
     }
 
+    //Henter alle biler hvis status er "Available"
+    public List<Car> fetchAllAvailableCars() {
+        return carRepo.fetchAllAvailableCars();
+    }
 
 
     public RentalContract fetchRentalContractDetails(String regNumber){
@@ -43,4 +47,13 @@ public class CarService {
         int geographyId = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode());
         renterRepo.addRenter(r, geographyId);
     }
+    //Henter alle renters
+    public List<Renter> fetchAllRenters() {
+        return renterRepo.fetchAllRenters();
+    }
+    // Tilføjer ny kontrakt og ændrer bilens status til "Leased"
+    public void addRentalContract(RentalContract rentalContract) {
+        rentalContractRepo.addRentalContract(rentalContract);
+    }
+
 }

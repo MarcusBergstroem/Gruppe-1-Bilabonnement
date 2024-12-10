@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -32,7 +33,7 @@ public class HomeController {
 
     @GetMapping("/opret_bil")
     public String createCar() {
-        return "home/opret_bil"; // This should point to your HTML form for creating a rental contract
+        return "home/opret_bil";
     }
     @PostMapping("/opret_bil")
     public String createCar(@ModelAttribute Car C){
@@ -52,18 +53,27 @@ public class HomeController {
     }
 
     @GetMapping("/opret_lejekontrakt")
-    public String createRentalContract() {
-        return "home/opret_lejekontrakt"; // This should point to your HTML form for creating a rental contract
+    public String createRentalContractForm(Model model) {
+
+        List<Car> availableCars = carService.fetchAllAvailableCars();
+        List<Renter> renters = carService.fetchAllRenters();
+
+        model.addAttribute("cars", availableCars);
+        model.addAttribute("renters", renters);
+
+        return "home/opret_lejekontrakt";
     }
     @PostMapping("/opret_lejekontrakt")
-    public String createRentalContract(@ModelAttribute RentalContract rc) {
-        //carService.addRentalContract(r);
-        return "home/opret_lejekontrakt"; // This should point to your HTML form for creating a rental contract
+    public String saveRentalContract(@ModelAttribute RentalContract rentalContract) {
+        //tilføjer kontrakt og ændrer status til 'leased'
+        carService.addRentalContract(rentalContract);
+
+        return "redirect:/";
     }
 
     @GetMapping("/opret_lejer")
     public String createRenter() {
-        return "home/opret_lejer"; // This should point to your HTML form for creating a rental contract
+        return "home/opret_lejer";
     }
 
     @PostMapping("/opret_lejer")

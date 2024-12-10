@@ -8,6 +8,7 @@ public class Car {
     private String vin;
     private String registrationNumber;
     private String returnDate;
+    private String rentalStatus;
 
     //Default Constructor
     public Car(){
@@ -15,7 +16,7 @@ public class Car {
     }
 
     // Constructor
-    public Car(int id, int vehicleNumber, String carBrand, String carModel, String equipmentLevel, String vin, String registrationNumber, String returnDate) {
+    public Car(int id, int vehicleNumber, String carBrand, String carModel, String equipmentLevel, String vin, String registrationNumber, String returnDate, String rentalStatus) {
         this.vehicleNumber = vehicleNumber;
         this.carBrand = carBrand;
         this.carModel = carModel;
@@ -23,6 +24,7 @@ public class Car {
         this.registrationNumber = registrationNumber;
         this.vin = vin;
         this.returnDate = returnDate;
+        this.rentalStatus = rentalStatus;
     }
 
 
@@ -78,5 +80,16 @@ public class Car {
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
+    }
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public String getRentalStatus() {
+        return rentalStatus;
+    }
+
+    public void setRentalStatus(String rentalStatus) {
+        this.rentalStatus = rentalStatus;
     }
 }
