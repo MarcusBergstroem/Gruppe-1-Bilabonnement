@@ -99,10 +99,13 @@ form {
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 8px;
-    width: 80%;
+    width: 80%; /* Denne breddetype centrerer indholdet */
     max-width: 900px;
     margin: 20px auto;
-    box-sizing: border-box; /* Sørger for at padding og border er inkluderet i bredden */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Sørger for, at børn fylder hele bredden */
+    box-sizing: border-box;
 }
 
 .create-form h2 {
@@ -115,9 +118,14 @@ form {
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start; /* Sørger for venstre justering */
     width: 100%;
-    box-sizing: border-box; /* Sørger for at padding og border er inkluderet i bredden */
+    box-sizing: border-box;
+}
+
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group label {
@@ -158,20 +166,16 @@ select, .form-group input, .form-group textarea {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px;
 }
 
 .signature input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+    margin-right: 10px;
 }
 
 /* Styling til knapper */
 .button-container {
     display: flex;
-    justify-content: center; /* Centrerer knapperne horisontalt */
-    gap: 10px; /* Giver afstand mellem knapperne */
+    justify-content: center; /* Centrerer horisontalt */
 }
 
 .button-container button {

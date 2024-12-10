@@ -20,7 +20,7 @@
 <h1>Opret lejekontrakt</h1>
 
 <!-- Lejer Dropdown -->
-<div class="create-form">
+<form action="/opret_lejekontrakt" method="post" class="create-form">
     <div class="form-group">
         <label for="lejer">Vælg lejer:</label>
         <select id="lejer" name="lejer">
@@ -81,15 +81,14 @@
             </label>
         </div>
     </div>
-</div>
 
-<!-- Knapper -->
-<div class="button-container">
-    <form action="/" method="GET" onsubmit="return confirm('Do you want to save?');">
-        <button type="submit">Gem lejekontrakt</button>
-    </form>
-    <button type="submit">Send lejekontrakt til kunde</button>
-</div>
-
+    <!-- Knapper -->
+    <div class="button-container">
+        <form action="/" method="GET" onsubmit="return confirm('Do you want to save?');">
+            <button type="submit">Gem lejekontrakt</button>
+        </form>
+        <button type="submit">Send lejekontrakt til kunde</button>
+    </div>
+</form>
 </body>
 </html>

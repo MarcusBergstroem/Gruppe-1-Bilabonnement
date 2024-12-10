@@ -22,10 +22,10 @@
 <h1 class="page-title">Opret en bil</h1>
 
 <!-- Biloplysninger Form -->
+<!-- Fjern den ekstra form-tag -->
 <form action="/opret_bil" method="post" class="create-form">
     <h2>Bil Information</h2>
 
-    <!-- Hver gruppe har "form-group"-klassen -->
     <div class="form-group">
         <label>Bilmærke:</label>
         <input type="text" name="carBrand" required placeholder="f.eks. Honda">
@@ -43,7 +43,6 @@
         <input type="text" name="vin" required placeholder="f.eks. H283HCS231H8JX2G">
     </div>
 
-    <!-- Bekræftelse -->
     <div class="signature">
         <h2>Signature</h2>
         <div class="form-group">
@@ -53,7 +52,6 @@
         </div>
     </div>
 
-    <!-- Submit Button -->
     <div class="button-container">
         <button type="submit" onclick="return confirm('Er du sikker på at du vil gemme bilen?');">Gem Bilen</button>
     </div>
