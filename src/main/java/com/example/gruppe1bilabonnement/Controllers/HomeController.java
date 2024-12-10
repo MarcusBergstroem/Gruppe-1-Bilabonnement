@@ -55,6 +55,11 @@ public class HomeController {
     public String createRentalContract() {
         return "home/opret_lejekontrakt"; // This should point to your HTML form for creating a rental contract
     }
+    @PostMapping("/opret_lejekontrakt")
+    public String createRentalContract(@ModelAttribute RentalContract rc) {
+        //carService.addRentalContract(r);
+        return "home/opret_lejekontrakt"; // This should point to your HTML form for creating a rental contract
+    }
 
     @GetMapping("/opret_lejer")
     public String createRenter() {
