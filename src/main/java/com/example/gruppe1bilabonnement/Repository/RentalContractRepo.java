@@ -20,7 +20,32 @@ public class RentalContractRepo {
     }
 
     public RentalContract fetchRentalContractDetails(String regNumber){
-        String sql = "SELECT * FROM rentalcontract WHERE RegistrationNumber = ?";
+
+        String sql = """
+                SELECT 
+                    rc.*, 
+                    drl.LocationName AS deliveryLocationName, 
+                    drl.LocationAddress AS deliveryLocationAddress, 
+                    drl.LocationZipcode AS deliveryLocationZipcode, 
+                    drl.LocationCity AS deliveryLocationCity, 
+                    drl.LocationCountry AS deliveryLocationCountry,
+                    drl2.LocationName AS returnLocationName, 
+                    drl2.LocationAddress AS returnLocationAddress, 
+                    drl2.LocationZipcode AS returnLocationZipcode, 
+                    drl2.LocationCity AS returnLocationCity, 
+                    drl2.LocationCountry AS returnLocationCountry
+                FROM 
+                    rentalcontract rc
+                INNER JOIN 
+                    delivery_return_location drl ON rc.Delivery_LocationID = drl.id
+                INNER JOIN 
+                    delivery_return_location drl2 ON rc.Return_LocationID = drl2.id
+                WHERE 
+                    rc.RegistrationNumber = ?;
+                """;
+
+
+        //String sql = "SELECT * FROM rentalcontract WHERE RegistrationNumber = ?";
         RowMapper<RentalContract> rowMapper1 = new BeanPropertyRowMapper<>(RentalContract.class);
         RentalContract rentalTmp = template.queryForObject(sql, rowMapper1, regNumber);
 
@@ -34,9 +59,8 @@ public class RentalContractRepo {
         Renter renterTmp = template.queryForObject(sqlRenter, rowMapper3, rentalTmp.getRenterID());
         rentalTmp.setRentalRenter(renterTmp);
 
-        // Laver et rentalContract objekt som indeholder alle detaljer for reg nr.
-
         return rentalTmp;
+
     }
 
     public List<RentalContract> searchRentalContracts(String regNumber){
