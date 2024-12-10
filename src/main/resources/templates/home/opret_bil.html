@@ -25,31 +25,29 @@
     <div class="form-group">
         <label for="carBrand">Bilmærke:</label>
         <input type="text" id="carBrand" name="carBrand" required placeholder="f.eks. Honda">
-    </div>
-    <div class="form-group">
+
         <label for="carModel">Bilmodel:</label>
         <input type="text" id="carModel" name="carModel" required placeholder="f.eks. Civic">
-    </div>
-    <div class="form-group">
+
         <label for="equipmentLevel">Udstyrsniveau:</label>
         <input type="text" id="equipmentLevel" name="equipmentLevel" placeholder="f.eks. Standard">
-    </div>
-    <div class="form-group">
+
         <label for="vin">VIN:</label>
         <input type="text" id="vin" name="vin" required placeholder="f.eks. H283HCS231H8JX2G">
     </div>
 
     <div class="signature">
         <h2>Signatur</h2>
+        <p>Bekræft venligst om<br>betalingen er gået igennem!</p>
         <div class="form-group">
             <label>
-                <input type="checkbox" name="signed" required> Jeg bekræfter hermed
+                <input type="checkbox" name="signed" required> TRYK for at bekræfte!
             </label>
         </div>
     </div>
 
-    <div class="button-container">
-        <button type="submit" onclick="return confirm('Er du sikker på at du vil gemme bilen?');">Gem Bilen</button>
+    <div class="multiple-button-container">
+        <button class="save-button" type="submit" onclick="return confirm('Er du sikker på at du vil gemme bilen?');">Gem Bilen</button>
     </div>
 </form>
 

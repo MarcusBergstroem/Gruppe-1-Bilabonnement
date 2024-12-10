@@ -139,6 +139,7 @@ select {
 
 .form-group label {
     display: block;
+    margin-top: 20px;
     margin-bottom: 5px;
     font-weight: bold;
 }
@@ -149,7 +150,7 @@ select {
     padding: 20px;
     margin: 20px auto;
     border-radius: 8px;
-    max-width: 600px;
+    width: 300px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -171,6 +172,36 @@ select {
 }
 
 /* Styling til knapper */
+.multiple-button-container {
+    display: flex; /* Brug Flexbox til at placere elementerne på en række */
+    justify-content: center; /* Centrerer knapperne horisontalt */
+    gap: 20px; /* Tilføjer mellemrum mellem knapperne */
+}
+
+.send-button,
+.save-button {
+    margin-bottom: 30px; /* Samme som de andre knapper */
+    width: 200px; /* Standardbredde */
+    height: auto;
+    box-sizing: border-box;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #007BFF;
+    border: 1px solid #0056b3;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    text-align: center;
+}
+
+.send-button:hover,
+.save-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+}
+
 .button-container {
     display: flex;
     flex-direction: column; /* Ændrer retningen til lodret */
@@ -194,4 +225,9 @@ select {
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
     text-align: center;
+}
+
+.button-container button:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
 }
