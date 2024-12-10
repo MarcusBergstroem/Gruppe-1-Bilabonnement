@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
     <title>Opret Lejer</title>
@@ -12,44 +12,53 @@
         <a href="/" class="title">Bilabonnement.dk</a>
     </div>
     <div class="navbar-right">
-        <button class="logout-button">Log Out</button>
+        <button class="logout-button">Log ud</button>
     </div>
 </nav>
 
-<h1>Opret en lejer </h1>
+<h1>Opret en lejer</h1>
 
 <form action="/opret_lejer" method="post" class="create-form">
     <h2>Lejer Information</h2>
+
     <div class="form-group">
-        <label>Fornavn: <input type="text" name="firstName" placeholder="f.eks Adrian"></label>
+        <label for="firstName">Fornavn:</label>
+        <input type="text" id="firstName" name="firstName" placeholder="f.eks. Adrian">
     </div>
     <div class="form-group">
-        <label>Efternavn: <input type="text" name="lastName" required placeholder="f.eks. Mortensen"></label>
+        <label for="lastName">Efternavn:</label>
+        <input type="text" id="lastName" name="lastName" required placeholder="f.eks. Mortensen">
     </div>
     <div class="form-group">
-        <label>Adresse: <input type="text" name="address" required placeholder="f.eks. Persillehaven"></label>
+        <label for="address">Adresse:</label>
+        <input type="text" id="address" name="address" required placeholder="f.eks. Persillehaven">
     </div>
     <div class="form-group">
-        <label>Postnummer: <input type="text" name="zipCode" required placeholder="f.eks. 2730"></label>
+        <label for="zipCode">Postnummer:</label>
+        <input type="text" id="zipCode" name="zipCode" required placeholder="f.eks. 2730">
     </div>
     <div class="form-group">
-        <label>By: <input type="text" name="city" required placeholder="f.eks. København"></label>
+        <label for="city">By:</label>
+        <input type="text" id="city" name="city" required placeholder="f.eks. København">
     </div>
     <div class="form-group">
-        <label>By: <input type="text" name="country" required placeholder="f.eks. Jylland"></label>
+        <label for="country">Land:</label>
+        <input type="text" id="country" name="country" required placeholder="f.eks. Danmark">
     </div>
     <div class="form-group">
-        <label>Telefonnummer: <input type="tel" name="phoneNumber" required placeholder="f.eks. +45 xx xx xx xx"></label>
+        <label for="phoneNumber">Telefonnummer:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="f.eks. +45 xx xx xx xx">
     </div>
     <div class="form-group">
-        <label>CPR-Nummer: <input type="text" name="cpr" required placeholder="f.eks. xxxxxx-xxxx"></label>
+        <label for="cpr">CPR-Nummer:</label>
+        <input type="text" id="cpr" name="cpr" required placeholder="f.eks. xxxxxx-xxxx">
     </div>
     <div class="form-group">
-        <label>Blacklist: <input type="checkbox" name="blacklist"></label>
+        <label>
+            <input type="checkbox" name="blacklist"> Sortliste
+        </label>
     </div>
 
-
-    <!-- Bekræftelse -->
     <div class="signature">
         <h2>Signatur</h2>
         <div class="form-group">
@@ -58,10 +67,11 @@
             </label>
         </div>
     </div>
-<!-- Knapper -->
+
     <div class="button-container">
         <button type="submit" onclick="return confirm('Er du sikker på at du vil gemme lejeren?');">Gem Lejer</button>
     </div>
 </form>
+
 </body>
 </html>

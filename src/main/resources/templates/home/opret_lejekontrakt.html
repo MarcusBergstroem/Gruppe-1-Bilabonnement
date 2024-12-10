@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
     <title>Opret Lejekontrakt</title>
@@ -13,14 +13,14 @@
     </div>
 
     <div class="navbar-right">
-        <button class="logout-button">Log Out</button>
+        <button class="logout-button">Log ud</button>
     </div>
 </nav>
 
 <h1>Opret lejekontrakt</h1>
 
-<!-- Lejer Dropdown -->
 <form action="/opret_lejekontrakt" method="post" class="create-form">
+    <!-- Lejer Dropdown -->
     <div class="form-group">
         <label for="lejer">Vælg lejer:</label>
         <select id="lejer" name="lejer">
@@ -43,33 +43,42 @@
     </div>
 
     <!-- Lejevilkår -->
-    <h2>Rental Terms</h2>
+    <h2>Lejevilkår</h2>
     <div class="form-group">
-        <label>Pickup Date: <input type="date" name="pickup_date" required></label>
+        <label for="pickup_date">Afhentningsdato:</label>
+        <input type="date" id="pickup_date" name="pickup_date" required>
     </div>
     <div class="form-group">
-        <label>Return Date: <input type="date" name="return_date" required></label>
+        <label for="return_date">Retur Dato:</label>
+        <input type="date" id="return_date" name="return_date" required>
     </div>
     <div class="form-group">
-        <label>Pickup Location: <input type="text" name="pickup_location" required placeholder="f.eks. "></label>
+        <label for="pickup_location">Afhentningssted:</label>
+        <input type="text" id="pickup_location" name="pickup_location" required placeholder="f.eks. ">
     </div>
     <div class="form-group">
-        <label>Return Location: <input type="text" name="return_location" required placeholder="f.eks. "></label>
+        <label for="return_location">Retursted:</label>
+        <input type="text" id="return_location" name="return_location" required placeholder="f.eks. ">
     </div>
     <div class="form-group">
-        <label>First Payment: <input type="number" name="first_payment" required placeholder="f.eks. '30.000',-"></label>
+        <label for="first_payment">Første Betaling:</label>
+        <input type="number" id="first_payment" name="first_payment" required placeholder="f.eks. '30.000',-">
     </div>
     <div class="form-group">
-        <label>Monthly Payment: <input type="number" name="monthly_payment" required placeholder="f.eks. '2.948',-"></label>
+        <label for="monthly_payment">Månedlig Betaling:</label>
+        <input type="number" id="monthly_payment" name="monthly_payment" required placeholder="f.eks. '2.948',-">
     </div>
     <div class="form-group">
-        <label>Total Kilometers: <input type="number" name="total_kilometers" required placeholder="f.eks. '5000 - 10000' Kilometers"></label>
+        <label for="total_kilometers">Samlede Kilometer:</label>
+        <input type="number" id="total_kilometers" name="total_kilometers" required placeholder="f.eks. '5000 - 10000' Kilometer">
     </div>
     <div class="form-group">
-        <label>Price per Excess Kilometer: <input type="number" name="price_per_km" required placeholder="f.eks. '250' or '500'"></label>
+        <label for="price_per_km">Pris pr. Ekstra Kilometer:</label>
+        <input type="number" id="price_per_km" name="price_per_km" required placeholder="f.eks. '250' eller '500'">
     </div>
     <div class="form-group">
-        <label>Add-ons (Free Text): <textarea name="add_ons"></textarea></label>
+        <label for="add_ons">Tilføjelser (Fri Tekst):</label>
+        <textarea id="add_ons" name="add_ons"></textarea>
     </div>
 
     <!-- Bekræftelse -->
@@ -85,8 +94,9 @@
     <!-- Knapper -->
     <div class="button-container">
         <button type="submit" onclick="return confirm('Er du sikker på at du vil gemme?');">Gem Lejekontrakten</button>
-        <button type="submit">Send lejekontrakt til kunde</button>
+        <button type="button" onclick="alert('Lejekontrakt er sendt til kunde');">Send lejekontrakt til kunde</button>
     </div>
 </form>
+
 </body>
 </html>

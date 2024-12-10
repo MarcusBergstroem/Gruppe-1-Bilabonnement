@@ -23,7 +23,7 @@ form {
     width: 100%;
 }
 
-/* Styling til at navigere (navigations-baren i toppen af skÃ¦rmen) */
+/* Styling til navigationsbaren */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -60,7 +60,7 @@ form {
     background-color: #d32f2f;
 }
 
-/* Styling for tables */
+/* Styling for tabeller */
 .styled-table {
     width: 50vw;
     border-collapse: collapse;
@@ -94,17 +94,17 @@ form {
     cursor: pointer;
 }
 
-/* Styling til formularer som "opret_Bil" og andre inputfelter */
+/* Styling til formularer */
 .create-form {
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 8px;
-    width: 80%; /* Denne breddetype centrerer indholdet */
+    width: 80%;
     max-width: 900px;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
-    align-items: stretch; /* Sørger for, at børn fylder hele bredden */
+    align-items: stretch;
     box-sizing: border-box;
 }
 
@@ -118,31 +118,29 @@ form {
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Sørger for venstre justering */
+    align-items: flex-start;
     width: 100%;
     box-sizing: border-box;
 }
 
-.form-group input {
-    width: 100%;
-    box-sizing: border-box;
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea,
+select {
+    width: 100%; /* Sørger for, at de fylder hele tilgængelige bredde */
+    box-sizing: border-box; /* Inkluderer padding og border i størrelsen */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-height: 40px;
+    font-size: 1rem;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-}
-
-/* Dette sørger for, at inputfelter og dropdown menuer har samme bredde */
-select, .form-group input, .form-group textarea {
-    width: 100%; /* Gør alle inputfelter og dropdowns lige brede */
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    min-height: 40px; /* Sætter minimumshøjde, så alle felterne bliver lige høje */
-    box-sizing: border-box; /* Inkluderer padding og border i den samlede størrelse */
 }
 
 /* Styling til Signature-boksen */
@@ -175,7 +173,7 @@ select, .form-group input, .form-group textarea {
 /* Styling til knapper */
 .button-container {
     display: flex;
-    justify-content: center; /* Centrerer horisontalt */
+    justify-content: center;
 }
 
 .button-container button {
@@ -189,10 +187,5 @@ select, .form-group input, .form-group textarea {
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
     text-align: center;
-    width: auto; /* Sørger for, at knapperne har deres naturlige bredde */
-}
-
-.button-container button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
+    width: auto;
 }
