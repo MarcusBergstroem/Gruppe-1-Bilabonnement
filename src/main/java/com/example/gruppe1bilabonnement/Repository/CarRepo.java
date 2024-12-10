@@ -22,4 +22,9 @@ public class CarRepo {
         template.update(sql, c.getCarBrand(), c.getCarModel(), c.getEquipmentLevel(), c.getVin());
 
     }
+    public List<Car> fetchAllAvailableCars() {
+        String sql = "SELECT * FROM car WHERE RentalStatus = 'available'";
+        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        return template.query(sql, rowMapper);
+    }
 }
