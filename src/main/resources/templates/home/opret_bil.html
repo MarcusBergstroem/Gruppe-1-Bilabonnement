@@ -21,8 +21,8 @@
 <!-- Overskrift -->
 <h1 class="page-title">Opret en bil</h1>
 
-<!-- Biloplysninger Form -->
-<form action="/opret_bil" method="post" class="create-form">
+<!-- Biloplysninger -->
+<div class="create-form" action="/opret_bil" method="post">
     <h2>Bil Information</h2>
 
     <!-- Hver gruppe har "form-group"-klassen -->
@@ -42,22 +42,23 @@
         <label>VIN:</label>
         <input type="text" name="vin" required placeholder="f.eks. H283HCS231H8JX2G">
     </div>
+</div>
 
-    <!-- Bekræftelse -->
-    <div class="signature">
-        <h2>Signature</h2>
-        <div class="form-group">
-            <label>
-                <input type="checkbox" name="signed" required> Jeg bekræfter hermed
-            </label>
-        </div>
+<!-- Bekræftelse -->
+<div class="signature">
+    <h2>Signature</h2>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="signed" required> Jeg bekræfter hermed
+        </label>
     </div>
+</div>
 
-    <!-- Submit Button -->
-    <div class="button-container">
-        <button type="submit" onclick="return confirm('Er du sikker på at du vil gemme bilen?');">Gem Bilen</button>
-    </div>
-</form>
-
+<!-- Knapper -->
+<div class="button-container">
+    <form action="/opret_bil" method="POST" onsubmit="return confirm('Er du sikker på at du vil gemme bilen?');">
+        <button type="submit">Gem Bilen</button>
+    </form>
+</div>
 </body>
 </html>
