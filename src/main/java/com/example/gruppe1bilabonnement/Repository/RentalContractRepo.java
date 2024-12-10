@@ -76,26 +76,26 @@ public class RentalContractRepo {
         }
         return rentalContractList;
     }
-    public void addRentalContract(RentalContract rentalContract) {
+        public void addRentalContract (RentalContract rentalContract){
+            String sql = "INSERT INTO rentalcontract (RenterID, CarVehicleNumber, Delivery_Return_LocationID, DeliveryDate, " +
+                    "ReturnDate, InitialPayment, MonthlyPayment, TotalKilometers, AdditionalKM, CustomChoices, IsSigned, RegistrationNumber) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        String sql = "INSERT INTO rentalcontract (RenterID, CarVehicleNumber, DeliveryReturnLocationId, " +
-                "PickupDate, ReturnDate, InitialPayment, MonthlyPayment, TotalKilometers, " +
-                "AdditionalKM, CustomChoices, IsSigned) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        template.update(sql,
-                rentalContract.getRenterID(),
-                rentalContract.getCarVehicleNumber(),
-                rentalContract.getDeliveryReturnLocationId(),
-                rentalContract.getDeliveryDate(),
-                rentalContract.getReturnDate(),
-                rentalContract.getInitialPayment(),
-                rentalContract.getMonthlyPayment(),
-                rentalContract.getTotalKilometers(),
-                rentalContract.getAdditionalKM(),
-                rentalContract.getCustomChoices(),
-                rentalContract.isSigned()
-        );
-        String updateCarStatusSql = "UPDATE car SET RentalStatus = ? WHERE VehicleNumber = ?";
-        template.update(updateCarStatusSql, "Leased", rentalContract.getCarVehicleNumber());
+            template.update(sql,
+                    rentalContract.getRenterID(),
+                    rentalContract.getCarVehicleNumber(),
+                    rentalContract.getDeliveryReturnLocationId(),
+                    rentalContract.getDeliveryDate(),
+                    rentalContract.getReturnDate(),
+                    rentalContract.getInitialPayment(),
+                    rentalContract.getMonthlyPayment(),
+                    rentalContract.getTotalKilometers(),
+                    rentalContract.getAdditionalKM(),
+                    rentalContract.getCustomChoices(),
+                    rentalContract.isSigned(),
+                    rentalContract.getRegistrationNumber()
+            );
+            String updateCarStatusSql = "UPDATE car SET RentalStatus = ? WHERE VehicleNumber = ?";
+            template.update(updateCarStatusSql, "Leased", rentalContract.getCarVehicleNumber());
+        }
     }
-}

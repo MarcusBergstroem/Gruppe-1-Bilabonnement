@@ -7,94 +7,77 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="navbar-left">
-        <a href="/" class="title">Bilabonnement.dk</a>
-    </div>
-
-    <div class="navbar-right">
-        <button class="logout-button">Log ud</button>
-    </div>
-</nav>
-
-<h1>Opret lejekontrakt</h1>
-
 <form action="/opret_lejekontrakt" method="post" class="create-form">
-    <!-- Lejer Dropdown -->
+    <!-- Dropdown for Renter -->
     <div class="form-group">
         <label for="lejer">Vælg lejer:</label>
-        <select id="lejer" name="lejer">
+        <select id="lejer" name="renterID" required>
             <option value="" disabled selected>-- Vælg en lejer --</option>
-            <option value="1">Lejer 1</option>
-            <option value="2">Lejer 2</option>
-            <option value="3">Lejer 3</option>
+
+            <th:block th:each="renter : ${renters}">
+                <option th:value="${renter.id}" th:text="${renter.firstName} + ' ' + ${renter.lastName}"></option>
+            </th:block>
         </select>
     </div>
 
-    <!-- Bil Dropdown -->
+    <!-- Dropdown for Car -->
     <div class="form-group">
         <label for="bil">Vælg bil:</label>
-        <select id="bil" name="bil">
+        <select id="bil" name="carVehicleNumber" required>
             <option value="" disabled selected>-- Vælg en bil --</option>
-            <option value="audi">Audi A4</option>
-            <option value="bmw">BMW 320</option>
-            <option value="tesla">Tesla Model 3</option>
+
+            <th:block th:each="car : ${cars}">
+                <option th:value="${car.vehicleNumber}" th:text="${car.carBrand} + ' ' + ${car.carModel}"></option>
+            </th:block>
         </select>
     </div>
+    <div class="form-group">
+        <label for="registration_number">Registreringsnummer:</label>
+        <input type="text" id="registration_number" name="registrationNumber" required placeholder="f.eks. AB12345">
+    </div>
 
-    <!-- Lejevilkår -->
-    <h2>Lejevilkår</h2>
+    <!-- Remaining Fields -->
     <div class="form-group">
         <label for="pickup_date">Afhentningsdato:</label>
-        <input type="date" id="pickup_date" name="pickup_date" required>
+        <input type="date" id="pickup_date" name="deliveryDate" required>
     </div>
     <div class="form-group">
         <label for="return_date">Retur Dato:</label>
-        <input type="date" id="return_date" name="return_date" required>
+        <input type="date" id="return_date" name="returnDate" required>
     </div>
     <div class="form-group">
-        <label for="pickup_location">Afhentningssted:</label>
-        <input type="text" id="pickup_location" name="pickup_location" required placeholder="f.eks. ">
-    </div>
-    <div class="form-group">
-        <label for="return_location">Retursted:</label>
-        <input type="text" id="return_location" name="return_location" required placeholder="f.eks. ">
+        <label for="pickup_locationID">Afhentningssted:</label>
+        <input type="number" id="pickup_locationID" name="deliveryReturnLocationId" required>
     </div>
     <div class="form-group">
         <label for="first_payment">Første Betaling:</label>
-        <input type="number" id="first_payment" name="first_payment" required placeholder="f.eks. '30.000',-">
+        <input type="number" id="first_payment" name="initialPayment" required>
     </div>
     <div class="form-group">
         <label for="monthly_payment">Månedlig Betaling:</label>
-        <input type="number" id="monthly_payment" name="monthly_payment" required placeholder="f.eks. '2.948',-">
+        <input type="number" id="monthly_payment" name="monthlyPayment" required>
     </div>
     <div class="form-group">
         <label for="total_kilometers">Samlede Kilometer:</label>
-        <input type="number" id="total_kilometers" name="total_kilometers" required placeholder="f.eks. '5000 - 10000' Kilometer">
+        <input type="number" id="total_kilometers" name="totalKilometers" required>
     </div>
     <div class="form-group">
         <label for="price_per_km">Pris pr. Ekstra Kilometer:</label>
-        <input type="number" id="price_per_km" name="price_per_km" required placeholder="f.eks. '250' eller '500'">
+        <input type="number" id="price_per_km" name="additionalKM" required>
     </div>
     <div class="form-group">
         <label for="add_ons">Tilføjelser (Fri Tekst):</label>
-        <textarea id="add_ons" name="add_ons"></textarea>
+        <textarea id="add_ons" name="customChoices"></textarea>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="isSigned" required> Jeg bekræfter hermed
+        </label>
     </div>
 
-    <!-- Bekræftelse -->
-    <div class="signature">
-        <h2>Signatur</h2>
-        <div class="form-group">
-            <label>
-                <input type="checkbox" name="signed" required> Jeg bekræfter hermed
-            </label>
-        </div>
-    </div>
-
-    <!-- Knapper -->
+    <!-- Submit Button -->
     <div class="button-container">
-        <button type="submit" onclick="return confirm('Er du sikker på at du vil gemme?');">Gem Lejekontrakten</button>
-        <button type="button" onclick="alert('Lejekontrakt er sendt til kunde');">Send lejekontrakt til kunde</button>
+        <button type="submit">Gem Lejekontrakten</button>
     </div>
 </form>
 
