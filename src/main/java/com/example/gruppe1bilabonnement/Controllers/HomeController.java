@@ -57,14 +57,19 @@ public class HomeController {
 
         List<Car> availableCars = carService.fetchAllAvailableCars();
         List<Renter> renters = carService.fetchAllRenters();
+        List<Map<String, Object>> locations = carService.getAllLocations();
 
         model.addAttribute("cars", availableCars);
         model.addAttribute("renters", renters);
+        model.addAttribute("locations", locations);
+
 
         return "home/opret_lejekontrakt";
     }
     @PostMapping("/opret_lejekontrakt")
     public String saveRentalContract(@ModelAttribute RentalContract rentalContract) {
+        System.out.println("DeliveryLocationID: " + rentalContract.getDeliveryLocationId());
+        System.out.println("ReturnLocationID: " + rentalContract.getReturnLocationId());
         //tilføjer kontrakt og ændrer status til 'leased'
         carService.addRentalContract(rentalContract);
 

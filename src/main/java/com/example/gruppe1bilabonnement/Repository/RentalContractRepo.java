@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class RentalContractRepo {
@@ -17,6 +18,10 @@ public class RentalContractRepo {
 
     public RentalContractRepo (JdbcTemplate template) {
         this.template = template;
+    }
+    public List<Map<String, Object>> fetchAllLocations() {
+        String sql = "SELECT ID, LocationName FROM delivery_return_location";
+        return template.queryForList(sql);
     }
 
     public RentalContract fetchRentalContractDetails(String regNumber){
@@ -112,14 +117,14 @@ public class RentalContractRepo {
         return rentalContractList;
     }
         public void addRentalContract (RentalContract rentalContract){
-            String sql = "INSERT INTO rentalcontract (RenterID, CarVehicleNumber, Delivery_Return_LocationID, DeliveryDate, " +
-                    "ReturnDate, InitialPayment, MonthlyPayment, TotalKilometers, AdditionalKM, CustomChoices, IsSigned, RegistrationNumber) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO rentalcontract (RenterID, CarVehicleNumber, DeliveryDate, ReturnDate, InitialPayment, " +
+                    "MonthlyPayment, TotalKilometers, AdditionalKM, CustomChoices, IsSigned, RegistrationNumber, " +
+                    "DeliveryLocationID, ReturnLocationID) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             template.update(sql,
                     rentalContract.getRenterID(),
                     rentalContract.getCarVehicleNumber(),
-                    rentalContract.getDeliveryReturnLocationId(),
                     rentalContract.getDeliveryDate(),
                     rentalContract.getReturnDate(),
                     rentalContract.getInitialPayment(),
@@ -128,7 +133,9 @@ public class RentalContractRepo {
                     rentalContract.getAdditionalKM(),
                     rentalContract.getCustomChoices(),
                     rentalContract.isSigned(),
-                    rentalContract.getRegistrationNumber()
+                    rentalContract.getRegistrationNumber(),
+                    rentalContract.getDeliveryLocationId(),
+                    rentalContract.getReturnLocationId()
             );
             String updateCarStatusSql = "UPDATE car SET RentalStatus = ? WHERE VehicleNumber = ?";
             template.update(updateCarStatusSql, "Leased", rentalContract.getCarVehicleNumber());

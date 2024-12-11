@@ -57,8 +57,40 @@
         <label for="return_date">Retur Dato:</label>
         <input type="date" id="return_date" name="returnDate" required>
 
-        <label for="pickup_locationID">Afhentningssted:</label>
-        <input type="number" id="pickup_locationID" name="deliveryReturnLocationId" required>
+        <div class="form-group">
+                <label for="delivery_location">Afhentningssted:</label>
+                <select id="delivery_location" name="deliveryLocationId" required>
+                    <option value="" disabled selected>-- Vælg afhentningssted --</option>
+                    <option value="1">Hovedlager København, Østerbrogade 45, København</option>
+                    <option value="2">Jyllands Central, Skanderborgvej 33, Aarhus</option>
+                    <option value="3">Odense Distribution, Toldbodgade 17, Odense</option>
+                    <option value="4">Nordjylland Depot, Havnevej 22, Aalborg</option>
+                    <option value="5">Sydsjælland Lokation, Roskildevej 75, Næstved</option>
+                    <option value="6">Bornholm Center, Store Torv 3, Rønne</option>
+                    <option value="7">Esbjerg Havn, Fiskervej 10, Esbjerg</option>
+                    <option value="8">Vejle Pakker, Vejlevej 65, Vejle</option>
+                    <option value="9">Randers Distribution, Randersvej 89, Randers</option>
+                    <option value="10">Sønderjylland Lager, Søndervej 12, Sønderborg</option>
+                </select>
+        </div>
+
+        <div class="form-group">
+            <label for="return_location">Retursted:</label>
+            <select id="return_location" name="returnLocationId" required>
+                <option value="" disabled selected>-- Vælg retursted --</option>
+                <option value="1">Hovedlager København, Østerbrogade 45, København</option>
+                <option value="2">Jyllands Central, Skanderborgvej 33, Aarhus</option>
+                <option value="3">Odense Distribution, Toldbodgade 17, Odense</option>
+                <option value="4">Nordjylland Depot, Havnevej 22, Aalborg</option>
+                <option value="5">Sydsjælland Lokation, Roskildevej 75, Næstved</option>
+                <option value="6">Bornholm Center, Store Torv 3, Rønne</option>
+                <option value="7">Esbjerg Havn, Fiskervej 10, Esbjerg</option>
+                <option value="8">Vejle Pakker, Vejlevej 65, Vejle</option>
+                <option value="9">Randers Distribution, Randersvej 89, Randers</option>
+                <option value="10">Sønderjylland Lager, Søndervej 12, Sønderborg</option>
+            </select>
+        </div>
+
 
         <label for="first_payment">Første Betaling:</label>
         <input type="number" id="first_payment" name="initialPayment" required>

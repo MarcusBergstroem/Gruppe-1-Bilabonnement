@@ -7,7 +7,6 @@ public class RentalContract {
     private int id;
     private int renterID;
     private int carVehicleNumber;
-    private int deliveryReturnLocationId;
     private String registrationNumber;
     private LocalDate deliveryDate;
     private LocalDate returnDate;
@@ -17,6 +16,8 @@ public class RentalContract {
     private double additionalKM;
     private String customChoices;
     private boolean isSigned;
+    private int deliveryLocationId;
+    private int returnLocationId;
 
     // Følgende data hentes fra særskilte tabeller
     private String deliveryLocationName;
@@ -43,14 +44,15 @@ public class RentalContract {
     }
 
     // Constructor
-    public RentalContract(int id, int renterID, int carVehicleNumber, int deliveryReturnLocationId, String registrationNumber,
+    public RentalContract(int id, int renterID, int carVehicleNumber, int deliveryLocationId, int returnLocationId, String registrationNumber,
                           LocalDate deliveryDate, LocalDate returnDate, double initialPayment,
                           double monthlyPayment, int totalKilometers, double additionalKM,
                           String customChoices, boolean isSigned, String deliveryLocationName, String deliveryLocationAddress, String deliveryLocationZipcode, String deliveryLocationCity, String deliveryLocationCountry, String returnLocationName, String returnLocationAddress, String returnLocationZipcode, String returnLocationCity, String returnLocationCountry) {
         this.id = id;
         this.renterID = renterID;
         this.carVehicleNumber = carVehicleNumber;
-        this.deliveryReturnLocationId = deliveryReturnLocationId;
+        this.deliveryLocationId = deliveryLocationId;
+        this.returnLocationId = returnLocationId;
         this.registrationNumber = registrationNumber;
         this.deliveryDate = deliveryDate;
         this.returnDate = returnDate;
@@ -96,14 +98,20 @@ public class RentalContract {
         this.carVehicleNumber = carVehicleNumber;
     }
 
-    public int getDeliveryReturnLocationId() {
-        return deliveryReturnLocationId;
+    public int getReturnLocationId() {
+        return returnLocationId;
     }
 
-    public void setDeliveryReturnLocationId(int deliveryReturnLocationId) {
-        this.deliveryReturnLocationId = deliveryReturnLocationId;
+    public void returnLocationId(int returnLocationId) {
+        this.returnLocationId = returnLocationId;
+    }
+    public int getDeliveryLocationId() {
+        return deliveryLocationId;
     }
 
+    public void setDeliveryLocationId(int deliveryLocationId) {
+        this.deliveryLocationId = deliveryLocationId;
+    }
     public LocalDate getDeliveryDate() {
         return deliveryDate;
     }

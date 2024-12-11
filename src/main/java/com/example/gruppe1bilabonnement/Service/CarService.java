@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CarService {
@@ -33,7 +34,9 @@ public class CarService {
     public List<Car> fetchAllAvailableCars() {
         return carRepo.fetchAllAvailableCars();
     }
-
+    public List<Map<String, Object>> getAllLocations() {
+        return rentalContractRepo.fetchAllLocations();
+    }
 
     public RentalContract fetchRentalContractDetails(String regNumber){
         return rentalContractRepo.fetchRentalContractDetails(regNumber);
@@ -42,7 +45,8 @@ public class CarService {
     public List<RentalContract> searchRentalContracts(String regNumber){
         return rentalContractRepo.searchRentalContracts(regNumber);
     }
-
+    //addRenter laver en unik geografiNøgle og efterfølgende gemmer den resten til geografitabellen.
+    //Efterfølgende tilføjer den til rentertabellen.
     public void addRenter(Renter r){
         int geographyId = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode());
         renterRepo.addRenter(r, geographyId);
