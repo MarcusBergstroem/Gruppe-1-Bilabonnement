@@ -44,8 +44,6 @@ public class RentalContractRepo {
                     rc.RegistrationNumber = ?;
                 """;
 
-
-        //String sql = "SELECT * FROM rentalcontract WHERE RegistrationNumber = ?";
         RowMapper<RentalContract> rowMapper1 = new BeanPropertyRowMapper<>(RentalContract.class);
         RentalContract rentalTmp = template.queryForObject(sql, rowMapper1, regNumber);
 
@@ -54,7 +52,20 @@ public class RentalContractRepo {
         Car carTmp = template.queryForObject(sqlCar, rowMapper2, rentalTmp.getCarVehicleNumber());
         rentalTmp.setRentalCar(carTmp);
 
-        String sqlRenter = "SELECT * FROM renter WHERE id = ?";
+        String sqlRenter = """
+                SELECT 
+                    rent.*, 
+                    geo.Zipcode AS zipCode, 
+                    geo.City AS city, 
+                    geo.Country AS country
+                FROM 
+                    renter rent
+                INNER JOIN 
+                    geography geo ON rent.GeographyID = geo.id
+                WHERE 
+                    rent.id = ?;
+                """;
+
         RowMapper<Renter> rowMapper3 = new BeanPropertyRowMapper<>(Renter.class);
         Renter renterTmp = template.queryForObject(sqlRenter, rowMapper3, rentalTmp.getRenterID());
         rentalTmp.setRentalRenter(renterTmp);
