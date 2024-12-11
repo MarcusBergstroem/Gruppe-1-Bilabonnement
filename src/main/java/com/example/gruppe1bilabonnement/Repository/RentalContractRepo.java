@@ -116,21 +116,21 @@ public class RentalContractRepo {
                     "ReturnDate, InitialPayment, MonthlyPayment, TotalKilometers, AdditionalKM, CustomChoices, IsSigned, RegistrationNumber) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            template.update(sql,
-                    rentalContract.getRenterID(),
-                    rentalContract.getCarVehicleNumber(),
-                    rentalContract.getDeliveryReturnLocationId(),
-                    rentalContract.getDeliveryDate(),
-                    rentalContract.getReturnDate(),
-                    rentalContract.getInitialPayment(),
-                    rentalContract.getMonthlyPayment(),
-                    rentalContract.getTotalKilometers(),
-                    rentalContract.getAdditionalKM(),
-                    rentalContract.getCustomChoices(),
-                    rentalContract.isSigned(),
-                    rentalContract.getRegistrationNumber()
-            );
-            String updateCarStatusSql = "UPDATE car SET RentalStatus = ? WHERE VehicleNumber = ?";
-            template.update(updateCarStatusSql, "Leased", rentalContract.getCarVehicleNumber());
-        }
+        template.update(sql,
+                rentalContract.getRenterID(),
+                rentalContract.getCarVehicleNumber(),
+                rentalContract.getDeliveryReturnLocationId(),
+                rentalContract.getDeliveryDate(),
+                rentalContract.getReturnDate(),
+                rentalContract.getInitialPayment(),
+                rentalContract.getMonthlyPayment(),
+                rentalContract.getTotalKilometers(),
+                rentalContract.getAdditionalKM(),
+                rentalContract.getCustomChoices(),
+                rentalContract.isSigned(),
+                rentalContract.getRegistrationNumber()
+        );
+        String updateCarStatusSql = "UPDATE car SET RentalStatus = ? WHERE VehicleNumber = ?";
+        template.update(updateCarStatusSql, "Leased", rentalContract.getCarVehicleNumber());
     }
+}

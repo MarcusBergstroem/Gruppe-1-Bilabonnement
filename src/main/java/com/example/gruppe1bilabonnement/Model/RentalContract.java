@@ -34,9 +34,6 @@ public class RentalContract {
     private Car rentalCar;
     private Renter rentalRenter;
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
 
     public RentalContract(){
 
@@ -266,6 +263,9 @@ public class RentalContract {
 
     public void setReturnLocationCountry(String returnLocationCountry) {
         this.returnLocationCountry = returnLocationCountry;
+    }
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 }
 
