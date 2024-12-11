@@ -102,7 +102,7 @@ public class RentalContract {
         return returnLocationId;
     }
 
-    public void returnLocationId(int returnLocationId) {
+    public void setReturnLocationId(int returnLocationId) {
         this.returnLocationId = returnLocationId;
     }
     public int getDeliveryLocationId() {
