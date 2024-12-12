@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vis alle biler</title>
+    <link rel="stylesheet" href="/Styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/" class="title">Bilabonnement.dk</a>
+    </div>
+    <div class="navbar-right">
+        <button class="logout-button">Log Out</button>
+    </div>
+</nav>
+
+<h1>Statistik: Alle lejekontrakter</h1>
+
+<table class="styled-table">
+    <thead>
+    <tr>
+        <th>Kontrakt ID</th>
+        <th>Reg.nr.</th>
+        <th>Udleveringsdato</th>
+        <th>Returneringsdato</th>
+        <th>Førstegangsydelse</th>
+        <th>Månedlig ydelse</th>
+        <th>Aftalte km</th>
+        <th>Pris pr. km</th>
+        <th>Tilvalgt udstyr</th>
+        <th>Underskrevet</th>
+        <th>Udleveringssted</th>
+        <th>Afleveringssted</th>
+
+        <th>CPR</th>
+        <th>Navn</th>
+        <th>Adresse</th>
+        <th>Postnr. og by</th>
+        <th>Land</th>
+        <th>Telefonnr.</th>
+        <th>Blacklist</th>
+
+        <th>Vognnummer</th>
+        <th>Mærke</th>
+        <th>Model</th>
+        <th>Udstyrsniveau</th>
+        <th>Stelnr.</th>
+        <th>Returneringsdato</th>
+        <th>Bilstatus</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="oneContractDetail : ${allContractDetails}">
+        <td th:text="${oneContractDetail.id}"></td>
+        <td th:text="${oneContractDetail.registrationNumber}"></td>
+        <td th:text="${oneContractDetail.deliveryDate}"></td>
+        <td th:text="${oneContractDetail.returnDate}"></td>
+        <td th:text="${#numbers.formatDecimal(oneContractDetail.initialPayment, 1, 0)}"></td>
+        <td th:text="${#numbers.formatDecimal(oneContractDetail.monthlyPayment, 1, 0)}"></td>
+        <td th:text="${oneContractDetail.totalKilometers}"></td>
+        <td th:text="${#numbers.formatDecimal(oneContractDetail.additionalKM, 1, 0)}"></td>
+        <td th:text="${oneContractDetail.customChoices}"></td>
+        <td th:text="${oneContractDetail.isSigned ? 'Ja' : 'Nej'}"></td>
+        <td th:text="${oneContractDetail.deliveryLocationName}"></td>
+        <td th:text="${oneContractDetail.returnLocationName}"></td>
+
+        <td th:text="${oneContractDetail.rentalRenter.cpr}"></td>
+        <td th:text="${oneContractDetail.rentalRenter.firstName} + ' ' + ${oneContractDetail.rentalRenter.lastName}"></td>
+        <td th:text="${oneContractDetail.rentalRenter.address}"></td>
+        <td th:text="${oneContractDetail.rentalRenter.zipCode} + ' ' + ${oneContractDetail.rentalRenter.city}"></td>
+        <td th:text="${oneContractDetail.rentalRenter.country}"></td>
+        <td th:text="${oneContractDetail.rentalRenter.phoneNumber}"></td>
+        <td th:text="${oneContractDetail.rentalRenter.blacklist ? 'Ja' : 'Nej'}"></td>
+
+        <td th:text="${oneContractDetail.rentalCar.vehicleNumber}"></td>
+        <td th:text="${oneContractDetail.rentalCar.carBrand}"></td>
+        <td th:text="${oneContractDetail.rentalCar.carModel}"></td>
+        <td th:text="${oneContractDetail.rentalCar.equipmentLevel}"></td>
+        <td th:text="${oneContractDetail.rentalCar.vin}"></td>
+        <td th:text="${oneContractDetail.rentalCar.returnDate}"></td>
+        <td th:text="${oneContractDetail.rentalCar.rentalStatus}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
