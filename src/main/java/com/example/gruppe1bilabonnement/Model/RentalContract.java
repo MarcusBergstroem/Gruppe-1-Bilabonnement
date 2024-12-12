@@ -34,6 +34,7 @@ public class RentalContract {
     // Følgende fields er ikke med i konstruktøren men sættes via setters
     private Car rentalCar;
     private Renter rentalRenter;
+    private DamageReport damageReport;
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
@@ -274,6 +275,14 @@ public class RentalContract {
 
     public void setReturnLocationCountry(String returnLocationCountry) {
         this.returnLocationCountry = returnLocationCountry;
+    }
+
+    public DamageReport getDamageReport() {
+        return damageReport;
+    }
+
+    public void setDamageReport(DamageReport damageReport) {
+        this.damageReport = damageReport;
     }
 }
 

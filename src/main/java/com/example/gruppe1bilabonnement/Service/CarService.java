@@ -1,9 +1,11 @@
 package com.example.gruppe1bilabonnement.Service;
 
 import com.example.gruppe1bilabonnement.Model.Car;
+import com.example.gruppe1bilabonnement.Model.DamageReport;
 import com.example.gruppe1bilabonnement.Model.Renter;
 import com.example.gruppe1bilabonnement.Model.RentalContract;
 import com.example.gruppe1bilabonnement.Repository.CarRepo;
+import com.example.gruppe1bilabonnement.Repository.DamageReportRepo;
 import com.example.gruppe1bilabonnement.Repository.RenterRepo;
 import com.example.gruppe1bilabonnement.Repository.RentalContractRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class CarService {
     RenterRepo renterRepo;
     @Autowired
     RentalContractRepo rentalContractRepo;
+    @Autowired
+    DamageReportRepo damageReportRepo;
 
     public List<RentalContract> fetchAllRentalContracts() {
         return rentalContractRepo.fetchAll();
@@ -46,7 +50,7 @@ public class CarService {
         return rentalContractRepo.searchRentalContracts(regNumber);
     }
     //addRenter laver en unik geografiNøgle og efterfølgende gemmer den resten til geografitabellen.
-    //Efterfølgende tilføjer den til rentertabellen.
+    //Efterfølgende tilføjer den til renter tabellen.
     public void addRenter(Renter r){
         int geographyId = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode());
         renterRepo.addRenter(r, geographyId);
@@ -59,5 +63,9 @@ public class CarService {
     public void addRentalContract(RentalContract rentalContract) {
         rentalContractRepo.addRentalContract(rentalContract);
     }
+
+        public List<DamageReport> fetchAllDamageReports() {
+            return damageReportRepo.fetchAllDamageReports();
+        }
 
 }

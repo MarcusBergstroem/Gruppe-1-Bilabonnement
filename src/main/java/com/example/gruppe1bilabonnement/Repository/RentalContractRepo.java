@@ -1,6 +1,7 @@
 package com.example.gruppe1bilabonnement.Repository;
 
 import com.example.gruppe1bilabonnement.Model.Car;
+import com.example.gruppe1bilabonnement.Model.DamageReport;
 import com.example.gruppe1bilabonnement.Model.RentalContract;
 import com.example.gruppe1bilabonnement.Model.Renter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -42,9 +43,9 @@ public class RentalContractRepo {
                 FROM 
                     rentalcontract rc
                 INNER JOIN 
-                    delivery_return_location drl ON rc.Delivery_LocationID = drl.id
+                    delivery_return_location drl ON rc.DeliveryLocationID = drl.id
                 INNER JOIN 
-                    delivery_return_location drl2 ON rc.Return_LocationID = drl2.id
+                    delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
                 WHERE 
                     rc.RegistrationNumber = ?;
                 """;
@@ -80,13 +81,37 @@ public class RentalContractRepo {
     }
 
     public List<RentalContract> searchRentalContracts(String regNumber){
-        String sql = "select * from rentalcontract where registrationNumber like concat('%', ?, '%')";
+        String sql = """
+            SELECT 
+                rc.*, 
+                drl.LocationName AS deliveryLocationName, 
+                drl.LocationAddress AS deliveryLocationAddress, 
+                drl.LocationZipcode AS deliveryLocationZipcode, 
+                drl.LocationCity AS deliveryLocationCity, 
+                drl.LocationCountry AS deliveryLocationCountry,
+                drl2.LocationName AS returnLocationName, 
+                drl2.LocationAddress AS returnLocationAddress, 
+                drl2.LocationZipcode AS returnLocationZipcode, 
+                drl2.LocationCity AS returnLocationCity, 
+                drl2.LocationCountry AS returnLocationCountry
+            FROM 
+                rentalcontract rc
+            INNER JOIN 
+                delivery_return_location drl ON rc.DeliveryLocationID = drl.id
+            INNER JOIN 
+                delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
+            where registrationNumber like concat('%', ?, '%')
+        """;
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         List<RentalContract> rentalContractList = template.query(sql, rowMapper, regNumber);
 
         String sqlCar = "select * from car";
         RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
         List<Car> carTmp = template.query(sqlCar, rowMapper2);
+
+        String sqlDamageReport = "select * from damagereport";
+        RowMapper<DamageReport> rowMapper3 = new BeanPropertyRowMapper<>(DamageReport.class);
+        List<DamageReport> damageReportTmp = template.query(sqlDamageReport, rowMapper3);
 
         for (RentalContract rentalContract : rentalContractList) {
             for (Car car : carTmp) {
@@ -95,11 +120,38 @@ public class RentalContractRepo {
                 }
             }
         }
+        for (RentalContract rentalContract : rentalContractList) {
+            for (DamageReport damageReport : damageReportTmp) {
+                if (damageReport.getCarVehicleNumber() == rentalContract.getCarVehicleNumber()) {
+                    rentalContract.setDamageReport(damageReport);
+                }
+            }
+        }
+
         return rentalContractList;
     }
 
     public List<RentalContract> fetchAll() {
-        String sql = "select * from rentalcontract";
+        String sql = """
+                SELECT 
+                    rc.*, 
+                    drl.LocationName AS deliveryLocationName, 
+                    drl.LocationAddress AS deliveryLocationAddress, 
+                    drl.LocationZipcode AS deliveryLocationZipcode, 
+                    drl.LocationCity AS deliveryLocationCity, 
+                    drl.LocationCountry AS deliveryLocationCountry,
+                    drl2.LocationName AS returnLocationName, 
+                    drl2.LocationAddress AS returnLocationAddress, 
+                    drl2.LocationZipcode AS returnLocationZipcode, 
+                    drl2.LocationCity AS returnLocationCity, 
+                    drl2.LocationCountry AS returnLocationCountry
+                FROM 
+                    rentalcontract rc
+                INNER JOIN 
+                    delivery_return_location drl ON rc.DeliveryLocationID = drl.id
+                INNER JOIN 
+                    delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id;
+                """;
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         List<RentalContract> rentalContractList = template.query(sql, rowMapper);
 
@@ -107,10 +159,21 @@ public class RentalContractRepo {
         RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
         List<Car> carTmp = template.query(sqlCar, rowMapper2);
 
+        String sqlDamageReport = "select * from damagereport";
+        RowMapper<DamageReport> rowMapper3 = new BeanPropertyRowMapper<>(DamageReport.class);
+        List<DamageReport> damageReportTmp = template.query(sqlDamageReport, rowMapper3);
+
         for (RentalContract rentalContract : rentalContractList) {
             for (Car car : carTmp) {
                 if (car.getVehicleNumber() == rentalContract.getCarVehicleNumber()) {
                     rentalContract.setRentalCar(car);
+                }
+            }
+        }
+        for (RentalContract rentalContract : rentalContractList) {
+            for (DamageReport damageReport : damageReportTmp) {
+                if (damageReport.getCarVehicleNumber() == rentalContract.getCarVehicleNumber()) {
+                    rentalContract.setDamageReport(damageReport);
                 }
             }
         }

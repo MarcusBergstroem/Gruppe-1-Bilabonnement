@@ -100,6 +100,17 @@ public class HomeController {
         return "home/lejedetaljer";
     }
 
+    @GetMapping("/skadeshåndtering")
+    public String damageReportOverview(Model model, @RequestParam Map<String, String> regNumber){
+
+        if (regNumber.containsKey("regNumber")) {
+            model.addAttribute("rentalContracts", carService.searchRentalContracts(regNumber.get("regNumber")));
+            return "home/skadeshåndtering";
+        }
+        model.addAttribute("rentalContracts", carService.fetchAllRentalContracts());
+        return "home/skadeshåndtering";
+    }
+
 
 
 //    @PostMapping

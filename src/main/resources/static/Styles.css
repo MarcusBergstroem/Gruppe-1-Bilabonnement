@@ -231,3 +231,26 @@ select {
     background-color: #0056b3;
     transform: scale(1.02);
 }
+
+.action-button {
+    background-color: #b3e5fc; /* Light pastel blue */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: #0277bd; /* Slightly darker blue for text */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.action-button:hover {
+    background-color: #81d4fa; /* Slightly darker pastel blue */
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+.no-background{
+    background-color: #ffffff;
+    border: none !important;
+    display: grid;
+}
