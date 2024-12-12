@@ -42,9 +42,9 @@ public class RentalContractRepo {
                 FROM 
                     rentalcontract rc
                 INNER JOIN 
-                    delivery_return_location drl ON rc.Delivery_LocationID = drl.id
+                    delivery_return_location drl ON rc.DeliveryLocationID = drl.id
                 INNER JOIN 
-                    delivery_return_location drl2 ON rc.Return_LocationID = drl2.id
+                    delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
                 WHERE 
                     rc.RegistrationNumber = ?;
                 """;
