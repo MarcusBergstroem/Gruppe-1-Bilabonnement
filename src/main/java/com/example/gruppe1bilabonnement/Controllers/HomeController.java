@@ -31,6 +31,12 @@ public class HomeController {
         return "home/index";
     }
 
+    @GetMapping("/salg_og_udlejning")
+    public String sales_and_rentals(Model model) {
+        //model.addAttribute("madvarer", carService.fetchAll())
+        return "home/salg_og_udlejning";
+    }
+
     @GetMapping("/opret_bil")
     public String createCar() {
         return "home/opret_bil";
