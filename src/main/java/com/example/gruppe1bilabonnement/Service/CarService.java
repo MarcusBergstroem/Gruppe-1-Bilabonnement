@@ -5,6 +5,7 @@ import com.example.gruppe1bilabonnement.Model.Renter;
 import com.example.gruppe1bilabonnement.Model.RentalContract;
 import com.example.gruppe1bilabonnement.Repository.CarRepo;
 import com.example.gruppe1bilabonnement.Repository.RenterRepo;
+import com.example.gruppe1bilabonnement.Repository.StatsRepo;
 import com.example.gruppe1bilabonnement.Repository.RentalContractRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class CarService {
     RenterRepo renterRepo;
     @Autowired
     RentalContractRepo rentalContractRepo;
+    @Autowired
+    StatsRepo statsRepo;
 
     public List<RentalContract> fetchAllRentalContracts() {
         return rentalContractRepo.fetchAll();
@@ -58,6 +61,16 @@ public class CarService {
     // Tilføjer ny kontrakt og ændrer bilens status til "Leased"
     public void addRentalContract(RentalContract rentalContract) {
         rentalContractRepo.addRentalContract(rentalContract);
+    }
+
+    // Til statistik: henter alle car details
+    public List<Car> fetchAllCarDetails(){
+        return statsRepo.fetchAllCarDetails();
+    }
+
+    // Til statistik: henter alle car details
+    public List<RentalContract> fetchAllContractDetails(){
+        return statsRepo.fetchAllContractDetails();
     }
 
 }

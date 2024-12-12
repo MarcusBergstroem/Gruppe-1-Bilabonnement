@@ -100,6 +100,22 @@ public class HomeController {
         return "home/lejedetaljer";
     }
 
+    @GetMapping("/statistik")
+    public String statistik(Model model){
+        return "home/statistik";
+    }
+
+    @GetMapping("/vis_alle_biler")
+    public String listAllCars(Model model){
+        model.addAttribute("allCarDetails", carService.fetchAllCarDetails());
+        return "home/vis_alle_biler";
+    }
+
+    @GetMapping("/vis_alle_lejekontrakter")
+    public String listAllContracts(Model model){
+        model.addAttribute("allContractDetails", carService.fetchAllContractDetails());
+        return "home/vis_alle_lejekontrakter";
+    }
 
 
 //    @PostMapping

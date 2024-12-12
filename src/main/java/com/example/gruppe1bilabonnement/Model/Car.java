@@ -6,7 +6,6 @@ public class Car {
     private String carModel;
     private String equipmentLevel;
     private String vin;
-    private String registrationNumber;
     private String returnDate;
     private String rentalStatus;
 
@@ -16,12 +15,11 @@ public class Car {
     }
 
     // Constructor
-    public Car(int id, int vehicleNumber, String carBrand, String carModel, String equipmentLevel, String vin, String registrationNumber, String returnDate, String rentalStatus) {
+    public Car(int id, int vehicleNumber, String carBrand, String carModel, String equipmentLevel, String vin, String returnDate, String rentalStatus) {
         this.vehicleNumber = vehicleNumber;
         this.carBrand = carBrand;
         this.carModel = carModel;
         this.equipmentLevel = equipmentLevel;
-        this.registrationNumber = registrationNumber;
         this.vin = vin;
         this.returnDate = returnDate;
         this.rentalStatus = rentalStatus;
@@ -50,10 +48,6 @@ public class Car {
         return vin;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
     public String getReturnDate() {
         return returnDate;
     }
@@ -78,9 +72,6 @@ public class Car {
         this.vin = vin;
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
@@ -91,5 +82,18 @@ public class Car {
 
     public void setRentalStatus(String rentalStatus) {
         this.rentalStatus = rentalStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "vehicleNumber='" + vehicleNumber + '\'' +
+                ", carBrand='" + carBrand + '\'' +
+                ", carModel='" + carModel + '\'' +
+                ", equipmentLevel='" + equipmentLevel + '\'' +
+                ", vin=" + vin +
+                ", returndate=" + returnDate +
+                ", rentalStatus=" + rentalStatus +
+                '}';
     }
 }
