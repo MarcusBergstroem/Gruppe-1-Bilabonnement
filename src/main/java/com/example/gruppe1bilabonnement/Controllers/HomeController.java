@@ -30,6 +30,19 @@ public class HomeController {
         //model.addAttribute("madvarer", carService.fetchAll())
         return "home/index";
     }
+    @GetMapping("/bilsalg")
+    public String car_sale(Model model){
+        return "home/bilsalg";
+    }
+    @GetMapping("/opret_koeber")
+    public String createBuyer(Model model){
+        return "home/opret_koeber";
+    }
+
+    @GetMapping("/opret_salgsaftale")
+    public String createSalesContract(Model model){
+        return "home/opret_salgsaftale";
+    }
 
     @GetMapping("/salg_og_udlejning")
     public String sales_and_rentals(Model model) {
