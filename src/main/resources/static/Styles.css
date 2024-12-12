@@ -93,6 +93,9 @@ form {
     background-color: #ddd;
     cursor: pointer;
 }
+.normal-pointer tbody tr:hover {
+    cursor: default;
+}
 
 /* Styling til formularer */
 .create-form {
@@ -240,8 +243,13 @@ select {
     color: #0277bd; /* Slightly darker blue for text */
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    /*transition: background-color 0.3s ease, transform 0.2s ease;*/
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    margin-right: 5px;
 }
 
 .action-button:hover {
@@ -253,4 +261,9 @@ select {
     background-color: #ffffff;
     border: none !important;
     display: grid;
+}
+
+tr:hover .action-button {
+    opacity: 1;
+    visibility: visible;
 }

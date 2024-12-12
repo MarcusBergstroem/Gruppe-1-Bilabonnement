@@ -111,6 +111,11 @@ public class HomeController {
         return "home/skadeshåndtering";
     }
 
+    @GetMapping("opret_skadejournal")
+    public String createDamageReport(Model model) {
+        return "home/opret_skadejournal";
+    }
+
 
 
 //    @PostMapping

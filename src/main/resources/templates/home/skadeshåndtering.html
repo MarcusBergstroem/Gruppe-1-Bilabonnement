@@ -25,7 +25,7 @@
     <input type="submit" value="Søg">
 </form>
 
-    <table class="styled-table">
+    <table class="styled-table normal-pointer" >
         <thead>
             <tr>
                 <th>Afhentningssted</th>
@@ -34,11 +34,12 @@
             </tr>
         </thead>
     <tbody>
-        <tr th:each="rentalContract : ${rentalContracts}" th:data-url="@{'/lejedetaljer?regNumber=' + ${rentalContract.damageReport.id}}" th:onclick="|window.location.href=this.dataset.url|">
-            <td th:text="${rentalContract.returnLocationName}"></td>
+        <tr th:each="rentalContract : ${rentalContracts}">
+            <td th:utext="'<b>' + ${rentalContract.returnLocationName} + '</b><br>' + ${rentalContract.returnLocationAddress} + '<br>' + ${rentalContract.returnDate}"></td>
             <td th:text="${rentalContract.rentalCar.carBrand}"></td>
             <td th:text="${rentalContract.registrationNumber}"></td>
-            <td class="no-background"><button class=action-button th:data-url="@{'/lejedetaljer?regNumber=' + ${rentalContract.damageReport.id}}" th:onclick="|window.location.href=this.dataset.url|">Opret</button></td>
+            <td class="no-background"><button class=action-button th:data-url="@{'/opret_skadejournal?regNumber=' + ${rentalContract.damageReport.id}}" th:onclick="|window.location.href=this.dataset.url|">Opret</button></td>
+            <td class="no-background"><button class=action-button th:data-url="@{'/opret_skadejournal?regNumber=' + ${rentalContract.damageReport.id}}" th:onclick="|window.location.href=this.dataset.url|">Vis/Rediger</button></td>
         </tr>
     </tbody>
 </table>
