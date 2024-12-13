@@ -18,37 +18,81 @@
 
 <h1 th:text="'Lejedetaljer for ' + ${rentalContractDetails.registrationNumber}"></h1>
 
-<div class="create-form">
-    <h2>Personoplysninger</h2>
-    <div class="form-group">
-        <p th:text="${rentalContractDetails.rentalRenter.firstName} + ' ' + ${rentalContractDetails.rentalRenter.lastName}"></p>
-        <p th:text="${rentalContractDetails.rentalRenter.address}"></p>
-        <p th:text="${rentalContractDetails.rentalRenter.zipCode} + ' ' + ${rentalContractDetails.rentalRenter.city}"></p>
-        <p th:text="${rentalContractDetails.rentalRenter.country}"></p>
-        <p th:text="'Telefon: ' + ${rentalContractDetails.rentalRenter.phoneNumber}"></p>
-        <p th:text="'CPR-nr.: ' + ${rentalContractDetails.rentalRenter.cpr}"></p>
-        <p th:text="'RKI: ' + ${rentalContractDetails.rentalRenter.blacklist ? 'Ja' : 'Nej'}"></p>
+<div class="wrapper">
+    <div class="create-form">
+        <h2>Personoplysninger</h2>
+        <div class="form-group">
+            <p th:text="${rentalContractDetails.rentalRenter.firstName} + ' ' + ${rentalContractDetails.rentalRenter.lastName}"></p>
+            <p th:text="${rentalContractDetails.rentalRenter.address}"></p>
+            <p th:text="${rentalContractDetails.rentalRenter.zipCode} + ' ' + ${rentalContractDetails.rentalRenter.city}"></p>
+            <p th:text="${rentalContractDetails.rentalRenter.country}"></p>
+            <p th:text="'Telefon: ' + ${rentalContractDetails.rentalRenter.phoneNumber}"></p>
+            <p th:text="'CPR-nr.: ' + ${rentalContractDetails.rentalRenter.cpr}"></p>
+            <p th:text="'RKI: ' + ${rentalContractDetails.rentalRenter.blacklist ? 'Ja' : 'Nej'}"></p>
+        </div>
+
+        <h2>Biloplysninger</h2>
+        <div class="form-group">
+            <p th:text="${rentalContractDetails.rentalCar.carBrand} + ' ' + ${rentalContractDetails.rentalCar.carModel} + ' ' + ${rentalContractDetails.rentalCar.equipmentLevel}"></p>
+            <p th:text="'Vognnummer: ' + ${rentalContractDetails.rentalCar.vehicleNumber}"></p>
+            <p th:text="'VIN: ' + ${rentalContractDetails.rentalCar.vin}"></p>
+        </div>
+
+        <h2>Lejevilkår</h2>
+        <div class="form-group">
+            <p th:text="'Udleveringsdato: ' + ${rentalContractDetails.deliveryDate}"></p>
+            <p th:text="'Afleveringsdato: ' + ${rentalContractDetails.returnDate}"></p>
+            <p th:text="'Udleveringssted: ' + ${rentalContractDetails.deliveryLocationName}"></p>
+            <p th:text="'Afleveringssted: ' + ${rentalContractDetails.returnLocationName}"></p>
+            <p th:text="'Førstegangsydelse: ' + ${#numbers.formatDecimal(rentalContractDetails.initialPayment, 1, 2)}"></p>
+            <p th:text="'Månedlig ydelse: ' + ${#numbers.formatDecimal(rentalContractDetails.monthlyPayment, 1, 2)}"></p>
+            <p th:text="'Aftalte kilometer: ' + ${rentalContractDetails.totalKilometers}"></p>
+            <p th:text="'Pris pr. overkørt km: ' + ${#numbers.formatDecimal(rentalContractDetails.additionalKM, 1, 2)}"></p>
+            <p th:text="'Tilvalg: ' + ${rentalContractDetails.customChoices}"></p>
+        </div>
     </div>
 
-    <h2>Biloplysninger</h2>
-    <div class="form-group">
-        <p th:text="${rentalContractDetails.rentalCar.carBrand} + ' ' + ${rentalContractDetails.rentalCar.carModel} + ' ' + ${rentalContractDetails.rentalCar.equipmentLevel}"></p>
-        <p th:text="'Vognnummer: ' + ${rentalContractDetails.rentalCar.vehicleNumber}"></p>
-        <p th:text="'VIN: ' + ${rentalContractDetails.rentalCar.vin}"></p>
+    <h2>Skadesoplysninger</h2>
+    <div class="field">
+        <label>
+            <input type="checkbox" id="internalJournal" th:checked="${damageReportExists}" />
+            Intern journal
+        </label>
+        <button type="button" th:disabled="${!damageReportExists}"
+                th:text="'Vis journal'"
+                th:onclick="'window.location.href=\'/showDamageReport/' + ${rentalContractDetails.id} + '\''"></button>
     </div>
 
-    <h2>Lejevilkår</h2>
-    <div class="form-group">
-        <p th:text="'Udleveringsdato: ' + ${rentalContractDetails.deliveryDate}"></p>
-        <p th:text="'Afleveringsdato: ' + ${rentalContractDetails.returnDate}"></p>
-        <p th:text="'Udleveringssted: ' + ${rentalContractDetails.deliveryLocationName}"></p>
-        <p th:text="'Afleveringssted: ' + ${rentalContractDetails.returnLocationName}"></p>
-        <p th:text="'Førstegangsydelse: ' + ${#numbers.formatDecimal(rentalContractDetails.initialPayment, 1, 2)}"></p>
-        <p th:text="'Månedlig ydelse: ' + ${#numbers.formatDecimal(rentalContractDetails.monthlyPayment, 1, 2)}"></p>
-        <p th:text="'Aftalte kilometer: ' + ${rentalContractDetails.totalKilometers}"></p>
-        <p th:text="'Pris pr. overkørt km: ' + ${#numbers.formatDecimal(rentalContractDetails.additionalKM, 1, 2)}"></p>
-        <p th:text="'Tilvalg: ' + ${rentalContractDetails.customChoices}"></p>
+    <div class="field">
+        <label>
+            <input type="checkbox" checked>
+            Ekstern journal
+        </label>
+        <button type="button">Vis journal</button>
+        <button type="button">Upload journal</button>
+    </div>
+    <button type="button">Gem</button>
+</div>
+
+<div class="right-box">
+    <!-- Slutafregning -->
+    <div class="box">
+        <h2>Slutafregning</h2>
+        <div class="field">
+            <label>Pris for skader</label>
+            <span th:text="${totalPrice}">0</span>
+        </div>
+        <div class="field">
+            <label>Pris overkørte km</label>
+            <span th:text="${#numbers.formatDecimal(rentalContractDetails.additionalKM * rentalContractDetails.totalKilometers, 1, 2)}"></span>
+        </div>
+        <div class="field">
+            <label>Samlet pris</label>
+            <span th:text="${#numbers.formatDecimal(totalPrice + (rentalContractDetails.additionalKM * rentalContractDetails.totalKilometers), 1, 2)}"></span>
+        </div>
+        <button type="button">Afslut udlejning</button>
     </div>
 </div>
+
 </body>
 </html>
