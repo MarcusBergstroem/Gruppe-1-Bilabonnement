@@ -114,8 +114,22 @@ public class HomeController {
     @GetMapping("/vis_alle_lejekontrakter")
     public String listAllContracts(Model model){
         model.addAttribute("allContractDetails", carService.fetchAllContractDetails());
+        model.addAttribute("rentedCarsThisMonthRevenue", carService.rentedCarsThisMonthRevenue());
         return "home/vis_alle_lejekontrakter";
     }
+
+    @GetMapping("/vis_alle_lejere")
+    public String listAllRenters(Model model){
+        model.addAttribute("allRenterDetails", carService.fetchAllRenterDetails());
+        return "home/vis_alle_lejere";
+    }
+
+    @GetMapping("/omsaetning_aar_til_dato")
+    public String revenueYearToDate(Model model){
+        model.addAttribute("revenueYearToDate", carService.revenueYearToDate());
+        return "home/omsaetning_aar_til_dato";
+    }
+
 
 
 //    @PostMapping

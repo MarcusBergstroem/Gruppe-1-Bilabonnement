@@ -10,6 +10,8 @@ import com.example.gruppe1bilabonnement.Repository.RentalContractRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -68,9 +70,24 @@ public class CarService {
         return statsRepo.fetchAllCarDetails();
     }
 
-    // Til statistik: henter alle car details
+    // Til statistik: henter alle rentalcontract details
     public List<RentalContract> fetchAllContractDetails(){
         return statsRepo.fetchAllContractDetails();
+    }
+
+    // Til statistik: finder omsætning fra udlejde biler i indeværende måned
+    public double rentedCarsThisMonthRevenue(){
+        return statsRepo.rentedCarsThisMonthRevenue();
+    }
+
+    // Til statistik: henter alle renter details
+    public List<Renter> fetchAllRenterDetails(){
+        return statsRepo.fetchAllRenterDetails();
+    }
+
+    // Til statistik: finder revenue year to date fordelt på måneder og hhv. førstegangs- og månedlig ydelse
+    public List<List<Double>> revenueYearToDate() {
+        return statsRepo.revenueYearToDate();
     }
 
 }
