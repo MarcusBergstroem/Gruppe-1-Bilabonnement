@@ -54,6 +54,7 @@ public class StatsRepo {
                     delivery_return_location drl ON rc.DeliveryLocationID = drl.id
                 INNER JOIN 
                     delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
+                ORDER BY id;
                 """;
 
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
@@ -80,7 +81,8 @@ public class StatsRepo {
                 INNER JOIN 
                     geography geo ON rent.GeographyID = geo.id
                 WHERE 
-                    rent.id = ?;
+                    rent.id = ?
+                ORDER BY id;
                 """;
 
             RowMapper<Renter> rowMapper3 = new BeanPropertyRowMapper<>(Renter.class);
@@ -105,6 +107,7 @@ public class StatsRepo {
                     renter rent
                 INNER JOIN 
                     geography geo ON rent.GeographyID = geo.id
+                ORDER BY id;
                 """;
 
         RowMapper<Renter> rowMapper = new BeanPropertyRowMapper<>(Renter.class);
