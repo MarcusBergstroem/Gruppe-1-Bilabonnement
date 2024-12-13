@@ -139,11 +139,10 @@ public class StatsRepo {
             int currentYear = cal.get(Calendar.YEAR);
 
             String startDate = currentYear + "-" + String.format("%02d", i) + "-01";
-            String endDate = currentYear + "-" + String.format("%02d", i) + "-31";
 
             // Initial payment
-            String sqlInitial = "SELECT SUM(InitialPayment) FROM rentalcontract WHERE deliveryDate BETWEEN ? AND ?";
-            Double initial = template.queryForObject(sqlInitial, Double.class, startDate, endDate);
+            String sqlInitial = "SELECT SUM(InitialPayment) FROM rentalcontract WHERE deliveryDate >= ? AND deliveryDate < DATE_ADD(LAST_DAY(?), INTERVAL 1 DAY)";
+            Double initial = template.queryForObject(sqlInitial, Double.class, startDate, startDate);
             if (initial == null) {
                 initial = 0.0;
             }
@@ -153,8 +152,8 @@ public class StatsRepo {
             sumOfInitial += initial;
 
             // MonthlyPayment
-            String sqlMonthly = "SELECT SUM(MonthlyPayment) FROM rentalcontract WHERE deliveryDate BETWEEN ? AND ?";
-            Double monthly = template.queryForObject(sqlMonthly, Double.class, startDate, endDate);
+            String sqlMonthly = "SELECT SUM(MonthlyPayment) FROM rentalcontract WHERE deliveryDate >= ? AND deliveryDate < DATE_ADD(LAST_DAY(?), INTERVAL 1 DAY)";
+            Double monthly = template.queryForObject(sqlMonthly, Double.class, startDate, startDate);
             if (monthly == null) {
                 monthly = 0.0;
             }
@@ -171,8 +170,6 @@ public class StatsRepo {
         // Gemmer årstotalerne i listen hertil
         yearTotals.add(sumOfInitial);
         yearTotals.add(sumOfMonthly);
-
-        System.out.println(yearTotals);
 
         List<List<Double>> revenueList = new ArrayList<>();
         revenueList.add(initialList);
