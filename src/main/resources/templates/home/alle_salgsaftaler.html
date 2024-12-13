@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Vis alle salgsaftaler</title>
+    <link rel="stylesheet" href="/Styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/" class="title">Bilabonnement.dk</a>
+    </div>
+    <div class="navbar-right">
+        <button class="logout-button">Log ud</button>
+    </div>
+</nav>
+
+<h1>Alle salgsaftaler</h1>
+
+<form method="GET" action="/alle_salgsaftaler">
+    <label>
+        Søg efter VIN:
+        <input type="text" name="vin" placeholder="Indtast VIN">
+    </label>
+    <input type="submit" value="Søg">
+</form>
+
+<table class="styled-table">
+    <thead>
+    <tr>
+        <th>Kontrakt ID</th>
+        <th>Køber</th>
+        <th>CVR</th>
+        <th>Telefon</th>
+        <th>Adresse</th>
+        <th>Postnr. og by</th>
+        <th>Land</th>
+
+        <th>Bil ID</th>
+        <th>Mærke</th>
+        <th>Model</th>
+        <th>Udstyrsniveau</th>
+        <th>VIN</th>
+
+        <th>Salgsdato</th>
+        <th>Leveringsadresse</th>
+        <th>Salgspris</th>
+        <th>Total kilometer</th>
+        <th>Tilvalg</th>
+        <th>Leveret af Rochs?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="oneContractDetail : ${salesContracts}">
+        <td th:text="${oneContractDetail.contractId}"></td>
+        <td th:text="${oneContractDetail.buyer.companyName}"></td>
+        <td th:text="${oneContractDetail.buyer.cvr}"></td>
+        <td th:text="${oneContractDetail.buyer.phoneNumber}"></td>
+        <td th:text="${oneContractDetail.buyer.address}"></td>
+        <td th:text="${oneContractDetail.buyer.zipcode} + ' ' + ${oneContractDetail.buyer.city}"></td>
+        <td th:text="${oneContractDetail.buyer.country}"></td>
+
+        <td th:text="${oneContractDetail.car.vehicleNumber}"></td>
+        <td th:text="${oneContractDetail.car.carBrand}"></td>
+        <td th:text="${oneContractDetail.car.carModel}"></td>
+        <td th:text="${oneContractDetail.car.equipmentLevel}"></td>
+        <td th:text="${oneContractDetail.car.vin}"></td>
+
+        <td th:text="${oneContractDetail.saleDate}"></td>
+        <td th:text="${oneContractDetail.deliveryAddress}"></td>
+        <td th:text="${#numbers.formatDecimal(oneContractDetail.salePrice, 1, 2)}"></td>
+        <td th:text="${oneContractDetail.totalKilometers}"></td>
+        <td th:text="${oneContractDetail.options}"></td>
+        <td th:text="${oneContractDetail.rochsTransport ? 'Ja' : 'Nej'}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

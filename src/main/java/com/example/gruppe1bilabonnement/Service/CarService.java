@@ -1,12 +1,7 @@
 package com.example.gruppe1bilabonnement.Service;
 
-import com.example.gruppe1bilabonnement.Model.Car;
-import com.example.gruppe1bilabonnement.Model.Renter;
-import com.example.gruppe1bilabonnement.Model.RentalContract;
-import com.example.gruppe1bilabonnement.Repository.CarRepo;
-import com.example.gruppe1bilabonnement.Repository.RenterRepo;
-import com.example.gruppe1bilabonnement.Repository.StatsRepo;
-import com.example.gruppe1bilabonnement.Repository.RentalContractRepo;
+import com.example.gruppe1bilabonnement.Model.*;
+import com.example.gruppe1bilabonnement.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +19,10 @@ public class CarService {
     RentalContractRepo rentalContractRepo;
     @Autowired
     StatsRepo statsRepo;
+    @Autowired
+    BuyerRepo buyerRepo;
+    @Autowired
+    SalesContractRepo salesContractRepo;
 
     public List<RentalContract> fetchAllRentalContracts() {
         return rentalContractRepo.fetchAll();
@@ -47,6 +46,13 @@ public class CarService {
 
     public List<RentalContract> searchRentalContracts(String regNumber){
         return rentalContractRepo.searchRentalContracts(regNumber);
+    }
+    public void addBuyer(Buyer b) {
+        // Add or retrieve the geography ID
+        int geoId = buyerRepo.addBuyerGeo(b.getCountry(), b.getCountry(), b.getCity(), b.getZipcode());
+
+        // Insert the buyer with the retrieved geography ID
+        buyerRepo.addBuyer(b, geoId);
     }
     //addRenter laver en unik geografiNøgle og efterfølgende gemmer den resten til geografitabellen.
     //Efterfølgende tilføjer den til rentertabellen.
@@ -72,5 +78,22 @@ public class CarService {
     public List<RentalContract> fetchAllContractDetails(){
         return statsRepo.fetchAllContractDetails();
     }
+    public List<Car> fetchAllCarsAtStorage() {
+        return carRepo.fetchAllCarsAtStorage();
+    }
+    public List<Buyer> fetchAllBuyers() {
+        return buyerRepo.fetchAllBuyers();
+    }
+    public void addSalesContract(SalesContract salesContract) {
+        salesContractRepo.addSalesContract(salesContract);
+    }
+    public List<SalesContract> fetchAllSalesContracts() {
+        return salesContractRepo.fetchSalesContracts();
+    }
+
+    public List<SalesContract> searchSalesContracts(String vin) {
+        return salesContractRepo.searchSalesContracts(vin);
+    }
+
 
 }

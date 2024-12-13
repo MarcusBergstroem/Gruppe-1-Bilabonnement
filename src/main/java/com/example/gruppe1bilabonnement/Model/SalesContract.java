@@ -13,11 +13,35 @@ public class SalesContract {
     private String options;
     private Boolean rochsTransport;
 
+    //Bruges til at lave innerjoins
+    private Buyer buyer;
+    private Car Car;
+
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public String getCarBrand() {
+        return carBrand;
+    }
+
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
+    }
+
+    private String buyerName;
+    private String carBrand;
+    private String carModel;
+    private String vin;
 
     public SalesContract() {}
 
     public SalesContract(int contractId, int buyerId, int vehicleNumber, LocalDate saleDate,
-                         String deliveryAddress, double salePrice, int totalKilometers, String options, Boolean rochsTransport) {
+                         String deliveryAddress, double salePrice, int totalKilometers, String options, Boolean rochsTransport, String buyerName, String carBrand, String carModel, String vin) {
         this.contractId = contractId;
         this.buyerId = buyerId;
         this.vehicleNumber = vehicleNumber;
@@ -27,6 +51,10 @@ public class SalesContract {
         this.totalKilometers = totalKilometers;
         this.options = options;
         this.rochsTransport = rochsTransport;
+        this.buyerName = buyerName;
+        this.carBrand = carBrand;
+        this.carModel = carModel;
+        this.vin = vin;
     }
 
     // Getters and Setters
@@ -99,5 +127,37 @@ public class SalesContract {
 
     public void setRochsTransport(Boolean rochsTransport) {
         this.rochsTransport = rochsTransport;
+    }
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
+    }
+
+    public Car getCar() {
+        return Car;
+    }
+
+    public void setCar(Car car) {
+        Car = car;
+    }
+
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    public String getVin() {
+        return vin;
+    }
+
+    public void setVin(String vin) {
+        this.vin = vin;
     }
 }
