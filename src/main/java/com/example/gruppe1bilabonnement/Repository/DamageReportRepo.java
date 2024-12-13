@@ -18,4 +18,8 @@ public class DamageReportRepo {
 
         return null;
     }
+
+    public void addDamageReport(DamageReport damageReport) {
+
+    }
 }

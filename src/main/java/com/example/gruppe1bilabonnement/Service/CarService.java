@@ -64,8 +64,13 @@ public class CarService {
         rentalContractRepo.addRentalContract(rentalContract);
     }
 
-        public List<DamageReport> fetchAllDamageReports() {
-            return damageReportRepo.fetchAllDamageReports();
-        }
+    public List<DamageReport> fetchAllDamageReports() {
+        return damageReportRepo.fetchAllDamageReports();
+    }
+
+    public void addDamageReport(DamageReport dp){
+        damageReportRepo.addDamageReport(dp);
+    }
+
 
 }

@@ -38,7 +38,7 @@
             <td th:utext="'<b>' + ${rentalContract.returnLocationName} + '</b><br>' + ${rentalContract.returnLocationAddress} + '<br>' + ${rentalContract.returnDate}"></td>
             <td th:text="${rentalContract.rentalCar.carBrand}"></td>
             <td th:text="${rentalContract.registrationNumber}"></td>
-            <td class="no-background"><button class=action-button th:data-url="@{'/opret_skadejournal?regNumber=' + ${rentalContract.damageReport.id}}" th:onclick="|window.location.href=this.dataset.url|">Opret</button></td>
+            <td class="no-background"><button class=action-button th:data-url="@{'/opret_skadejournal'}" th:onclick="|window.location.href=this.dataset.url|">Opret</button></td>
             <td class="no-background"><button class=action-button th:data-url="@{'/opret_skadejournal?regNumber=' + ${rentalContract.damageReport.id}}" th:onclick="|window.location.href=this.dataset.url|">Vis/Rediger</button></td>
         </tr>
     </tbody>

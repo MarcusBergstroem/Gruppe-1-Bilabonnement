@@ -267,3 +267,13 @@ tr:hover .action-button {
     opacity: 1;
     visibility: visible;
 }
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    width: 50%;
+}
+.summary div {
+    font-weight: bold;
+}

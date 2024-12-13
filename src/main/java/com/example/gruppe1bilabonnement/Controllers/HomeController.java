@@ -1,6 +1,7 @@
 package com.example.gruppe1bilabonnement.Controllers;
 
 import com.example.gruppe1bilabonnement.Model.Car;
+import com.example.gruppe1bilabonnement.Model.DamageReport;
 import com.example.gruppe1bilabonnement.Model.RentalContract;
 import com.example.gruppe1bilabonnement.Model.Renter;
 import com.example.gruppe1bilabonnement.Service.CarService;
@@ -114,6 +115,12 @@ public class HomeController {
     @GetMapping("opret_skadejournal")
     public String createDamageReport(Model model) {
         return "home/opret_skadejournal";
+    }
+
+    @PostMapping("opret_skadejournal")
+    public String createDamageReport(@ModelAttribute DamageReport damageReport){
+        carService.addDamageReport(damageReport);
+        return "redirect:/skadeshåndtering";
     }
 
 
