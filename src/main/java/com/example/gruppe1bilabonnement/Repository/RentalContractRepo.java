@@ -99,7 +99,7 @@ public class RentalContractRepo {
     }
 
     public List<RentalContract> fetchAll() {
-        String sql = "select * from rentalcontract";
+        String sql = "select * from rentalcontract ORDER BY returnDate";
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         List<RentalContract> rentalContractList = template.query(sql, rowMapper);
 
