@@ -8,12 +8,10 @@ import com.example.gruppe1bilabonnement.Service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -102,25 +100,21 @@ public class HomeController {
     }
 
     @GetMapping("/skadeshåndtering")
-    public String damageReportOverview(Model model, @RequestParam Map<String, String> regNumber){
-
-        if (regNumber.containsKey("regNumber")) {
-            model.addAttribute("rentalContracts", carService.searchRentalContracts(regNumber.get("regNumber")));
-            return "home/skadeshåndtering";
-        }
-        model.addAttribute("rentalContracts", carService.fetchAllRentalContracts());
+    public String damageReportOverview(Model model){
+        model.addAttribute("rentalContracts", carService.fetchAllSoldCars());
         return "home/skadeshåndtering";
     }
 
     @GetMapping("opret_skadejournal")
-    public String createDamageReport(Model model) {
+    public String createDamageReport(Model model, @RequestParam String vehicleNumber) {
+        model.addAttribute("vehicleNumber", vehicleNumber);
         return "home/opret_skadejournal";
     }
 
     @PostMapping("opret_skadejournal")
-    public String createDamageReport(@ModelAttribute DamageReport damageReport){
-        carService.addDamageReport(damageReport);
-        return "redirect:/skadeshåndtering";
+    public String createDamageReport(@RequestParam Map<String, String> formData) throws UnsupportedEncodingException {
+        carService.addDamageReport(formData);
+        return "redirect:/" + URLEncoder.encode("skadeshåndtering", "UTF-8");
     }
 
 

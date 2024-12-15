@@ -1,59 +1,32 @@
 package com.example.gruppe1bilabonnement.Model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DamageReport {
 
     //Måske unødvendig
     private int carVehicleNumber;
     private int id;
 
-    private String damageDescription;
-    private String classification;
-    private String price;
+    private List<Damage> damageReportList;
 
     //Default Constructor
     public DamageReport(){
-
+        damageReportList = new ArrayList<>();
     }
 
-    public DamageReport(int id, int carVehicleNumber, String damageDescription, String classification, String price) {
-        this.id = id;
-        this.carVehicleNumber = carVehicleNumber;
-        this.damageDescription = damageDescription;
-        this.classification = classification;
-        this.price = price;
+    public void addDamageToList(Damage damage){
+        damageReportList.add(damage);
     }
 
-    public int getCarVehicleNumber() {
-        return carVehicleNumber;
+    public List<Damage> getDamageReportList() {
+        return damageReportList;
     }
 
-    public void setCarVehicleNumber(int carVehicleNumber) {
-        this.carVehicleNumber = carVehicleNumber;
-    }
-
-    public String getDamageDescription() {
-        return damageDescription;
-    }
-
-    public void setDamageDescription(String damageDescription) {
-        this.damageDescription = damageDescription;
-    }
-
-    public String getClassification() {
-        return classification;
-    }
-
-    public void setClassification(String classification) {
-        this.classification = classification;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
+    public void setDamageReportList(List<Damage> damageReportList) {
+        this.damageReportList = damageReportList;
     }
 
     public int getId() {
@@ -62,5 +35,13 @@ public class DamageReport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCarVehicleNumber() {
+        return carVehicleNumber;
+    }
+
+    public void setCarVehicleNumber(int carVehicleNumber) {
+        this.carVehicleNumber = carVehicleNumber;
     }
 }

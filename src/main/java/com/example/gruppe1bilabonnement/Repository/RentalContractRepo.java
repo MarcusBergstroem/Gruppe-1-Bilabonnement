@@ -203,4 +203,59 @@ public class RentalContractRepo {
             String updateCarStatusSql = "UPDATE car SET RentalStatus = ? WHERE VehicleNumber = ?";
             template.update(updateCarStatusSql, "Leased", rentalContract.getCarVehicleNumber());
         }
+        public List<RentalContract> fetchAllCarsAtStorage(){
+
+            String sql = """
+            SELECT 
+                rc.*,
+                c.rentalstatus,
+                drl.LocationName AS deliveryLocationName, 
+                drl.LocationAddress AS deliveryLocationAddress, 
+                drl.LocationZipcode AS deliveryLocationZipcode, 
+                drl.LocationCity AS deliveryLocationCity, 
+                drl.LocationCountry AS deliveryLocationCountry,
+                drl2.LocationName AS returnLocationName, 
+                drl2.LocationAddress AS returnLocationAddress, 
+                drl2.LocationZipcode AS returnLocationZipcode, 
+                drl2.LocationCity AS returnLocationCity, 
+                drl2.LocationCountry AS returnLocationCountry
+            FROM 
+                rentalcontract rc
+            INNER JOIN 
+                delivery_return_location drl ON rc.DeliveryLocationID = drl.id
+            INNER JOIN 
+                delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
+            INNER JOIN
+                car c on rc.carvehiclenumber = c.vehiclenumber
+            where rentalstatus=?
+        """;
+            RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
+            List<RentalContract> rentalContractList = template.query(sql, rowMapper, "atstorage");
+
+            String sqlCar = "select * from car";
+            RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
+            List<Car> carTmp = template.query(sqlCar, rowMapper2);
+
+            String sqlDamageReport = "select * from damagereport";
+            RowMapper<DamageReport> rowMapper3 = new BeanPropertyRowMapper<>(DamageReport.class);
+            List<DamageReport> damageReportTmp = template.query(sqlDamageReport, rowMapper3);
+
+            for (RentalContract rentalContract : rentalContractList) {
+                for (Car car : carTmp) {
+                    if (car.getVehicleNumber() == rentalContract.getCarVehicleNumber()) {
+                        rentalContract.setRentalCar(car);
+                    }
+                }
+            }
+            for (RentalContract rentalContract : rentalContractList) {
+                for (DamageReport damageReport : damageReportTmp) {
+                    if (damageReport.getCarVehicleNumber() == rentalContract.getCarVehicleNumber()) {
+                        rentalContract.setDamageReport(damageReport);
+                    }
+                }
+            }
+
+            return rentalContractList;
+
+        }
     }

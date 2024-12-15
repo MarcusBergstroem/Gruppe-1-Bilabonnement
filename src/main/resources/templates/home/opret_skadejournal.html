@@ -8,7 +8,7 @@
 <body>
 
 <nav class="navbar">
-    <div class="navbar-left">
+<div class="navbar-left">
         <a href="/" class="title">Bilabonnement.dk</a>
     </div>
     <div class="navbar-right">
@@ -17,9 +17,9 @@
 </nav>
 
 <h1>Opret Skadejournal</h1>
-
 <form action="/opret_skadejournal" method="post" class="create-form" style="max-width: 100%">
     <h2>Skade information</h2>
+    <!-- Man tilføjer kun på denne side, så hvis man vil have flere skdaer end 10, kan man genåbne siden efter at have oprettet de første 10  -->
 
     <table id="formTable" class="styled-table">
         <thead>
@@ -33,20 +33,21 @@
         <tbody>
         <tr th:each="i: ${#numbers.sequence(1,10)}">
             <td th:text="${i}"></td>
-            <td><input type="text" th:name="'beskrivelse' + ${i}" placeholder="Indtast beskrivelse" ></td>
+            <td><input type="text" th:name="'damageDescription' + ${i}" placeholder="Indtast beskrivelse" ></td>
             <td>
-                <select th:name="'k' + ${i}">
-                    <option value="k1">K1</option>
-                    <option value="k2">K2</option>
-                    <option value="k3">K3</option>
-                    <option value="k4">K4</option>
-                    <option value="k5">K5</option>
+                <select th:name="'classification' + ${i}">
+                    <option value=""></option>
+                    <option value="K1">K1</option>
+                    <option value="K2">K2</option>
+                    <option value="K3">K3</option>
+                    <option value="K4">K4</option>
+                    <option value="K5">K5</option>
                 </select></td>
-            <td><input type="text" th:name="'pris' + ${i}" placeholder="Indtast pris" ></td>
+            <td><input type="number" step="0.01" min=0 th:name="'pris' + ${i}"></td>
         </tr>
         </tbody>
     </table>
-
+    <input type="hidden" name="vehicleNumber" th:value="${vehicleNumber}">
     <div class="summary">
         <div>Samlet pris:</div>
         <div id="totalPrice">0</div>
