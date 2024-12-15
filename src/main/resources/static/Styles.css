@@ -269,11 +269,17 @@ tr:hover .action-button {
 }
 
 .summary {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
     width: 50%;
 }
 .summary div {
     font-weight: bold;
+}
+
+
+#mileage {
+    width: 25%;
+    margin: 0 auto 1em;
+}
+.mileage{
+    margin: 0 auto 0;
 }

@@ -55,10 +55,18 @@ public class DamageReportRepo {
         }
 
         if (!chunk.isEmpty()) {
+            System.out.println("Processing extra chunk: " + chunk);
             damageReport.setCarVehicleNumber(Integer.parseInt(chunk.get(0)));
+            addMileage(Integer.parseInt(chunk.get(1)), damageReport.getCarVehicleNumber());
         }
         return damageReport;
     }
+
+    public void addMileage(int mileage, int vehicleNumber) {
+        String sql = "update car set mileage = ? where vehiclenumber = ?";
+        template.update(sql, mileage, vehicleNumber);
+    }
+
 
     public void addDamageReport(DamageReport damageReport) {
 
@@ -90,5 +98,11 @@ public class DamageReportRepo {
         template.update(sql, id);
     }
 
+    public double getTotalPrice(int vehicleNumber) {
+        String sql = "select id from damagereport where CarVehicleNumber = ?";
+        int id = template.queryForObject(sql, Integer.class, vehicleNumber);
 
+        String sqlPrice = "select SUM(price) from damage where damagereportid = ?";
+        return template.queryForObject(sqlPrice, Double.class, id);
+    }
 }

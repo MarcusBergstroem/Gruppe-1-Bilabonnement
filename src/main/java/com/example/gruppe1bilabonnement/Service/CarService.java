@@ -83,4 +83,12 @@ public class CarService {
     public void deleteDamage(int id){
         damageReportRepo.deleteDamage(id);
     }
+
+    public Double getTotalPrice(int vehicleNumber){
+        return damageReportRepo.getTotalPrice(vehicleNumber);
+    }
+
+    public int fetchMileage(int vehicleNumber){
+        return carRepo.fetchMileage(vehicleNumber);
+    }
 }

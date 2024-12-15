@@ -47,8 +47,8 @@
   </table>
 
   <div class="summary">
-    <div>Samlet pris:</div>
-    <div id="totalPrice">0</div>
+    <div th:text="'Kilometerstand: ' + ${mileage} + ' km'"></div>
+    <div th:text="'Samlet pris: '+${totalPrice} + ' kr'"></div>
   </div>
 </body>
 </html>

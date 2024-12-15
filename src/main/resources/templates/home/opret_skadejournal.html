@@ -48,10 +48,8 @@
         </tbody>
     </table>
     <input type="hidden" name="vehicleNumber" th:value="${vehicleNumber}">
-    <div class="summary">
-        <div>Samlet pris:</div>
-        <div id="totalPrice">0</div>
-    </div>
+    <label class="mileage" for="mileage">Kilometerstand: </label>
+    <input id="mileage" type="number" name="mileage">
 
     <div class="multiple-button-container">
         <button class="save-button" type="submit" onclick="return confirm('Er du sikker på at du vil oprette denne skadejournal?');">Opret</button>

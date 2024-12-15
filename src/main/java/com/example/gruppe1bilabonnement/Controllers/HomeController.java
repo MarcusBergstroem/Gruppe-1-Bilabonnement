@@ -121,6 +121,8 @@ public class HomeController {
     @GetMapping("skadejournal_detaljer")
     public String damageReportOverview(Model model, @RequestParam int vehicleNumber) {
         model.addAttribute("damageReport", carService.fetchDamageReport(vehicleNumber));
+        model.addAttribute("totalPrice", carService.getTotalPrice(vehicleNumber));
+        model.addAttribute("mileage", carService.fetchMileage(vehicleNumber));
         return "home/skadejournal_detaljer";
     }
 
