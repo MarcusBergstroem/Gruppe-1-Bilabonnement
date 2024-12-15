@@ -69,12 +69,18 @@ public class CarService {
     }
 
     public void addDamageReport(Map<String, String> formData){
-        damageReportRepo.addDamageReport(formData);
+        damageReportRepo.addDamageReport(damageReportRepo.assembleDamageReport(formData));
     }
 
     public List<RentalContract> fetchAllSoldCars() {
         return rentalContractRepo.fetchAllCarsAtStorage();
     }
 
+    public DamageReport fetchDamageReport(int vehicleNumber){
+        return damageReportRepo.fetchDamageReport(vehicleNumber);
+    }
 
+    public void deleteDamage(int id){
+        damageReportRepo.deleteDamage(id);
+    }
 }

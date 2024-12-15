@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>G1.Skadejournal detaljer</title>
+    <link rel="stylesheet" href="/Styles.css">
+
 </head>
 <body>
 
@@ -19,7 +21,7 @@
 
   <h2>Skade information</h2>
 
-  <table class="styled-table">
+  <table class="styled-table normal-pointer">
     <thead>
     <tr>
       <th>Nr.</th>
@@ -29,18 +31,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="i: ${#numbers.sequence(1,10)}">
-      <td th:text="${i}"></td>
-      <td><input type="text" th:name="'beskrivelse' + ${i}" placeholder="Indtast beskrivelse" ></td>
-      <td>
-        <select th:name="'k' + ${i}">
-          <option value="k1">K1</option>
-          <option value="k2">K2</option>
-          <option value="k3">K3</option>
-          <option value="k4">K4</option>
-          <option value="k5">K5</option>
-        </select></td>
-      <td><input type="number" step="0.01" min=0 th:name="'pris' + ${i}" placeholder="Indtast pris" ></td>
+    <tr th:each="damage, index : ${damageReport.getDamageList()}">
+      <td th:text="${index.count}"></td>
+      <td th:text="${damage.damageDescription}"></td>
+      <td th:text="${damage.classification}"></td>
+      <td th:text="${damage.price}"></td>
+      <td class="no-background">
+        <form action="/skadejournal_detaljer" method="post">
+          <input type="hidden" name="vehicleNumber" th:value="${damageReport.carVehicleNumber}">
+          <button class=action-button name="id" th:value="${damage.id}">Slet</button>
+        </form>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -49,11 +50,5 @@
     <div>Samlet pris:</div>
     <div id="totalPrice">0</div>
   </div>
-
-  <div class="multiple-button-container">
-    <button class="save-button" type="submit" onclick="return confirm('Er du sikker på at du vil oprette denne skadejournal?');">Opret</button>
-  </div>
-</form>
-
 </body>
 </html>

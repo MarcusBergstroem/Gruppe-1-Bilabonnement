@@ -230,7 +230,7 @@ public class RentalContractRepo {
             where rentalstatus=?
         """;
             RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
-            List<RentalContract> rentalContractList = template.query(sql, rowMapper, "atstorage");
+            List<RentalContract> rentalContractList = template.query(sql, rowMapper, "sold");
 
             String sqlCar = "select * from car";
             RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);

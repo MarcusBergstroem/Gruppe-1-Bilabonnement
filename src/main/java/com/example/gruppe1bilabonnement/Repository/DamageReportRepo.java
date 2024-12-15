@@ -2,7 +2,10 @@ package com.example.gruppe1bilabonnement.Repository;
 
 import com.example.gruppe1bilabonnement.Model.Damage;
 import com.example.gruppe1bilabonnement.Model.DamageReport;
+import com.example.gruppe1bilabonnement.Model.RentalContract;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -22,19 +25,19 @@ public class DamageReportRepo {
         return null;
     }
 
-    public void addDamage(Damage damage, int vehicleNumber) {
-        String sql = "INSERT INTO damagereport (CarVehicleNumber, DamageDescription, Classification, Price)" +
+    public void addDamage(Damage damage, int id) {
+        String sql = "INSERT INTO damage (DamageDescription, Classification, Price, DamageReportID)" +
                 "VALUES (?, ?, ?, ?)";
 
         template.update(sql,
-                vehicleNumber,
                 damage.getDamageDescription(),
                 damage.getClassification(),
-                damage.getPrice()
+                damage.getPrice(),
+                id
         );
     }
 
-    public void addDamageReport(Map<String, String> formData) {
+    public DamageReport assembleDamageReport(Map<String, String> formData) {
         DamageReport damageReport = new DamageReport();
 
         formData.values().removeIf(s -> s.trim().isEmpty());
@@ -54,10 +57,38 @@ public class DamageReportRepo {
         if (!chunk.isEmpty()) {
             damageReport.setCarVehicleNumber(Integer.parseInt(chunk.get(0)));
         }
+        return damageReport;
+    }
 
-        for (Damage damage : damageReport.getDamageReportList()){
-            addDamage(damage, damageReport.getCarVehicleNumber());
+    public void addDamageReport(DamageReport damageReport) {
+
+        String sql = "insert ignore into damagereport (carvehiclenumber) values (?)";
+        template.update(sql, damageReport.getCarVehicleNumber());
+
+        String sqlReport = "select id from damagereport where CarVehicleNumber = ?";
+        int id = template.queryForObject(sqlReport, Integer.class, damageReport.getCarVehicleNumber());
+
+        for (Damage damage : damageReport.getDamageList()){
+            addDamage(damage, id);
         }
 
     }
+
+    public DamageReport fetchDamageReport(int vehicleNumber) {
+        String sqlReport = "select id from damagereport where CarVehicleNumber = ?";
+        int id = template.queryForObject(sqlReport, Integer.class, vehicleNumber);
+
+        String sqlDamage = "select * from damage where damagereportid = ?";
+        RowMapper<Damage> rowMapper = new BeanPropertyRowMapper<>(Damage.class);
+        List<Damage> damageList = template.query(sqlDamage, rowMapper, id);
+
+        return new DamageReport(vehicleNumber,damageList);
+    }
+
+    public void deleteDamage(int id){
+        String sql = "delete from damage where id = ?";
+        template.update(sql, id);
+    }
+
+
 }

@@ -1,7 +1,6 @@
 package com.example.gruppe1bilabonnement.Controllers;
 
 import com.example.gruppe1bilabonnement.Model.Car;
-import com.example.gruppe1bilabonnement.Model.DamageReport;
 import com.example.gruppe1bilabonnement.Model.RentalContract;
 import com.example.gruppe1bilabonnement.Model.Renter;
 import com.example.gruppe1bilabonnement.Service.CarService;
@@ -40,14 +39,15 @@ public class HomeController {
     public String createCar() {
         return "home/opret_bil";
     }
+
     @PostMapping("/opret_bil")
-    public String createCar(@ModelAttribute Car C){
+    public String createCar(@ModelAttribute Car C) {
         carService.addCar(C);
         return "redirect:/";
     }
 
     @GetMapping("/udlejede_biler")
-    public String udlejedeBiler(Model model, @RequestParam Map<String, String> regNumber ) {
+    public String udlejedeBiler(Model model, @RequestParam Map<String, String> regNumber) {
 
         if (regNumber.containsKey("regNumber")) {
             model.addAttribute("rentalContracts", carService.searchRentalContracts(regNumber.get("regNumber")));
@@ -71,6 +71,7 @@ public class HomeController {
 
         return "home/opret_lejekontrakt";
     }
+
     @PostMapping("/opret_lejekontrakt")
     public String saveRentalContract(@ModelAttribute RentalContract rentalContract) {
         System.out.println("DeliveryLocationID: " + rentalContract.getDeliveryLocationId());
@@ -87,7 +88,7 @@ public class HomeController {
     }
 
     @PostMapping("/opret_lejer")
-    public String createRenter(@ModelAttribute Renter r){
+    public String createRenter(@ModelAttribute Renter r) {
         System.out.println("Renter received: " + r);
         carService.addRenter(r);
         return "redirect:/";
@@ -100,7 +101,7 @@ public class HomeController {
     }
 
     @GetMapping("/skadeshåndtering")
-    public String damageReportOverview(Model model){
+    public String damageReportOverview(Model model) {
         model.addAttribute("rentalContracts", carService.fetchAllSoldCars());
         return "home/skadeshåndtering";
     }
@@ -117,7 +118,17 @@ public class HomeController {
         return "redirect:/" + URLEncoder.encode("skadeshåndtering", "UTF-8");
     }
 
+    @GetMapping("skadejournal_detaljer")
+    public String damageReportOverview(Model model, @RequestParam int vehicleNumber) {
+        model.addAttribute("damageReport", carService.fetchDamageReport(vehicleNumber));
+        return "home/skadejournal_detaljer";
+    }
 
+    @PostMapping("skadejournal_detaljer")
+    public String deleteDamage(@RequestParam int id, int vehicleNumber) {
+        carService.deleteDamage(id);
+        return "redirect:/skadejournal_detaljer?vehicleNumber=" + vehicleNumber;
+    }
 
 //    @PostMapping
 //    public String createCar(@ModelAttribute Car C) {

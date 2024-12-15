@@ -10,23 +10,28 @@ public class DamageReport {
     private int carVehicleNumber;
     private int id;
 
-    private List<Damage> damageReportList;
+    private List<Damage> damageList;
 
     //Default Constructor
     public DamageReport(){
-        damageReportList = new ArrayList<>();
+        damageList = new ArrayList<>();
+    }
+
+    public DamageReport(int carVehicleNumber, List<Damage> damageList){
+        this.carVehicleNumber = carVehicleNumber;
+        this.damageList = damageList;
     }
 
     public void addDamageToList(Damage damage){
-        damageReportList.add(damage);
+        damageList.add(damage);
     }
 
-    public List<Damage> getDamageReportList() {
-        return damageReportList;
+    public List<Damage> getDamageList() {
+        return damageList;
     }
 
-    public void setDamageReportList(List<Damage> damageReportList) {
-        this.damageReportList = damageReportList;
+    public void setDamageList(List<Damage> damageList) {
+        this.damageList = damageList;
     }
 
     public int getId() {
