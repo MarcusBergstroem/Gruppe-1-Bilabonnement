@@ -165,4 +165,11 @@ public class CarService {
     public Boolean hasJournal(String regNumber){
         return rentalContractRepo.hasJournal(regNumber);
     }
+
+    public List<RentalContract> searchAllLeasedCars(String regNumber){
+        return rentalContractRepo.searchAllLeasedCars(regNumber);
+    }
+    public List<RentalContract> searchAllContracts_With_DamageReport(String regNubmer){
+        return rentalContractRepo.searchAllContractsWithDamageReport(regNubmer);
+    }
 }
