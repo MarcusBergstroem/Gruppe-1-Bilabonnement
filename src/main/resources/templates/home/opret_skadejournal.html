@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>G1.Opret Skadejournal</title>
+    <link rel="stylesheet" href="/Styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+<div class="navbar-left">
+        <a href="/" class="title">Bilabonnement.dk</a>
+    </div>
+    <div class="navbar-right">
+        <button class="logout-button">Log ud</button>
+    </div>
+</nav>
+
+<h1>Opret Skadejournal</h1>
+<form action="/opret_skadejournal" method="post" class="create-form" style="max-width: 100%">
+    <h2>Skade information</h2>
+    <!-- Man tilføjer kun på denne side, så hvis man vil have flere skdaer end 10, kan man genåbne siden efter at have oprettet de første 10  -->
+
+    <table id="formTable" class="styled-table">
+        <thead>
+        <tr>
+            <th>Nr.</th>
+            <th>Beskrivelse</th>
+            <th>K1 - K5</th>
+            <th>Pris</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i: ${#numbers.sequence(1,10)}">
+            <td th:text="${i}"></td>
+            <td><input type="text" th:name="'damageDescription' + ${i}" placeholder="Indtast beskrivelse" ></td>
+            <td>
+                <select th:name="'classification' + ${i}">
+                    <option value=""></option>
+                    <option value="K1">K1</option>
+                    <option value="K2">K2</option>
+                    <option value="K3">K3</option>
+                    <option value="K4">K4</option>
+                    <option value="K5">K5</option>
+                </select></td>
+            <td><input type="number" step="0.01" min=0 th:name="'pris' + ${i}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="hidden" name="vehicleNumber" th:value="${vehicleNumber}">
+    <label class="mileage" for="mileage">Kilometerstand: </label>
+    <input id="mileage" type="number" name="mileage">
+
+    <div class="multiple-button-container">
+        <button class="save-button" type="submit" onclick="return confirm('Er du sikker på at du vil oprette denne skadejournal?');">Opret</button>
+    </div>
+</form>
+</body>
+</html>
