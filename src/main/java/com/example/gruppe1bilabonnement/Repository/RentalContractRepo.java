@@ -167,19 +167,22 @@ public class RentalContractRepo {
     }
 
     public int getDamageReportID(int carVehicleNumber) {
-        String sql = "SELECT ID FROM damagereport where CarVehicleNumber = ?";
-        return template.queryForObject(sql, Integer.class, carVehicleNumber);
+        try {
+            String sql = "SELECT ID FROM damagereport where CarVehicleNumber = ?";
+            return template.queryForObject(sql, Integer.class, carVehicleNumber);
+        }catch (EmptyResultDataAccessException e) {
+            return -1;
+        }
     }
 
     public Double getTotalDamagePrice(int carVehicleNumber) {
         // Brug carVehicleNumber til at finde totalDamagePrice
-        try {
-            String sql = "SELECT SUM(Price) FROM damage WHERE DamageReportID = ?";
-            Double totalDamagePrice = template.queryForObject(sql, Double.class, getDamageReportID(carVehicleNumber));
-            return totalDamagePrice != null ? totalDamagePrice : 0.0;
-        } catch (EmptyResultDataAccessException e) {
-            return null;
+        String sql = "SELECT SUM(Price) FROM damage WHERE DamageReportID = ?";
+        if (getDamageReportID(carVehicleNumber) == -1) {
+            return 0.0;
         }
+        Double totalDamagePrice = template.queryForObject(sql, Double.class, getDamageReportID(carVehicleNumber));
+        return totalDamagePrice != null ? totalDamagePrice : 0.0;
     }
 
     public Double getAdditionalKM(int carVehicleNumber) {
@@ -187,8 +190,8 @@ public class RentalContractRepo {
         return template.queryForObject(sql, Double.class, carVehicleNumber);
     }
 
-        public Double calculateAdditionalKMPrice(int carVehicleNumber, double pricePerKM) {
-            Double additionalKM = getAdditionalKM(carVehicleNumber);
-            return additionalKM != null ? additionalKM * pricePerKM : 0.0;
-        }
+    public Double calculateAdditionalKMPrice(int carVehicleNumber, double pricePerKM) {
+        Double additionalKM = getAdditionalKM(carVehicleNumber);
+        return additionalKM != null ? additionalKM * pricePerKM : 0.0;
     }
+}

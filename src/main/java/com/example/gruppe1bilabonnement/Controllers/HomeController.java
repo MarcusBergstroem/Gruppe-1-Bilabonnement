@@ -1,8 +1,6 @@
 package com.example.gruppe1bilabonnement.Controllers;
 
-import com.example.gruppe1bilabonnement.Model.Car;
-import com.example.gruppe1bilabonnement.Model.RentalContract;
-import com.example.gruppe1bilabonnement.Model.Renter;
+import com.example.gruppe1bilabonnement.Model.*;
 import com.example.gruppe1bilabonnement.Repository.RentalContractRepo;
 import com.example.gruppe1bilabonnement.Service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +41,7 @@ public class HomeController {
     public String createBuyer(Model model){
         return "home/opret_koeber";
     }
+
     @PostMapping("/opret_koeber")
     public String addBuyer(@ModelAttribute Buyer b) {
         // Pass the Buyer object to the service layer
@@ -147,12 +146,6 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/lejedetaljer")
-    public String rentalDetails(Model model, @RequestParam String regNumber) {
-        model.addAttribute("rentalContractDetails", carService.fetchRentalContractDetails(regNumber));
-        return "home/lejedetaljer";
-    }
-
     @GetMapping("/statistik")
     public String statistik(Model model){
         return "home/statistik";
@@ -219,37 +212,4 @@ public class HomeController {
         // Returnerer Thymeleaf-template
         return "home/lejedetaljer";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-//    @PostMapping
-//    public String createCar(@ModelAttribute Car C) {
-//        //carService.addCar(C);
-//        return "redirect:/";
-//    }
-
-//    @PostMapping
-//    public String createRentalContract(@ModelAttribute RentalContract R) {
-//        //carService.addRentalContract(R);
-//        return "redirect:/";
-//    }
-
-//    @PostMapping
-//    public String createRenter(@ModelAttribute Renter R) {
-//        //carService.addRenter(R);
-//        return "redirect:/";
-//    }
 }
