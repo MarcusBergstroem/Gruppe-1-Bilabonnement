@@ -37,8 +37,15 @@ form {
 
 .navbar-left {
     display: flex;
-    align-items: center;
+    align-items: center; /* Aligns logo and text vertically */
+    gap: 10px; /* Adds space between logo and text */
 }
+
+.logo {
+    width: 50px; /* Adjust size */
+    height: auto; /* Maintain aspect ratio */
+}
+
 
 .title {
     font-size: 20px;
