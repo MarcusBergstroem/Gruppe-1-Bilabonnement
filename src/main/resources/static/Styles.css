@@ -37,8 +37,15 @@ form {
 
 .navbar-left {
     display: flex;
-    align-items: center;
+    align-items: center; /* Aligns logo and text vertically */
+    gap: 10px; /* Adds space between logo and text */
 }
+
+.logo {
+    width: 50px; /* Adjust size */
+    height: auto; /* Maintain aspect ratio */
+}
+
 
 .title {
     font-size: 20px;
@@ -115,6 +122,11 @@ form {
     margin-bottom: 15px;
     color: #444;
     text-align: left;
+}
+
+.dashed .form-group {
+    border: 3px dashed black;
+    padding: 0 5px 0;
 }
 
 .form-group {
@@ -231,6 +243,10 @@ select {
     text-align: center;
 }
 
+.back-button{
+    background-color: #f44336 !important;
+}
+
 .button-container button:hover {
     background-color: #0056b3;
     transform: scale(1.02);
@@ -332,7 +348,6 @@ button:hover {
 
 
 
-
 .action-button {
     background-color: #b3e5fc; /* Light pastel blue */
     border: none;
@@ -380,4 +395,28 @@ tr:hover .action-button {
 }
 .mileage{
     margin: 0 auto 0;
+}
+
+.journalView{
+    display: flex;
+}
+.journalContainer h2{
+    text-align: center;
+    margin-bottom: -10px;
+}
+
+.alert{
+    position: absolute;
+    top: 20%;
+    padding:2px 1em;
+    text-align: center;
+    color: white
+}
+
+.alert-success{
+    background-color: green;
+}
+
+.alert-error{
+    background-color: darkred;
 }

@@ -10,16 +10,23 @@
 
 <nav class="navbar">
     <div class="navbar-left">
+        <img src="/images/logo.png" alt="Logo" class="logo">
         <a href="/" class="title">Bilabonnement.dk</a>
     </div>
+
     <div class="navbar-right">
         <button class="logout-button">Log Out</button>
     </div>
 </nav>
 
+<div th:if="${message}" th:classappend="' alert-' + ${alertType}" class="alert" style="position:absolute;top:30%;">
+    <p th:text="${message}"></p>
+</div>
+
 <div class="button-container">
     <button type="submit" onclick="window.location.href='salg_og_udlejning'"> Udlejning </button>
-    <button type="submit" onclick="window.location.href='bilsalg'"> Bilsalg </button>
+    <button type="submit" onclick="window.location.href='bilsalg'"> Salg </button>
+    <button type="submit" onclick="window.location.href='skadeshåndtering'"> Skadeshåndtering </button>
     <button type="submit" onclick="window.location.href='statistik'"> Statistik </button>
 </div>
 </body>

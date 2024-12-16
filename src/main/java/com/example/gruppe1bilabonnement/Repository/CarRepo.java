@@ -33,8 +33,8 @@ public class CarRepo {
         return template.queryForObject(sql, Integer.class, vehicleNumber);
     }
 
-    public List<Car> fetchAllCarsAtStorage() {
-        String sql = "SELECT * FROM car WHERE RentalStatus = 'atStorage'";
+    public List<Car> fetchAllCarsLeasedOrAtStorage() {
+        String sql = "SELECT * FROM car WHERE RentalStatus = 'atStorage' OR RentalStatus = 'Leased'";
         RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
         return template.query(sql, rowMapper);
     }

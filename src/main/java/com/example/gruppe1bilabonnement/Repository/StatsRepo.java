@@ -214,6 +214,11 @@ public class StatsRepo {
                 String returnDate = rs.getString("returndate");
                 String saleDate = rs.getString("saledate");
                 int daysDifference = rs.getInt("DaysDifference");
+                // Da der kan være forhåndssalg af biler, kan salgsdato være før returneringsdato
+                // Det vil give negativ salgstid, hvilket ikke giver mening. Vi sætter i så fald til 0 dage.
+                if (daysDifference < 0){
+                    daysDifference = 0;
+                }
 
                 // Opret en liste med værdierne
                 List<String> rowData = new ArrayList<>();
