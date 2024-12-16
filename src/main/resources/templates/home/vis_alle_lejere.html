@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vis alle biler</title>
+    <link rel="stylesheet" href="/Styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/" class="title">Bilabonnement.dk</a>
+    </div>
+    <div class="navbar-right">
+        <button class="logout-button">Log Out</button>
+    </div>
+</nav>
+
+<h1>Statistik: Alle lejere</h1>
+
+<table class="styled-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>CPR</th>
+        <th>Navn</th>
+        <th>Adresse</th>
+        <th>Postnr. og by</th>
+        <th>Land</th>
+        <th>Telefonnr.</th>
+        <th>Blacklist</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="oneRenterDetail : ${allRenterDetails}">
+        <td th:text="${oneRenterDetail.id}"></td>
+        <td th:text="${oneRenterDetail.cpr}"></td>
+        <td th:text="${oneRenterDetail.firstName} + ' ' + ${oneRenterDetail.lastName}"></td>
+        <td th:text="${oneRenterDetail.address}"></td>
+        <td th:text="${oneRenterDetail.zipCode} + ' ' + ${oneRenterDetail.city}"></td>
+        <td th:text="${oneRenterDetail.country}"></td>
+        <td th:text="${oneRenterDetail.phoneNumber}"></td>
+        <td th:text="${oneRenterDetail.blacklist ? 'Ja' : 'Nej'}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

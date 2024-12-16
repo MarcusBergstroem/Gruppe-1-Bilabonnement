@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vis alle biler</title>
+    <title>Alle lejekontrakter</title>
     <link rel="stylesheet" href="/Styles.css">
 </head>
 <body>
@@ -17,6 +17,9 @@
 </nav>
 
 <h1>Statistik: Alle lejekontrakter</h1>
+
+<p>Omsætning i indeværende måned fra udlejede biler, dvs. månedlig ydelse på biler som er udlejet i øjeblikket:</p>
+<p th:text="${#numbers.formatDecimal(rentedCarsThisMonthRevenue, 1, 0)} + ' kr.'"></p>
 
 <table class="styled-table">
     <thead>
@@ -34,6 +37,7 @@
         <th>Udleveringssted</th>
         <th>Afleveringssted</th>
 
+        <th>ID</th>
         <th>CPR</th>
         <th>Navn</th>
         <th>Adresse</th>
@@ -63,10 +67,11 @@
         <td th:text="${oneContractDetail.totalKilometers}"></td>
         <td th:text="${#numbers.formatDecimal(oneContractDetail.additionalKM, 1, 0)}"></td>
         <td th:text="${oneContractDetail.customChoices}"></td>
-        <td th:text="${oneContractDetail.isSigned ? 'Ja' : 'Nej'}"></td>
+        <td th:text="${oneContractDetail.isSigned ? 'Nej' : 'Ja'}"></td>
         <td th:text="${oneContractDetail.deliveryLocationName}"></td>
         <td th:text="${oneContractDetail.returnLocationName}"></td>
 
+        <td th:text="${oneContractDetail.rentalRenter.id}"></td>
         <td th:text="${oneContractDetail.rentalRenter.cpr}"></td>
         <td th:text="${oneContractDetail.rentalRenter.firstName} + ' ' + ${oneContractDetail.rentalRenter.lastName}"></td>
         <td th:text="${oneContractDetail.rentalRenter.address}"></td>

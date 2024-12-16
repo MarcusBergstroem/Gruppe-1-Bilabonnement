@@ -1,8 +1,6 @@
 package com.example.gruppe1bilabonnement.Controllers;
 
-import com.example.gruppe1bilabonnement.Model.Car;
-import com.example.gruppe1bilabonnement.Model.RentalContract;
-import com.example.gruppe1bilabonnement.Model.Renter;
+import com.example.gruppe1bilabonnement.Model.*;
 import com.example.gruppe1bilabonnement.Service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +27,53 @@ public class HomeController {
     public String index(Model model) {
         //model.addAttribute("madvarer", carService.fetchAll())
         return "home/index";
+    }
+    @GetMapping("/bilsalg")
+    public String car_sale(Model model){
+        return "home/bilsalg";
+    }
+
+    @GetMapping("/opret_koeber")
+    public String createBuyer(Model model){
+        return "home/opret_koeber";
+    }
+    @PostMapping("/opret_koeber")
+    public String addBuyer(@ModelAttribute Buyer b) {
+        // Pass the Buyer object to the service layer
+        carService.addBuyer(b);
+        return "redirect:/"; // Redirect to the home page or another relevant page
+    }
+
+    @GetMapping("/opret_salgsaftale")
+    public String createSalesContract(Model model){
+
+        List<Buyer> buyers = carService.fetchAllBuyers();
+        List<Car> carsAtStorage = carService.fetchAllCarsAtStorage();
+
+        model.addAttribute("buyers", buyers);
+        model.addAttribute("cars", carsAtStorage);
+        return "home/opret_salgsaftale";
+    }
+    @PostMapping("/opret_salgsaftale")
+    public String saveSalesContract(@ModelAttribute SalesContract salesContract) {
+
+        //tilføjer kontrakt og ændrer status til 'leased'
+        carService.addSalesContract(salesContract);
+
+        return "redirect:/";
+    }
+    @GetMapping("/alle_salgsaftaler")
+    public String alleSalgsaftaler(Model model, @RequestParam Map<String, String> vin) {
+
+        // Check if the request contains the VIN parameter
+        if (vin.containsKey("vin")) {
+            model.addAttribute("salesContracts", carService.searchSalesContracts(vin.get("vin")));
+            return "home/alle_salgsaftaler";
+        }
+
+        // Otherwise, fetch all sales contracts
+        model.addAttribute("salesContracts", carService.fetchAllSalesContracts());
+        return "home/alle_salgsaftaler";
     }
 
     @GetMapping("/salg_og_udlejning")
@@ -74,8 +119,7 @@ public class HomeController {
     }
     @PostMapping("/opret_lejekontrakt")
     public String saveRentalContract(@ModelAttribute RentalContract rentalContract) {
-        System.out.println("DeliveryLocationID: " + rentalContract.getDeliveryLocationId());
-        System.out.println("ReturnLocationID: " + rentalContract.getReturnLocationId());
+
         //tilføjer kontrakt og ændrer status til 'leased'
         carService.addRentalContract(rentalContract);
 
@@ -114,8 +158,22 @@ public class HomeController {
     @GetMapping("/vis_alle_lejekontrakter")
     public String listAllContracts(Model model){
         model.addAttribute("allContractDetails", carService.fetchAllContractDetails());
+        model.addAttribute("rentedCarsThisMonthRevenue", carService.rentedCarsThisMonthRevenue());
         return "home/vis_alle_lejekontrakter";
     }
+
+    @GetMapping("/vis_alle_lejere")
+    public String listAllRenters(Model model){
+        model.addAttribute("allRenterDetails", carService.fetchAllRenterDetails());
+        return "home/vis_alle_lejere";
+    }
+
+    @GetMapping("/omsaetning_aar_til_dato")
+    public String revenueYearToDate(Model model){
+        model.addAttribute("revenueYearToDate", carService.revenueYearToDate());
+        return "home/omsaetning_aar_til_dato";
+    }
+
 
 
 //    @PostMapping

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret Salgsaftale</title>
+    <link rel="stylesheet" href="/Styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/" class="title">Bilabonnement.dk</a>
+    </div>
+    <div class="navbar-right">
+        <button class="logout-button">Log ud</button>
+    </div>
+</nav>
+
+<h1>Opret Salgsaftale</h1>
+
+<form action="/opret_salgsaftale" method="post" class="create-form">
+    <!-- Køber Dropdown -->
+    <div class="form-group">
+        <label for="buyer">Vælg køber:</label>
+        <select id="buyer" name="buyerId" required>
+            <option value="" disabled selected>-- Vælg en køber --</option>
+            <th:block th:each="buyer : ${buyers}">
+                <option th:value="${buyer.buyerId}" th:text="${buyer.companyName}"></option>
+            </th:block>
+        </select>
+    </div>
+
+    <!-- Bil Dropdown -->
+    <div class="form-group">
+        <label for="car">Vælg bil:</label>
+        <select id="car" name="vehicleNumber" required>
+            <option value="" disabled selected>-- Vælg en bil --</option>
+            <th:block th:each="car : ${cars}">
+                <option th:value="${car.vehicleNumber}" th:text="${car.carBrand} + ' ' + ${car.carModel}"></option>
+            </th:block>
+        </select>
+    </div>
+
+    <!-- Salgsaftale Information -->
+    <div class="form-group">
+        <label for="sale_date">Salgsdato:</label>
+        <input type="date" id="sale_date" name="saleDate" required>
+
+        <label for="delivery_address">Leveringsadresse:</label>
+        <input type="text" id="delivery_address" name="deliveryAddress" required placeholder="f.eks. Østerbrogade 45, København">
+
+        <label for="sale_price">Salgspris:</label>
+        <input type="number" id="sale_price" name="salePrice" required placeholder="f.eks. 250000">
+
+        <label for="total_kilometers">Total kilometer:</label>
+        <input type="number" id="total_kilometers" name="totalKilometers" required placeholder="f.eks. 10000">
+
+        <label for="options">Tilvalg (fritekst):</label>
+        <textarea id="options" name="options" placeholder="Tilføjelser.
+        .."></textarea>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="rochsTransport"> Roch's Transport leverer bilen
+        </label>
+    </div>
+    <!-- Bekræftelse -->
+    <div class="signature">
+        <h2>Underskrevet</h2>
+        <label>
+            <input type="checkbox" name="isSigned" required> Jeg bekræfter hermed
+        </label>
+    </div>
+
+    <!-- Knapper -->
+    <div class="button-container">
+        <button type="submit" class="save-button">Gem salgskontrakten</button>
+        <button type="button" class="send-button" onclick="alert('Salgskontrakt er sendt til kunde!');">Send salgskontrakt til kunde</button>
+    </div>
+</form>
+
+</body>
+</html>
