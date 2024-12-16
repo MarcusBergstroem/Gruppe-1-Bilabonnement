@@ -270,7 +270,6 @@ public class RentalContractRepo {
             return rentalContractList;
 
         }
-    }
     public RentalContract findByRegistrationNumber(String regNumber) {
         String sql = "SELECT * FROM RentalContract WHERE registrationNumber = ?";
         List<RentalContract> contracts = template.query(sql, new BeanPropertyRowMapper<>(RentalContract.class), regNumber);
@@ -281,7 +280,7 @@ public class RentalContractRepo {
     }
 
 
-public int getDamageReportID(int carVehicleNumber) {
+    public int getDamageReportID(int carVehicleNumber) {
         try {
             String sql = "SELECT ID FROM damagereport where CarVehicleNumber = ?";
             return template.queryForObject(sql, Integer.class, carVehicleNumber);
