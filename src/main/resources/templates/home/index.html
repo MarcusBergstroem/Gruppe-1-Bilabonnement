@@ -1,33 +1,37 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Bilabonnement.dk</title>
     <link rel="stylesheet" href="/Styles.css">
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="navbar-left">
-        <img src="/images/logo.png" alt="Logo" class="logo">
-        <a href="/" class="title">Bilabonnement.dk</a>
-    </div>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-    <div class="navbar-right">
-        <button class="logout-button">Log Out</button>
+<div class="frontpage-photo-container">
+    <img src="/images/FrontPagePhoto.jpeg" alt="Front Page Photo" class="frontpage-photo">
+    <div class="overlay-text">
+        <h1>Bilabonnement.dk's interne system</h1>
+        <p>Effektiv håndtering af data, skader og statistikker</p>
     </div>
-</nav>
-
-<div th:if="${message}" th:classappend="' alert-' + ${alertType}" class="alert" style="position:absolute;top:30%;">
-    <p th:text="${message}"></p>
 </div>
-
-<div class="button-container">
-    <button type="submit" onclick="window.location.href='salg_og_udlejning'"> Udlejning </button>
-    <button type="submit" onclick="window.location.href='bilsalg'"> Salg </button>
-    <button type="submit" onclick="window.location.href='skadeshåndtering'"> Skadeshåndtering </button>
-    <button type="submit" onclick="window.location.href='statistik'"> Statistik </button>
+    <div th:if="${message}" th:classappend="' alert-' + ${alertType}" class="alert" style="position:absolute;top:30%;">
+        <p th:text="${message}"></p>
+    </div>
+<div class="role-description">
+    <a href="salg_og_udlejning" class="role-box">
+        <h2>Dataregistrering</h2>
+        <p>For medarbejdere hos Bilabonnement.dk, der står for at salg og udlejninger i systemet.</p>
+    </a>
+    <a href="skadeshåndtering" class="role-box">
+        <h2>Skade & udbedring</h2>
+        <p>For mekanikere, der skal indberette og gemme skader ved tilbagelevering.</p>
+    </a>
+    <a href="statistik" class="role-box">
+        <h2>Forretningsudviklere</h2>
+        <p>Overblik over udlejninger, salg, biler og økonomi.</p>
+    </a>
 </div>
 </body>
 </html>

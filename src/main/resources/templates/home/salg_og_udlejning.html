@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +7,28 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="navbar-left">
-        <a href="/" class="title">Bilabonnement.dk</a>
-    </div>
-    <div class="navbar-right">
-        <button class="logout-button">Log Out</button>
-    </div>
-</nav>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-<div class="button-container">
-    <button type="submit" onclick="window.location.href='opret_bil'"> Opret bil </button>
-    <button type="submit" onclick="window.location.href='opret_lejer'"> Opret lejer </button>
-    <button type="submit" onclick="window.location.href='opret_lejekontrakt'"> Opret lejekontrakt </button>
-    <button type="submit" onclick="window.location.href='udlejede_biler'"> Vis udlejede biler </button>
-    <button type="submit" class="back-button" onclick="window.location.href='/'"> Tilbage til hovedmenu </button>
+<div class="content-container">
+
+    <div class="section-box">
+        <h2 class="section-title">Udlejning</h2>
+        <ul class="link-list">
+            <li><a href="opret_lejer">Opret lejer</a></li>
+            <li><a href="opret_bil">Opret bil</a></li>
+            <li><a href="opret_lejekontrakt">Opret lejekontrakt</a></li>
+            <li><a href="udlejede_biler">Vis udlejede biler</a></li>
+        </ul>
+    </div>
+
+    <div class="section-box">
+        <h2 class="section-title">Salg</h2>
+        <ul class="link-list">
+            <li><a href="opret_koeber">Opret køber</a></li>
+            <li><a href="opret_salgsaftale">Opret salgsaftale</a></li>
+            <li><a href="alle_salgsaftaler">Se alle salgsaftaler</a></li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

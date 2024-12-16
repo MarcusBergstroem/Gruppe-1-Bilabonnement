@@ -1,13 +1,8 @@
-/* Generelle styling for website */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100vh;
+    background-color: #ffffff;
 }
 
 h1, .page-title {
@@ -23,51 +18,95 @@ form {
     width: 100%;
 }
 
-/* Styling til navigationsbaren */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ccc;
-    padding: 10px 20px;
+    background-color: #f2f2f2;
+    padding: 20px 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
     top: 0;
-    width: 98%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
 .navbar-left {
     display: flex;
-    align-items: center; /* Aligns logo and text vertically */
-    gap: 10px; /* Adds space between logo and text */
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.navbar-right .nav-link {
+    text-decoration: none;
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.navbar-right .nav-link:hover {
+    transform: scale(1.05);
+}
+
+.dropdown-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 1000;
+    min-width: 200px;
+}
+
+.dropdown-content a {
+    color: #333333;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .logo {
-    width: 50px; /* Adjust size */
-    height: auto; /* Maintain aspect ratio */
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
 }
-
 
 .title {
-    font-size: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
     font-weight: bold;
-    color: #333;
+    color: #000000;
+    text-decoration: none;
 }
 
-.navbar-right .logout-button {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.navbar-right .logout-button:hover {
-    background-color: #d32f2f;
-}
-
-/* Styling for tabeller */
 .styled-table {
     width: 50vw;
     border-collapse: collapse;
@@ -104,11 +143,6 @@ form {
     cursor: default;
 }
 
-.cursor-pointer tbody tr:hover {
-    cursor: pointer;
-}
-
-/* Styling til formularer */
 .create-form {
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
@@ -147,8 +181,8 @@ form {
 .form-group input[type="date"],
 .form-group textarea,
 select {
-    width: 100%; /* Sørger for, at de fylder hele tilgængelige bredde */
-    box-sizing: border-box; /* Inkluderer padding og border i størrelsen */
+    width: 100%;
+    box-sizing: border-box;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -163,7 +197,6 @@ select {
     font-weight: bold;
 }
 
-/* Styling til Signature-boksen */
 .signature {
     background: rgba(240, 240, 240, 0.9);
     padding: 20px;
@@ -191,50 +224,46 @@ select {
     margin-right: 10px;
 }
 
-/* Styling til knapper */
 .multiple-button-container {
-    display: flex; /* Brug Flexbox til at placere elementerne på en række */
-    justify-content: center; /* Centrerer knapperne horisontalt */
-    gap: 20px; /* Tilføjer mellemrum mellem knapperne */
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
-.send-button,
-.save-button {
-    margin-bottom: 30px; /* Samme som de andre knapper */
-    width: 200px; /* Standardbredde */
-    height: auto;
-    box-sizing: border-box;
+.multiple-button-container button {
+    background-color: #4c6ef5;
+    color: #ffffff;
+    border: none;
     padding: 12px 24px;
     font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-    background-color: #007BFF;
-    border: 1px solid #0056b3;
-    border-radius: 4px;
+    font-weight: bold;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.send-button:hover,
-.save-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.02);
+.multiple-button-container button:hover {
+    background-color: #3b5bdb;
+    transform: scale(1.03);
+}
+
+.multiple-button-container button:active {
+    background-color: #364fc7;
+    transform: scale(1);
 }
 
 .button-container {
     display: flex;
-    flex-direction: column; /* Ændrer retningen til lodret */
-    align-items: center; /* Centrerer knapperne vandret */
-    justify-content: center; /* Centrerer knapperne lodret */
-    min-height: 100vh; /* Får containeren til at fylde hele skærmen lodret */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 .button-container button {
-    margin-bottom: 30px; /* tilføjer mellemrum mellem knapperne */
-    width: 200px; /* bredden på knapperne */
-    height: auto; /* højden på knapperne */
-    box-sizing: border-box; /* padding og border i knappernes mål */
+    margin-bottom: 30px;
+    width: 200px;
     padding: 12px 24px;
     font-size: 16px;
     font-weight: 600;
@@ -261,14 +290,14 @@ select {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 90%; /* Fylder næsten hele bredden */
-    margin: 20px auto; /* Centrer containeren */
-    gap: 20px; /* Tilføj mellemrum mellem sektionerne */
+    width: 90%;
+    margin: 20px auto;
+    gap: 20px;
 }
 
 /* Venstre sektion */
 .left-section {
-    flex: 3; /* Tager mere plads */
+    flex: 3;
     display: flex;
     flex-direction: column;
     gap: 20px; /* Mellemrum mellem tabeller */
@@ -280,31 +309,30 @@ select {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: flex-start; /* Justerer indholdet til venstre */
+    align-items: flex-start;
 }
-/* Tilpasning af overskrifter */
+
 h2 {
     margin-bottom: 10px;
     color: #333;
     align-content: center;
 }
 
-/* Generel styling til formularer og bokse */
 .skadesoplysninger, .box {
     width: 100%;
     background-color: white;
     padding: 20px;
-    border-radius: 8px; /* Ændret til 8px for en mere moderne boks */
+    border-radius: 8px;
     box-sizing: border-box;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tilføjet skygge for dybde */
-    margin-bottom: 20px; /* Tilføjet margin for plads mellem sektionerne */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .skadesoplysninger h2, .box h2 {
     color: #444;
     margin-bottom: 15px;
-    border-bottom: 2px solid #ccc; /* Tilføjet border for separation */
-    padding-bottom: 5px; /* Padding til bedre læsbarhed */
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
     text-align: left;
 }
 
@@ -350,19 +378,14 @@ button:hover {
     margin-top: 20px;
 }
 
-
-
 .action-button {
-    background-color: #b3e5fc; /* Light pastel blue */
+    background-color: #b3e5fc;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
-    color: #0277bd; /* Slightly darker blue for text */
+    color: #0277bd;
     font-size: 14px;
     cursor: pointer;
-    /*transition: background-color 0.3s ease, transform 0.2s ease;*/
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -370,11 +393,11 @@ button:hover {
 }
 
 .action-button:hover {
-    background-color: #81d4fa; /* Slightly darker pastel blue */
-    transform: scale(1.05); /* Subtle zoom effect */
+    background-color: #81d4fa;
+    transform: scale(1.05);
 }
 
-.no-background{
+.no-background {
     background-color: #ffffff;
     border: none !important;
     display: grid;
@@ -388,10 +411,10 @@ tr:hover .action-button {
 .summary {
     width: 50%;
 }
+
 .summary div {
     font-weight: bold;
 }
-
 
 #mileage {
     width: 25%;
@@ -400,6 +423,136 @@ tr:hover .action-button {
 .mileage{
     margin: 0 auto 0;
 }
+
+.frontpage-photo-container {
+    position: relative;
+    width: 100%;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.frontpage-photo {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+    width: 90%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+.overlay-text h1 {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.overlay-text p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    font-weight: 300;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    background-color: #f8f9fa;
+    padding: 50px;
+    border-radius: 12px;
+    margin: 40px auto;
+    max-width: 1200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+}
+
+.link-list {
+    list-style: none;
+    padding: 0;
+}
+
+.link-list li {
+    margin: 15px 0;
+}
+
+.link-list a {
+    font-size: 1.2rem;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 2px solid #333;
+    display: inline-block;
+    padding-bottom: 5px;
+    transition: color 0.2s ease;
+}
+
+.link-list a:hover {
+    color: #4c6ef5;
+    border-bottom: 2px solid #4c6ef5;
+}
+.role-description {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px auto;
+    max-width: 1200px;
+}
+
+.role-box {
+    display: block;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.role-box h2 {
+    color: black;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.role-box p {
+    color: #333333;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.role-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background-color: #e9ecef;
+}
+
+
 
 .journalView{
     display: flex;
