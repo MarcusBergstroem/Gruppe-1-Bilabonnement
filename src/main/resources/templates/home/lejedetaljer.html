@@ -6,14 +6,7 @@
     <link rel="stylesheet" href="/Styles.css">
 </head>
 <body>
-<nav class="navbar">
-    <div class="navbar-left">
-        <a href="/" class="title">Bilabonnement.dk</a>
-    </div>
-    <div class="navbar-right">
-        <button class="logout-button">Log Out</button>
-    </div>
-</nav>
+<div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="title">
     <h1 th:text="'Lejedetaljer for ' + ${rentalContractDetails.registrationNumber}"></h1>
