@@ -64,10 +64,10 @@ class CarServiceTest {
         );
 
 
-        when(carRepo.fetchAllCarsAtStorage()).thenReturn(mockCars);
+        when(carRepo.fetchAllCarsLeasedOrAtStorage()).thenReturn(mockCars);
 
 
-        List<Car> result = carService.fetchAllCarsAtStorage();
+        List<Car> result = carService.fetchAllCarsLeasedOrAtStorage();
 
 
         assertEquals(2, result.size(), "Der burde være 2 biler i listen");
@@ -75,7 +75,7 @@ class CarServiceTest {
         assertEquals("Sport", result.get(1).getEquipmentLevel(), "Den anden bil burde være en BMW");
 
 
-        verify(carRepo, times(1)).fetchAllCarsAtStorage();
+        verify(carRepo, times(1)).fetchAllCarsLeasedOrAtStorage();
     }
 
 }

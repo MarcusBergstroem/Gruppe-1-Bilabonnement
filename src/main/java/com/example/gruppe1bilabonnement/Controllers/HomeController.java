@@ -50,7 +50,7 @@ public class HomeController {
     public String createSalesContract(Model model){
 
         List<Buyer> buyers = carService.fetchAllBuyers();
-        List<Car> carsAtStorage = carService.fetchAllCarsAtStorage();
+        List<Car> carsAtStorage = carService.fetchAllCarsLeasedOrAtStorage();
 
         model.addAttribute("buyers", buyers);
         model.addAttribute("cars", carsAtStorage);

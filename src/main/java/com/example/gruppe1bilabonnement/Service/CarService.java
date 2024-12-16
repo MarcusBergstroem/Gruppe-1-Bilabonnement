@@ -90,8 +90,8 @@ public class CarService {
     public List<RentalContract> fetchAllContractDetails(){
         return statsRepo.fetchAllContractDetails();
     }
-    public List<Car> fetchAllCarsAtStorage() {
-        return carRepo.fetchAllCarsAtStorage();
+    public List<Car> fetchAllCarsLeasedOrAtStorage() {
+        return carRepo.fetchAllCarsLeasedOrAtStorage();
     }
     public List<Buyer> fetchAllBuyers() {
         return buyerRepo.fetchAllBuyers();
