@@ -60,16 +60,17 @@
             <h2>Skadesoplysninger</h2>
             <div class="field">
                 <label>
+                    <input type="checkbox">
                     Intern journal
                     <button type="button" th:data-url="@{'/skadejournal_detaljer?vehicleNumber=' + ${rentalContractDetails.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Vis journal</button>
                 </label>
             </div>
             <div class="field">
                 <label>
-                    <input type="checkbox" checked>
+                    <input type="checkbox">
                     Ekstern journal
+                    <button type="button">Vis journal</button>
                 </label>
-                <button type="button">Vis journal</button>
                 <button type="button">Upload journal</button>
             </div>
             <button type="button">Gem</button>

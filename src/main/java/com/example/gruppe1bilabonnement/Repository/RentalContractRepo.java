@@ -21,6 +21,7 @@ public class RentalContractRepo {
     public RentalContractRepo (JdbcTemplate template) {
         this.template = template;
     }
+
     public List<Map<String, Object>> fetchAllLocations() {
         String sql = "SELECT ID, LocationName FROM delivery_return_location";
         return template.queryForList(sql);
@@ -299,13 +300,63 @@ public class RentalContractRepo {
         return totalDamagePrice != null ? totalDamagePrice : 0.0;
     }
 
-    public Double getAdditionalKM(int carVehicleNumber) {
+    // Hent prisen per ekstra kilometer fra rentalcontract
+    public Double fetchAdditionalKMPrice(int carVehicleNumber) {
         String sql = "SELECT AdditionalKM FROM rentalcontract WHERE carVehicleNumber = ?";
         return template.queryForObject(sql, Double.class, carVehicleNumber);
     }
 
-    public Double calculateAdditionalKMPrice(int carVehicleNumber, double pricePerKM) {
-        Double additionalKM = getAdditionalKM(carVehicleNumber);
-        return additionalKM != null ? additionalKM * pricePerKM : 0.0;
+    // Hent total kilometers (TotalKilometers) fra rentalcontract tabellen
+    public Double fetchTotalKilometers(int carVehicleNumber) {
+        String sql = "SELECT TotalKilometers FROM rentalcontract WHERE carVehicleNumber = ?";
+        try {
+            return template.queryForObject(sql, Double.class, carVehicleNumber);
+        } catch (EmptyResultDataAccessException e) {
+            return 0.0;  // Returner 0.0, hvis der ikke findes nogen række
+        }
     }
+
+    // Hent mileage fra car tabellen
+    public Double fetchCarMileage(int vehicleNumber) {
+        String sql = "SELECT IFNULL(MIleage, 0) FROM car WHERE VehicleNumber = ?";
+        try {
+            return template.queryForObject(sql, Double.class, vehicleNumber);
+        } catch (EmptyResultDataAccessException e) {
+            return 0.0;  // Hvis der ikke findes nogen række, returner 0
+        }
+    }
+
+
+
+    // Beregn prisen for ekstra kilometer baseret på forskellen mellem mileage og total km
+    public Double calculateExtraKMPrice(int carVehicleNumber) {
+        // Hent total kørte kilometer fra rentalcontract
+        double totalKilometers = fetchTotalKilometers(carVehicleNumber);
+
+        // Hent bilens mileage
+        Double carMileage = fetchCarMileage(carVehicleNumber);
+
+        // Hvis mileage er null eller mindre end eller lig med total km, skal vi ikke beregne forskellen
+        if (carMileage == null || carMileage <= totalKilometers) {
+            return 0.0;  // Hvis mileage er null eller mindre end total km, returner 0, da vi ikke har ekstra kilometer
+        }
+
+        // Beregn forskellen mellem mileage og total kørte kilometer
+        double additionalKilometers = carMileage - totalKilometers;
+
+        // Hent prisen per ekstra kilometer fra rentalcontract
+        Double pricePerExtraKM = fetchAdditionalKMPrice(carVehicleNumber);
+
+        System.out.println();
+        System.out.println("Ekstra kilometer: " + additionalKilometers);
+        System.out.println("Total kilometer: " + totalKilometers);
+        System.out.println("Total mileage: " + fetchCarMileage(carVehicleNumber));
+        System.out.println("Mileage: " + carMileage);
+        System.out.println("Pris per ekstra kilometer: " + pricePerExtraKM);
+
+        // Beregn den samlede pris for de ekstra kilometer
+        return pricePerExtraKM != null ? pricePerExtraKM * additionalKilometers : 0.0;
+
+    }
+
 }

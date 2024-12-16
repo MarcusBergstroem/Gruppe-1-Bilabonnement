@@ -227,12 +227,15 @@ public class HomeController {
 
         // Henter totalDamagePrice ved hjælp af carVehicleNumber
         Double totalDamagePrice = rentalContractRepo.getTotalDamagePrice(rentalContract.getCarVehicleNumber());
-
-        // Definerer pris pr. overkørt kilometer
-        double pricePerKM = 1.50; // Juster denne værdi efter behov
+        if (totalDamagePrice == null) {
+            totalDamagePrice = 0.0;  // Hvis totalDamagePrice er null, sæt det til 0
+        }
 
         // Beregner prisen for overkørte kilometer
-        Double additionalKMPrice = rentalContractRepo.calculateAdditionalKMPrice(rentalContract.getCarVehicleNumber(), pricePerKM);
+        Double additionalKMPrice = rentalContractRepo.calculateExtraKMPrice(rentalContract.getCarVehicleNumber());
+        if (additionalKMPrice == null) {
+            additionalKMPrice = 0.0;  // Hvis additionalKMPrice er null, sæt det til 0
+        }
 
         // Beregner den samlede pris ved at summere totalDamagePrice og additionalKMPrice
         Double totalPrice = totalDamagePrice + additionalKMPrice;
@@ -246,4 +249,5 @@ public class HomeController {
         // Returnerer Thymeleaf-template
         return "home/lejedetaljer";
     }
+
 }
