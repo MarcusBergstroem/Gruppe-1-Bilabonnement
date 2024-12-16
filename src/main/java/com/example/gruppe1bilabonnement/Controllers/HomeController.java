@@ -18,10 +18,9 @@ import java.util.Map;
 @Controller
 public class HomeController {
 
-    private final CarService carService;
     @Autowired
     private RentalContractRepo rentalContractRepo;
-
+    private final CarService carService;
 
     public HomeController(CarService carService) {
         this.carService = carService;
