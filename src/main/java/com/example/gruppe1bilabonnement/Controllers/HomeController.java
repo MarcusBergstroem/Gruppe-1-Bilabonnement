@@ -144,35 +144,42 @@ public class HomeController {
     }
 
     @GetMapping("/statistik")
-    public String statistik(Model model){
+    public String statistik(Model model) {
         return "home/statistik";
     }
 
     @GetMapping("/vis_alle_biler")
-    public String listAllCars(Model model){
+    public String listAllCars(Model model) {
         model.addAttribute("allCarDetails", carService.fetchAllCarDetails());
         return "home/vis_alle_biler";
     }
 
     @GetMapping("/vis_alle_lejekontrakter")
-    public String listAllContracts(Model model){
+    public String listAllContracts(Model model) {
         model.addAttribute("allContractDetails", carService.fetchAllContractDetails());
         model.addAttribute("rentedCarsThisMonthRevenue", carService.rentedCarsThisMonthRevenue());
         return "home/vis_alle_lejekontrakter";
     }
 
     @GetMapping("/vis_alle_lejere")
-    public String listAllRenters(Model model){
+    public String listAllRenters(Model model) {
         model.addAttribute("allRenterDetails", carService.fetchAllRenterDetails());
         return "home/vis_alle_lejere";
     }
 
     @GetMapping("/omsaetning_aar_til_dato")
-    public String revenueYearToDate(Model model){
+    public String revenueYearToDate(Model model) {
         model.addAttribute("revenueYearToDate", carService.revenueYearToDate());
         return "home/omsaetning_aar_til_dato";
     }
 
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+        model.addAttribute("soldCarsDates", carService.soldCarsDates());
+        model.addAttribute("avgSalesTime", carService.avgSalesTime());
+        return "home/dashboard";
+    }
+}
     @GetMapping("/skadeshåndtering")
     public String damageReportOverview(Model model) {
         model.addAttribute("rentalContracts", carService.fetchAllSoldCars());
