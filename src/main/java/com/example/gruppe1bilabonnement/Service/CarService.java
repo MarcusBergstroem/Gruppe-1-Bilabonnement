@@ -13,8 +13,6 @@ import com.example.gruppe1bilabonnement.Repository.RentalContractRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -131,8 +129,8 @@ public class CarService {
         damageReportRepo.addDamageReport(damageReportRepo.assembleDamageReport(formData));
     }
 
-    public List<RentalContract> fetchAllSoldCars() {
-        return rentalContractRepo.fetchAllCarsAtStorage();
+    public List<RentalContract> fetchAllLeasedCars() {
+        return rentalContractRepo.fetchAllLeasedCars();
     }
 
     public DamageReport fetchDamageReport(int vehicleNumber){
@@ -160,6 +158,8 @@ public class CarService {
         return statsRepo.avgSalesTime();
     }
 
-
+    public List<RentalContract> fetchAllContractsAtStorage(){
+        return rentalContractRepo.fetchAllContractsAtStorage();
+    }
 
 }

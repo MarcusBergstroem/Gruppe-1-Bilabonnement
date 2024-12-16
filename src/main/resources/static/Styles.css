@@ -388,3 +388,11 @@ tr:hover .action-button {
 .mileage{
     margin: 0 auto 0;
 }
+
+.journalView{
+    display: flex;
+}
+.journalContainer h2{
+    text-align: center;
+    margin-bottom: -10px;
+}

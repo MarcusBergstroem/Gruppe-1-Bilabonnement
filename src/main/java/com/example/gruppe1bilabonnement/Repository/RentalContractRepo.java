@@ -214,62 +214,66 @@ public class RentalContractRepo {
             );
             String updateCarStatusSql = "UPDATE car SET RentalStatus = ? WHERE VehicleNumber = ?";
             template.update(updateCarStatusSql, "Leased", rentalContract.getCarVehicleNumber());
-        }
-        public List<RentalContract> fetchAllCarsAtStorage(){
+    }
+    public List<RentalContract> fetchAllLeasedCars(){
 
-            String sql = """
-            SELECT 
-                rc.*,
-                c.rentalstatus,
-                drl.LocationName AS deliveryLocationName, 
-                drl.LocationAddress AS deliveryLocationAddress, 
-                drl.LocationZipcode AS deliveryLocationZipcode, 
-                drl.LocationCity AS deliveryLocationCity, 
-                drl.LocationCountry AS deliveryLocationCountry,
-                drl2.LocationName AS returnLocationName, 
-                drl2.LocationAddress AS returnLocationAddress, 
-                drl2.LocationZipcode AS returnLocationZipcode, 
-                drl2.LocationCity AS returnLocationCity, 
-                drl2.LocationCountry AS returnLocationCountry
-            FROM 
-                rentalcontract rc
-            INNER JOIN 
-                delivery_return_location drl ON rc.DeliveryLocationID = drl.id
-            INNER JOIN 
-                delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
-            INNER JOIN
-                car c on rc.carvehiclenumber = c.vehiclenumber
-            where rentalstatus=?
-        """;
-            RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
-            List<RentalContract> rentalContractList = template.query(sql, rowMapper, "sold");
+        String sql = """
+        SELECT 
+            rc.*,
+            c.rentalstatus,
+            drl.LocationName AS deliveryLocationName, 
+            drl.LocationAddress AS deliveryLocationAddress, 
+            drl.LocationZipcode AS deliveryLocationZipcode, 
+            drl.LocationCity AS deliveryLocationCity, 
+            drl.LocationCountry AS deliveryLocationCountry,
+            drl2.LocationName AS returnLocationName, 
+            drl2.LocationAddress AS returnLocationAddress, 
+            drl2.LocationZipcode AS returnLocationZipcode, 
+            drl2.LocationCity AS returnLocationCity, 
+            drl2.LocationCountry AS returnLocationCountry
+        FROM 
+            rentalcontract rc
+        INNER JOIN 
+            delivery_return_location drl ON rc.DeliveryLocationID = drl.id
+        INNER JOIN 
+            delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
+        INNER JOIN
+            car c on rc.carvehiclenumber = c.vehiclenumber
+        where rentalstatus='leased'
+        order by returndate asc 
+    """;
+        RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
+        List<RentalContract> rentalContractList = template.query(sql, rowMapper);
 
-            String sqlCar = "select * from car";
-            RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
-            List<Car> carTmp = template.query(sqlCar, rowMapper2);
+        String sqlCar = "select * from car";
+        RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
+        List<Car> carTmp = template.query(sqlCar, rowMapper2);
 
-            String sqlDamageReport = "select * from damagereport";
-            RowMapper<DamageReport> rowMapper3 = new BeanPropertyRowMapper<>(DamageReport.class);
-            List<DamageReport> damageReportTmp = template.query(sqlDamageReport, rowMapper3);
+        String sqlDamageReport = "select * from damagereport";
+        RowMapper<DamageReport> rowMapper3 = new BeanPropertyRowMapper<>(DamageReport.class);
+        List<DamageReport> damageReportTmp = template.query(sqlDamageReport, rowMapper3);
 
-            for (RentalContract rentalContract : rentalContractList) {
-                for (Car car : carTmp) {
-                    if (car.getVehicleNumber() == rentalContract.getCarVehicleNumber()) {
-                        rentalContract.setRentalCar(car);
-                    }
+        for (RentalContract rentalContract : rentalContractList) {
+            for (Car car : carTmp) {
+                if (car.getVehicleNumber() == rentalContract.getCarVehicleNumber()) {
+                    rentalContract.setRentalCar(car);
                 }
             }
-            for (RentalContract rentalContract : rentalContractList) {
-                for (DamageReport damageReport : damageReportTmp) {
-                    if (damageReport.getCarVehicleNumber() == rentalContract.getCarVehicleNumber()) {
-                        rentalContract.setDamageReport(damageReport);
-                    }
+        }
+        for (RentalContract rentalContract : rentalContractList) {
+            for (DamageReport damageReport : damageReportTmp) {
+                if (damageReport.getCarVehicleNumber() == rentalContract.getCarVehicleNumber()) {
+                    rentalContract.setDamageReport(damageReport);
                 }
             }
-
-            return rentalContractList;
-
         }
+
+        return rentalContractList;
+
+    }
+
+
+
     public RentalContract findByRegistrationNumber(String regNumber) {
         String sql = "SELECT * FROM RentalContract WHERE registrationNumber = ?";
         List<RentalContract> contracts = template.query(sql, new BeanPropertyRowMapper<>(RentalContract.class), regNumber);
@@ -307,5 +311,60 @@ public class RentalContractRepo {
     public Double calculateAdditionalKMPrice(int carVehicleNumber, double pricePerKM) {
         Double additionalKM = getAdditionalKM(carVehicleNumber);
         return additionalKM != null ? additionalKM * pricePerKM : 0.0;
+    }
+
+    public List<RentalContract> fetchAllContractsAtStorage(){
+
+        String sql = """
+        SELECT 
+            rc.*,
+            c.rentalstatus,
+            drl.LocationName AS deliveryLocationName, 
+            drl.LocationAddress AS deliveryLocationAddress, 
+            drl.LocationZipcode AS deliveryLocationZipcode, 
+            drl.LocationCity AS deliveryLocationCity, 
+            drl.LocationCountry AS deliveryLocationCountry,
+            drl2.LocationName AS returnLocationName, 
+            drl2.LocationAddress AS returnLocationAddress, 
+            drl2.LocationZipcode AS returnLocationZipcode, 
+            drl2.LocationCity AS returnLocationCity, 
+            drl2.LocationCountry AS returnLocationCountry
+        FROM 
+            rentalcontract rc
+        INNER JOIN 
+            delivery_return_location drl ON rc.DeliveryLocationID = drl.id
+        INNER JOIN 
+            delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
+        INNER JOIN
+            car c on rc.carvehiclenumber = c.vehiclenumber
+        where rentalstatus='atstorage'
+    """;
+        RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
+        List<RentalContract> rentalContractList = template.query(sql, rowMapper);
+
+        String sqlCar = "select * from car";
+        RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
+        List<Car> carTmp = template.query(sqlCar, rowMapper2);
+
+        String sqlDamageReport = "select * from damagereport";
+        RowMapper<DamageReport> rowMapper3 = new BeanPropertyRowMapper<>(DamageReport.class);
+        List<DamageReport> damageReportTmp = template.query(sqlDamageReport, rowMapper3);
+
+        for (RentalContract rentalContract : rentalContractList) {
+            for (Car car : carTmp) {
+                if (car.getVehicleNumber() == rentalContract.getCarVehicleNumber()) {
+                    rentalContract.setRentalCar(car);
+                }
+            }
+        }
+        for (RentalContract rentalContract : rentalContractList) {
+            for (DamageReport damageReport : damageReportTmp) {
+                if (damageReport.getCarVehicleNumber() == rentalContract.getCarVehicleNumber()) {
+                    rentalContract.setDamageReport(damageReport);
+                }
+            }
+        }
+
+        return rentalContractList;
     }
 }

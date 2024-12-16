@@ -182,7 +182,8 @@ public class HomeController {
 
     @GetMapping("/skadeshåndtering")
     public String damageReportOverview(Model model) {
-        model.addAttribute("rentalContracts", carService.fetchAllSoldCars());
+        model.addAttribute("rentalContractsLeased", carService.fetchAllLeasedCars());
+        model.addAttribute("rentalContractsAtStorage", carService.fetchAllContractsAtStorage());
         return "home/skadeshåndtering";
     }
 
