@@ -272,7 +272,7 @@ public class RentalContractRepo {
         return rentalContractList;
     }
 
-    public List<RentalContract> fetchAllContractsAtStorage(){
+    public List<RentalContract> fetchAllContractsWithDamageReport(){
 
         String sql = """
         SELECT 
@@ -296,7 +296,8 @@ public class RentalContractRepo {
             delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
         INNER JOIN
             car c on rc.carvehiclenumber = c.vehiclenumber
-        where rentalstatus='atstorage'
+        where damagereportid is not null 
+        order by returndate asc
     """;
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         List<RentalContract> rentalContractList = template.query(sql, rowMapper);

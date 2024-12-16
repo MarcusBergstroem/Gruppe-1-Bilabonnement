@@ -61,7 +61,7 @@
             </tr>
         </thead>
         <tbody>
-        <tr th:each="rentalContract : ${rentalContractsAtStorage}">
+        <tr th:each="rentalContract : ${rentalContractsWithDamageReport}">
             <td th:utext="'<b>' + ${rentalContract.returnLocationName} + '</b><br>' + ${rentalContract.returnLocationAddress} + '<br>' + ${rentalContract.returnDate}"></td>
             <td th:text="${rentalContract.rentalCar.carBrand}"></td>
             <td th:text="${rentalContract.registrationNumber}"></td>

@@ -158,8 +158,8 @@ public class CarService {
         return statsRepo.avgSalesTime();
     }
 
-    public List<RentalContract> fetchAllContractsAtStorage(){
-        return rentalContractRepo.fetchAllContractsAtStorage();
+    public List<RentalContract> fetchAllContracts_With_DamageReport(){
+        return rentalContractRepo.fetchAllContractsWithDamageReport();
     }
 
 }
