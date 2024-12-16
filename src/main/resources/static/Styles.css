@@ -92,6 +92,7 @@ form {
 .styled-table tbody tr:hover {
     background-color: #ddd;
 }
+
 .normal-pointer tbody tr:hover {
     cursor: default;
 }
