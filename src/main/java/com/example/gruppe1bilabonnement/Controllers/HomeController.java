@@ -179,7 +179,7 @@ public class HomeController {
         model.addAttribute("avgSalesTime", carService.avgSalesTime());
         return "home/dashboard";
     }
-}
+
     @GetMapping("/skadeshåndtering")
     public String damageReportOverview(Model model) {
         model.addAttribute("rentalContracts", carService.fetchAllSoldCars());
