@@ -27,6 +27,12 @@ public class CarRepo {
         RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
         return template.query(sql, rowMapper);
     }
+
+    public int fetchMileage(int vehicleNumber){
+        String sql = "select IFNULL(mileage,0) from car where vehicleNumber = ?";
+        return template.queryForObject(sql, Integer.class, vehicleNumber);
+    }
+
     public List<Car> fetchAllCarsAtStorage() {
         String sql = "SELECT * FROM car WHERE RentalStatus = 'atStorage'";
         RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
