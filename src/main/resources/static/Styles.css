@@ -124,6 +124,11 @@ form {
     text-align: left;
 }
 
+.dashed .form-group {
+    border: 3px dashed black;
+    padding: 0 5px 0;
+}
+
 .form-group {
     margin-bottom: 15px;
     display: flex;
@@ -339,7 +344,6 @@ button:hover {
 
 
 
-
 .action-button {
     background-color: #b3e5fc; /* Light pastel blue */
     border: none;
@@ -395,4 +399,20 @@ tr:hover .action-button {
 .journalContainer h2{
     text-align: center;
     margin-bottom: -10px;
+}
+
+.alert{
+    position: absolute;
+    top: 20%;
+    padding:2px 1em;
+    text-align: center;
+    color: white
+}
+
+.alert-success{
+    background-color: green;
+}
+
+.alert-error{
+    background-color: darkred;
 }

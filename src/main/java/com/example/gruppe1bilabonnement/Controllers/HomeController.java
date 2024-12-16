@@ -40,10 +40,17 @@ public class HomeController {
     }
 
     @PostMapping("/opret_koeber")
-    public String addBuyer(@ModelAttribute Buyer b) {
-        // Pass the Buyer object to the service layer
-        carService.addBuyer(b);
-        return "redirect:/"; // Redirect to the home page or another relevant page
+    public String addBuyer(Model model, @ModelAttribute Buyer b) {
+        try {
+            // Pass the Buyer object to the service layer
+            carService.addBuyer(b);
+            model.addAttribute("message", "Operation fuldført. Køber blev oprettet!");
+            model.addAttribute("alertType", "success");
+        }catch (Exception e) {
+            model.addAttribute("message", "Operation fejlet. Intet blev oprettet!");
+            model.addAttribute("alertType", "error");
+        }
+        return "home/index"; // Redirect to the home page or another relevant page
     }
 
     @GetMapping("/opret_salgsaftale")
@@ -57,13 +64,21 @@ public class HomeController {
         return "home/opret_salgsaftale";
     }
     @PostMapping("/opret_salgsaftale")
-    public String saveSalesContract(@ModelAttribute SalesContract salesContract) {
+    public String saveSalesContract(Model model, @ModelAttribute SalesContract salesContract) {
 
-        //tilføjer kontrakt og ændrer status til 'leased'
-        carService.addSalesContract(salesContract);
+        try {
+            //tilføjer kontrakt og ændrer status til 'leased'
+            carService.addSalesContract(salesContract);
+            model.addAttribute("message", "Operation fuldført. Salgsaftale blev oprettet!");
+            model.addAttribute("alertType", "success");
+        } catch (Exception e) {
+            model.addAttribute("message", "Operation fejlet. Intet blev oprettet!");
+            model.addAttribute("alertType", "error");
 
-        return "redirect:/";
+        }
+        return "home/index";
     }
+
     @GetMapping("/alle_salgsaftaler")
     public String alleSalgsaftaler(Model model, @RequestParam Map<String, String> vin) {
 
@@ -90,9 +105,16 @@ public class HomeController {
     }
 
     @PostMapping("/opret_bil")
-    public String createCar(@ModelAttribute Car C) {
-        carService.addCar(C);
-        return "redirect:/";
+    public String createCar(Model model, @ModelAttribute Car C) {
+        try{
+            carService.addCar(C);
+            model.addAttribute("message", "Operation fuldført. Bil blev oprettet!");
+            model.addAttribute("alertType", "success");
+        } catch (Exception e) {
+            model.addAttribute("message", "Operation fejlet. Intet blev oprettet!");
+            model.addAttribute("alertType", "error");
+        }
+        return "home/index";
     }
 
     @GetMapping("/udlejede_biler")
@@ -122,13 +144,20 @@ public class HomeController {
     }
 
     @PostMapping("/opret_lejekontrakt")
-    public String saveRentalContract(@ModelAttribute RentalContract rentalContract) {
-        System.out.println("DeliveryLocationID: " + rentalContract.getDeliveryLocationId());
-        System.out.println("ReturnLocationID: " + rentalContract.getReturnLocationId());
-        //tilføjer kontrakt og ændrer status til 'leased'
-        carService.addRentalContract(rentalContract);
+    public String saveRentalContract(Model model, @ModelAttribute RentalContract rentalContract) {
+        try {
+            System.out.println("DeliveryLocationID: " + rentalContract.getDeliveryLocationId());
+            System.out.println("ReturnLocationID: " + rentalContract.getReturnLocationId());
+            //tilføjer kontrakt og ændrer status til 'leased'
+            carService.addRentalContract(rentalContract);
+            model.addAttribute("message", "Operation fuldført. Lejekontrakt blev oprettet!");
+            model.addAttribute("alertType", "success");
+        } catch (Exception e) {
+            model.addAttribute("message", "Operation fejlet. Intet blev oprettet!");
+            model.addAttribute("alertType", "error");
 
-        return "redirect:/";
+        }
+        return "home/index";
     }
 
     @GetMapping("/opret_lejer")
@@ -137,10 +166,21 @@ public class HomeController {
     }
 
     @PostMapping("/opret_lejer")
-    public String createRenter(@ModelAttribute Renter r) {
-        System.out.println("Renter received: " + r);
+    public String createRenter(Model model, @ModelAttribute Renter r) {
+        /*System.out.println("Renter received: " + r);
         carService.addRenter(r);
         return "redirect:/";
+       */
+        try {
+            System.out.println("Renter received: " + r);
+            carService.addRenter(r);
+            model.addAttribute("message", "Operation fuldført. Lejer blev oprettet!");
+            model.addAttribute("alertType", "success");
+        } catch (Exception e) {
+            model.addAttribute("message", "Operation fejlet. Intet blev oprettet!");
+            model.addAttribute("alertType", "error");
+        }
+        return "home/index";
     }
 
     @GetMapping("/statistik")

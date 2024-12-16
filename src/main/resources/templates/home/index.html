@@ -19,6 +19,10 @@
     </div>
 </nav>
 
+<div th:if="${message}" th:classappend="' alert-' + ${alertType}" class="alert" style="position:absolute;top:30%;">
+    <p th:text="${message}"></p>
+</div>
+
 <div class="button-container">
     <button type="submit" onclick="window.location.href='salg_og_udlejning'"> Udlejning </button>
     <button type="submit" onclick="window.location.href='bilsalg'"> Bilsalg </button>
