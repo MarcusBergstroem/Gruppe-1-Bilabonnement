@@ -159,6 +159,7 @@ select {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 15px;
+    align-content: center;
 }
 
 .signature .form-group {
@@ -232,23 +233,56 @@ select {
     transform: scale(1.02);
 }
 
+/* Layout container for at placere venstre og højre sektion */
+.layout-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%; /* Fylder næsten hele bredden */
+    margin: 20px auto; /* Centrer containeren */
+    gap: 20px; /* Tilføj mellemrum mellem sektionerne */
+}
 
-/* Styling for lejedetaljer */
-.right-box {
+/* Venstre sektion */
+.left-section {
+    flex: 3; /* Tager mere plads */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Mellemrum mellem tabeller */
+}
+
+/* Højre sektion */
+.right-section {
+    flex: 1; /* Mindre plads til højre sektion */
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: flex-start; /* Justerer indholdet til venstre */
 }
-
-.box {
-    border: 1px dashed #ccc;
-    padding: 15px;
-    border-radius: 5px;
-}
-
-.box h2 {
-    font-size: 1.2rem;
+/* Tilpasning af overskrifter */
+h2 {
     margin-bottom: 10px;
+    color: #333;
+    align-content: center;
+}
+
+/* Generel styling til formularer og bokse */
+.skadesoplysninger, .box {
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px; /* Ændret til 8px for en mere moderne boks */
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tilføjet skygge for dybde */
+    margin-bottom: 20px; /* Tilføjet margin for plads mellem sektionerne */
+}
+
+.skadesoplysninger h2, .box h2 {
+    color: #444;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ccc; /* Tilføjet border for separation */
+    padding-bottom: 5px; /* Padding til bedre læsbarhed */
+    text-align: left;
 }
 
 .field {
@@ -256,42 +290,41 @@ select {
 }
 
 .field label {
-    display: block;
     font-weight: bold;
+    display: block;
     margin-bottom: 5px;
 }
 
+.field span {
+    display: block;
+    margin-bottom: 10px;
+}
+
 button {
-    margin-top: 5px;
-    padding: 5px 10px;
-    border: 1px solid #007BFF;
     background-color: #007BFF;
     color: white;
-    border-radius: 3px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: scale(1.02);
 }
 
-/* wrapper styling til side-om-side layout */
-.wrapper {
-    display: flex;
-    justify-content: space-between; /* Adskiller venstre og højre sektion */
-    align-items: flex-start; /* Justerer sektionerne til toppen */
-    width: 90%; /* Begræns bredden af layoutet */
-    margin: 20px auto; /* Centrer layoutet */
-    gap: 20px; /* Giver lidt luft mellem sektionerne */
+.skadesoplysninger button {
+    width: auto;
+    padding: 8px 16px;
+    margin-top: 10px;
 }
 
-.create-form {
-    flex: 2; /* Venstre sektion fylder dobbelt så meget som højre */
-    max-width: 65%; /* Begræns maks bredde af venstre sektion */
+.box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
 }
 
-.right-box {
-    flex: 1; /* Højre sektion fylder mindre */
-    max-width: 30%; /* Begræns maks bredde af højre sektion */
-}
 
