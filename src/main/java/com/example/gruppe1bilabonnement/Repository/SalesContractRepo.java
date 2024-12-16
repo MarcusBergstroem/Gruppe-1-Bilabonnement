@@ -55,6 +55,7 @@ public class SalesContractRepo {
         bg.City,
         bg.Zipcode,
         bg.Country,
+        c.VehicleNumber,
         c.CarBrand,
         c.CarModel,
         c.EquipmentLevel,
@@ -94,6 +95,7 @@ public class SalesContractRepo {
 
             // Populate Car details
             Car car = new Car();
+            car.setVehicleNumber(rs.getInt("VehicleNumber"));
             car.setCarBrand(rs.getString("CarBrand"));
             car.setCarModel(rs.getString("CarModel"));
             car.setEquipmentLevel(rs.getString("EquipmentLevel"));
