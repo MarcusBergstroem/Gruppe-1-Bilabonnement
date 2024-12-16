@@ -8,11 +8,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class StatsRepo {
@@ -183,12 +183,63 @@ public class StatsRepo {
         return revenueList;
     }
 
+    // Metode returnerer liste over biler og deres returnerings-, salgsdatoer og beregnede salgstider
+    // Det er en liste af string-lister fordi listen indeholder x antal biler med 4 stringtekster om hver af dem
+    public List<List<String>> soldCarsDates(){
 
+        // Query returnerer en tabel som indeholder de 4 felter for alle solgte biler
+        String sql = """
+            SELECT 
+                salescontract.vehiclenumber, 
+                rentalcontract.returndate,
+                salescontract.saledate, 
+                DATEDIFF(salescontract.saledate, rentalcontract.returndate) AS DaysDifference
+            FROM 
+                salescontract
+            JOIN 
+                rentalcontract
+            ON 
+                salescontract.vehiclenumber = rentalcontract.carvehiclenumber;
+            """;
 
+        // Vi overrider mapRow da vi her skal have den til at lave en liste af strings
+        // Hver række som returneres i SQL'en mappes til en List af strings via mapRow.
+        // template.query laver disse string-lister til én liste af string-lister via rowMapper.
+        // soldCarsDates returnerer denne liste af string-lister
+        return template.query(sql, new RowMapper<List<String>>() {
+            @Override
+            public List<String> mapRow(ResultSet rs, int rowNum) throws SQLException {
+                // Hent de enkelte værdier fra ResultSet
+                String vehicleNumber = rs.getString("vehiclenumber");
+                String returnDate = rs.getString("returndate");
+                String saleDate = rs.getString("saledate");
+                int daysDifference = rs.getInt("DaysDifference");
 
+                // Opret en liste med værdierne
+                List<String> rowData = new ArrayList<>();
+                rowData.add(vehicleNumber);
+                rowData.add(returnDate);
+                rowData.add(saleDate);
+                rowData.add(String.valueOf(daysDifference));
 
+                return rowData;
+            }
+        });
+    }
 
+    // Metode returnerer gennemsnitlig salgstid på solgte biler
+    public double avgSalesTime(){
+        String sql = """
+            SELECT
+                AVG(DATEDIFF(salescontract.saledate, rentalcontract.returndate)) AS AverageDaysDifference
+            FROM 
+                salescontract
+            JOIN 
+                rentalcontract
+            ON 
+                salescontract.vehiclenumber = rentalcontract.carvehiclenumber;
+            """;
 
-
-
+        return template.queryForObject(sql, Integer.class);
+    }
 }

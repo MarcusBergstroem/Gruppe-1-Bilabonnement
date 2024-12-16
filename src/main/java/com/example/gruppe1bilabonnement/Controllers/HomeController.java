@@ -41,14 +41,15 @@ public class HomeController {
     public String createCar() {
         return "home/opret_bil";
     }
+
     @PostMapping("/opret_bil")
-    public String createCar(@ModelAttribute Car C){
+    public String createCar(@ModelAttribute Car C) {
         carService.addCar(C);
         return "redirect:/";
     }
 
     @GetMapping("/udlejede_biler")
-    public String udlejedeBiler(Model model, @RequestParam Map<String, String> regNumber ) {
+    public String udlejedeBiler(Model model, @RequestParam Map<String, String> regNumber) {
 
         if (regNumber.containsKey("regNumber")) {
             model.addAttribute("rentalContracts", carService.searchRentalContracts(regNumber.get("regNumber")));
@@ -72,6 +73,7 @@ public class HomeController {
 
         return "home/opret_lejekontrakt";
     }
+
     @PostMapping("/opret_lejekontrakt")
     public String saveRentalContract(@ModelAttribute RentalContract rentalContract) {
         System.out.println("DeliveryLocationID: " + rentalContract.getDeliveryLocationId());
@@ -88,7 +90,7 @@ public class HomeController {
     }
 
     @PostMapping("/opret_lejer")
-    public String createRenter(@ModelAttribute Renter r){
+    public String createRenter(@ModelAttribute Renter r) {
         System.out.println("Renter received: " + r);
         carService.addRenter(r);
         return "redirect:/";
@@ -101,52 +103,39 @@ public class HomeController {
     }
 
     @GetMapping("/statistik")
-    public String statistik(Model model){
+    public String statistik(Model model) {
         return "home/statistik";
     }
 
     @GetMapping("/vis_alle_biler")
-    public String listAllCars(Model model){
+    public String listAllCars(Model model) {
         model.addAttribute("allCarDetails", carService.fetchAllCarDetails());
         return "home/vis_alle_biler";
     }
 
     @GetMapping("/vis_alle_lejekontrakter")
-    public String listAllContracts(Model model){
+    public String listAllContracts(Model model) {
         model.addAttribute("allContractDetails", carService.fetchAllContractDetails());
         model.addAttribute("rentedCarsThisMonthRevenue", carService.rentedCarsThisMonthRevenue());
         return "home/vis_alle_lejekontrakter";
     }
 
     @GetMapping("/vis_alle_lejere")
-    public String listAllRenters(Model model){
+    public String listAllRenters(Model model) {
         model.addAttribute("allRenterDetails", carService.fetchAllRenterDetails());
         return "home/vis_alle_lejere";
     }
 
     @GetMapping("/omsaetning_aar_til_dato")
-    public String revenueYearToDate(Model model){
+    public String revenueYearToDate(Model model) {
         model.addAttribute("revenueYearToDate", carService.revenueYearToDate());
         return "home/omsaetning_aar_til_dato";
     }
 
-
-
-//    @PostMapping
-//    public String createCar(@ModelAttribute Car C) {
-//        //carService.addCar(C);
-//        return "redirect:/";
-//    }
-
-//    @PostMapping
-//    public String createRentalContract(@ModelAttribute RentalContract R) {
-//        //carService.addRentalContract(R);
-//        return "redirect:/";
-//    }
-
-//    @PostMapping
-//    public String createRenter(@ModelAttribute Renter R) {
-//        //carService.addRenter(R);
-//        return "redirect:/";
-//    }
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+        model.addAttribute("soldCarsDates", carService.soldCarsDates());
+        model.addAttribute("avgSalesTime", carService.avgSalesTime());
+        return "home/dashboard";
+    }
 }

@@ -90,4 +90,16 @@ public class CarService {
         return statsRepo.revenueYearToDate();
     }
 
+    // Til statistik: finder gennemsnitlig salgstid for solgte biler
+    public List<List<String>> soldCarsDates(){
+        return statsRepo.soldCarsDates();
+    }
+
+    // Til statistik: finder gennemsnitlig salgstid for solgte biler
+    public double avgSalesTime(){
+        return statsRepo.avgSalesTime();
+    }
+
+
+
 }
