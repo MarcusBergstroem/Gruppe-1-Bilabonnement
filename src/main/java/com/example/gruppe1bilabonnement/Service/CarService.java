@@ -162,4 +162,7 @@ public class CarService {
         return rentalContractRepo.fetchAllContractsWithDamageReport();
     }
 
+    public Boolean hasJournal(String regNumber){
+        return rentalContractRepo.hasJournal(regNumber);
+    }
 }

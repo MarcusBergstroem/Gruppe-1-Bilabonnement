@@ -104,6 +104,10 @@ form {
     cursor: default;
 }
 
+.cursor-pointer tbody tr:hover {
+    cursor: pointer;
+}
+
 /* Styling til formularer */
 .create-form {
     background: rgba(255, 255, 255, 0.9);

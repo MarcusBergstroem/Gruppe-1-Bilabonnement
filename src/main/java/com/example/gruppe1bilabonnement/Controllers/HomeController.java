@@ -286,6 +286,7 @@ public class HomeController {
         model.addAttribute("totalDamagePrice", totalDamagePrice);
         model.addAttribute("additionalKMPrice", additionalKMPrice);
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("hasJournal", carService.hasJournal(regNumber));
 
         // Returnerer Thymeleaf-template
         return "home/lejedetaljer";

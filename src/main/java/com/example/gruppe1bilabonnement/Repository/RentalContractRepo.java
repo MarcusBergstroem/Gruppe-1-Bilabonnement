@@ -416,4 +416,12 @@ public class RentalContractRepo {
         // Beregn den samlede pris for de ekstra kilometer
         return pricePerExtraKM != null ? pricePerExtraKM * additionalKilometers : 0.0;
     }
+
+    public Boolean hasJournal(String regNumber) {
+        String sqlContract = "select carvehiclenumber from rentalcontract where registrationNumber = ?";
+        int carVNumber = template.queryForObject(sqlContract, Integer.class, regNumber);
+
+        String sqlDamageReport = "select count(*) from damagereport where carvehiclenumber=?";
+        return template.queryForObject(sqlDamageReport, Boolean.class, carVNumber);
+    }
 }
