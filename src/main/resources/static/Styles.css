@@ -91,7 +91,6 @@ form {
 
 .styled-table tbody tr:hover {
     background-color: #ddd;
-    cursor: pointer;
 }
 
 /* Styling til formularer */
