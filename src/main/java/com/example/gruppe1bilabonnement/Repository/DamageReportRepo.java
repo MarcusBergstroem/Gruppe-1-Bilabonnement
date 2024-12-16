@@ -79,6 +79,9 @@ public class DamageReportRepo {
         String sqlStatus = "update car set rentalstatus = 'atstorage' where vehiclenumber=?";
         template.update(sqlStatus, damageReport.getCarVehicleNumber());
 
+        String sqlReportID = "update rentalcontract set damagereportid = ? where vehiclenumber=?";
+        template.update(sqlReportID, damageReport.getId(), damageReport.getCarVehicleNumber());
+
         for (Damage damage : damageReport.getDamageList()){
             addDamage(damage, id);
         }
