@@ -2,6 +2,14 @@ package com.example.gruppe1bilabonnement.Service;
 
 import com.example.gruppe1bilabonnement.Model.*;
 import com.example.gruppe1bilabonnement.Repository.*;
+import com.example.gruppe1bilabonnement.Model.Car;
+import com.example.gruppe1bilabonnement.Model.DamageReport;
+import com.example.gruppe1bilabonnement.Model.Renter;
+import com.example.gruppe1bilabonnement.Model.RentalContract;
+import com.example.gruppe1bilabonnement.Repository.CarRepo;
+import com.example.gruppe1bilabonnement.Repository.DamageReportRepo;
+import com.example.gruppe1bilabonnement.Repository.RenterRepo;
+import com.example.gruppe1bilabonnement.Repository.RentalContractRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +33,8 @@ public class CarService {
     BuyerRepo buyerRepo;
     @Autowired
     SalesContractRepo salesContractRepo;
+    @Autowired
+    DamageReportRepo damageReportRepo;
 
     public List<RentalContract> fetchAllRentalContracts() {
         return rentalContractRepo.fetchAll();
@@ -57,7 +67,7 @@ public class CarService {
         buyerRepo.addBuyer(b, geoId);
     }
     //addRenter laver en unik geografiNøgle og efterfølgende gemmer den resten til geografitabellen.
-    //Efterfølgende tilføjer den til rentertabellen.
+    //Efterfølgende tilføjer den til renter tabellen.
     public void addRenter(Renter r){
         int geographyId = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode());
         renterRepo.addRenter(r, geographyId);
@@ -112,5 +122,44 @@ public class CarService {
     public List<List<Double>> revenueYearToDate() {
         return statsRepo.revenueYearToDate();
     }
+
+    public List<DamageReport> fetchAllDamageReports() {
+        return damageReportRepo.fetchAllDamageReports();
+    }
+
+    public void addDamageReport(Map<String, String> formData){
+        damageReportRepo.addDamageReport(damageReportRepo.assembleDamageReport(formData));
+    }
+
+    public List<RentalContract> fetchAllSoldCars() {
+        return rentalContractRepo.fetchAllCarsAtStorage();
+    }
+
+    public DamageReport fetchDamageReport(int vehicleNumber){
+        return damageReportRepo.fetchDamageReport(vehicleNumber);
+    }
+
+    public void deleteDamage(int id){
+        damageReportRepo.deleteDamage(id);
+    }
+
+    public Double getTotalPrice(int vehicleNumber){
+        return damageReportRepo.getTotalPrice(vehicleNumber);
+    }
+
+    public int fetchMileage(int vehicleNumber){
+        return carRepo.fetchMileage(vehicleNumber);
+    }
+    // Til statistik: finder gennemsnitlig salgstid for solgte biler
+    public List<List<String>> soldCarsDates(){
+        return statsRepo.soldCarsDates();
+    }
+
+    // Til statistik: finder gennemsnitlig salgstid for solgte biler
+    public double avgSalesTime(){
+        return statsRepo.avgSalesTime();
+    }
+
+
 
 }

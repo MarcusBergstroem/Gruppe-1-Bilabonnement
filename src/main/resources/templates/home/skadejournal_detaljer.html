@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>G1.Skadejournal detaljer</title>
+    <link rel="stylesheet" href="/Styles.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-left">
+    <a href="/" class="title">Bilabonnement.dk</a>
+  </div>
+  <div class="navbar-right">
+    <button class="logout-button">Log ud</button>
+  </div>
+</nav>
+
+<h1>Skadejournal</h1>
+
+  <h2>Skade information</h2>
+
+  <table class="styled-table normal-pointer">
+    <thead>
+    <tr>
+      <th>Nr.</th>
+      <th>Beskrivelse</th>
+      <th>K1 - K5</th>
+      <th>Pris</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="damage, index : ${damageReport.getDamageList()}">
+      <td th:text="${index.count}"></td>
+      <td th:text="${damage.damageDescription}"></td>
+      <td th:text="${damage.classification}"></td>
+      <td th:text="${damage.price}"></td>
+      <td class="no-background">
+        <form action="/skadejournal_detaljer" method="post">
+          <input type="hidden" name="vehicleNumber" th:value="${damageReport.carVehicleNumber}">
+          <button class=action-button name="id" th:value="${damage.id}">Slet</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <div th:text="'Kilometerstand: ' + ${mileage} + ' km'"></div>
+    <div th:text="'Samlet pris: '+${totalPrice} + ' kr'"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>G1.Skadeshåndtering</title>
+    <link rel="stylesheet" href="/Styles.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/" class="title">Bilabonnement.dk</a>
+    </div>
+    <div class="navbar-right">
+        <button class="logout-button">Log Out</button>
+    </div>
+</nav>
+
+<h1><b>Skadeshåndtering</b></h1>
+
+<form method="GET">
+    <label>
+        Søg efter reg. nr.
+        <input type="text" name="regNumber">
+    </label>
+    <input type="submit" value="Søg">
+</form>
+
+    <table class="styled-table normal-pointer" >
+        <thead>
+            <tr>
+                <th>Afhentningssted</th>
+                <th>Mærke</th>
+                <th>Registreringsnummer</th>
+            </tr>
+        </thead>
+    <tbody>
+        <tr th:each="rentalContract : ${rentalContracts}">
+            <td th:utext="'<b>' + ${rentalContract.returnLocationName} + '</b><br>' + ${rentalContract.returnLocationAddress} + '<br>' + ${rentalContract.returnDate}"></td>
+            <td th:text="${rentalContract.rentalCar.carBrand}"></td>
+            <td th:text="${rentalContract.registrationNumber}"></td>
+            <td class="no-background"><button class=action-button th:data-url="@{'/opret_skadejournal?vehicleNumber=' + ${rentalContract.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Opret</button></td>
+            <td class="no-background"><button class=action-button th:data-url="@{'/skadejournal_detaljer?vehicleNumber=' + ${rentalContract.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Vis/Rediger</button></td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

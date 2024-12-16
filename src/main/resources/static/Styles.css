@@ -91,7 +91,10 @@ form {
 
 .styled-table tbody tr:hover {
     background-color: #ddd;
-    cursor: pointer;
+}
+
+.normal-pointer tbody tr:hover {
+    cursor: default;
 }
 
 /* Styling til formularer */
@@ -111,7 +114,7 @@ form {
 .create-form h2 {
     margin-bottom: 15px;
     color: #444;
-    text-align: center;
+    text-align: left;
 }
 
 .form-group {
@@ -159,6 +162,7 @@ select {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 15px;
+    align-content: center;
 }
 
 .signature .form-group {
@@ -230,4 +234,150 @@ select {
 .button-container button:hover {
     background-color: #0056b3;
     transform: scale(1.02);
+}
+
+/* Layout container for at placere venstre og højre sektion */
+.layout-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%; /* Fylder næsten hele bredden */
+    margin: 20px auto; /* Centrer containeren */
+    gap: 20px; /* Tilføj mellemrum mellem sektionerne */
+}
+
+/* Venstre sektion */
+.left-section {
+    flex: 3; /* Tager mere plads */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Mellemrum mellem tabeller */
+}
+
+/* Højre sektion */
+.right-section {
+    flex: 1; /* Mindre plads til højre sektion */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start; /* Justerer indholdet til venstre */
+}
+/* Tilpasning af overskrifter */
+h2 {
+    margin-bottom: 10px;
+    color: #333;
+    align-content: center;
+}
+
+/* Generel styling til formularer og bokse */
+.skadesoplysninger, .box {
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px; /* Ændret til 8px for en mere moderne boks */
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tilføjet skygge for dybde */
+    margin-bottom: 20px; /* Tilføjet margin for plads mellem sektionerne */
+}
+
+.skadesoplysninger h2, .box h2 {
+    color: #444;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ccc; /* Tilføjet border for separation */
+    padding-bottom: 5px; /* Padding til bedre læsbarhed */
+    text-align: left;
+}
+
+.field {
+    margin-bottom: 10px;
+}
+
+.field label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.field span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+}
+
+.skadesoplysninger button {
+    width: auto;
+    padding: 8px 16px;
+    margin-top: 10px;
+}
+
+.box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+}
+
+
+
+
+.action-button {
+    background-color: #b3e5fc; /* Light pastel blue */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: #0277bd; /* Slightly darker blue for text */
+    font-size: 14px;
+    cursor: pointer;
+    /*transition: background-color 0.3s ease, transform 0.2s ease;*/
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    margin-right: 5px;
+}
+
+.action-button:hover {
+    background-color: #81d4fa; /* Slightly darker pastel blue */
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+.no-background{
+    background-color: #ffffff;
+    border: none !important;
+    display: grid;
+}
+
+tr:hover .action-button {
+    opacity: 1;
+    visibility: visible;
+}
+
+.summary {
+    width: 50%;
+}
+.summary div {
+    font-weight: bold;
+}
+
+
+#mileage {
+    width: 25%;
+    margin: 0 auto 1em;
+}
+.mileage{
+    margin: 0 auto 0;
 }
