@@ -448,7 +448,7 @@ public class RentalContractRepo {
         if (contracts.isEmpty()) {
             return null;
         }
-        return contracts.get(0); // Vælger den første række, hvis der er flere
+        return contracts.get(0);
     }
 
 
@@ -462,7 +462,6 @@ public class RentalContractRepo {
     }
 
     public Double getTotalDamagePrice(int carVehicleNumber) {
-        // Brug carVehicleNumber til at finde totalDamagePrice
         String sql = "SELECT SUM(Price) FROM damage WHERE DamageReportID = ?";
         if (getDamageReportID(carVehicleNumber) == -1) {
             return 0.0;
@@ -471,51 +470,40 @@ public class RentalContractRepo {
         return totalDamagePrice != null ? totalDamagePrice : 0.0;
     }
 
-    // Hent prisen per ekstra kilometer fra rentalcontract
     public Double fetchAdditionalKMPrice(int carVehicleNumber) {
         String sql = "SELECT AdditionalKM FROM rentalcontract WHERE carVehicleNumber = ?";
         return template.queryForObject(sql, Double.class, carVehicleNumber);
     }
 
-    // Hent total kilometers (TotalKilometers) fra rentalcontract tabellen
     public Double fetchTotalKilometers(int carVehicleNumber) {
         String sql = "SELECT TotalKilometers FROM rentalcontract WHERE carVehicleNumber = ?";
         try {
             return template.queryForObject(sql, Double.class, carVehicleNumber);
         } catch (EmptyResultDataAccessException e) {
-            return 0.0;  // Returner 0.0, hvis der ikke findes nogen række
+            return 0.0;
         }
     }
 
-    // Hent mileage fra car tabellen
     public Double fetchCarMileage(int vehicleNumber) {
         String sql = "SELECT IFNULL(MIleage, 0) FROM car WHERE VehicleNumber = ?";
         try {
             return template.queryForObject(sql, Double.class, vehicleNumber);
         } catch (EmptyResultDataAccessException e) {
-            return 0.0;  // Hvis der ikke findes nogen række, returner 0
+            return 0.0;
         }
     }
 
-
-
-    // Beregn prisen for ekstra kilometer baseret på forskellen mellem mileage og total km
     public Double calculateExtraKMPrice(int carVehicleNumber) {
-        // Hent total kørte kilometer fra rentalcontract
         double totalKilometers = fetchTotalKilometers(carVehicleNumber);
 
-        // Hent bilens mileage
         Double carMileage = fetchCarMileage(carVehicleNumber);
 
-        // Hvis mileage er null eller mindre end eller lig med total km, skal vi ikke beregne forskellen
         if (carMileage == null || carMileage <= totalKilometers) {
-            return 0.0;  // Hvis mileage er null eller mindre end total km, returner 0, da vi ikke har ekstra kilometer
+            return 0.0;
         }
 
-        // Beregn forskellen mellem mileage og total kørte kilometer
         double additionalKilometers = carMileage - totalKilometers;
 
-        // Hent prisen per ekstra kilometer fra rentalcontract
         Double pricePerExtraKM = fetchAdditionalKMPrice(carVehicleNumber);
 
         System.out.println();
@@ -525,7 +513,6 @@ public class RentalContractRepo {
         System.out.println("Mileage: " + carMileage);
         System.out.println("Pris per ekstra kilometer: " + pricePerExtraKM);
 
-        // Beregn den samlede pris for de ekstra kilometer
         return pricePerExtraKM != null ? pricePerExtraKM * additionalKilometers : 0.0;
     }
 

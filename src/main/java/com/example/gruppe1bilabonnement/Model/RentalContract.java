@@ -19,7 +19,6 @@ public class RentalContract {
     private int deliveryLocationId;
     private int returnLocationId;
 
-    // Følgende data hentes fra særskilte tabeller
     private String deliveryLocationName;
     private String deliveryLocationAddress;
     private String deliveryLocationZipcode;
@@ -31,7 +30,6 @@ public class RentalContract {
     private String returnLocationCity;
     private String returnLocationCountry;
 
-    // Følgende fields er ikke med i konstruktøren men sættes via setters
     private Car rentalCar;
     private Renter rentalRenter;
     private DamageReport damageReport;
@@ -44,7 +42,6 @@ public class RentalContract {
 
     }
 
-    // Constructor
     public RentalContract(int id, int renterID, int carVehicleNumber, int deliveryLocationId, int returnLocationId, String registrationNumber,
                           LocalDate deliveryDate, LocalDate returnDate, double initialPayment,
                           double monthlyPayment, int totalKilometers, double additionalKM,
