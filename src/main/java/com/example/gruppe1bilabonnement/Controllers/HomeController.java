@@ -237,6 +237,13 @@ public class HomeController {
         return "home/opret_skadejournal";
     }
 
+    @GetMapping("vis_alle_salgskontrakter")
+    public String showAllSalesContracts(Model model) {
+        // anvende samme metode som sælgeren allerede har i sit view
+        model.addAttribute("salesContracts", carService.fetchAllSalesContracts());
+        return "home/vis_alle_salgskontrakter";
+    }
+
     @PostMapping("opret_skadejournal")
     public String createDamageReport(@RequestParam Map<String, String> formData) throws UnsupportedEncodingException {
         carService.addDamageReport(formData);
