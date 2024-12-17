@@ -67,7 +67,7 @@ public class CarService {
     //addRenter laver en unik geografiNøgle og efterfølgende gemmer den resten til geografitabellen.
     //Efterfølgende tilføjer den til renter tabellen.
     public void addRenter(Renter r){
-        int geographyId = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode());
+        int geographyId = renterRepo.addGeography(r.getCountry(), r.getCity(), r.getZipCode(), r.getAddress());
         renterRepo.addRenter(r, geographyId);
     }
     //Henter alle renters

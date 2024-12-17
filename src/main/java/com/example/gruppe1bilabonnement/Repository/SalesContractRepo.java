@@ -68,7 +68,7 @@ public class SalesContractRepo {
     INNER JOIN 
         buyer b ON sc.BuyerId = b.buyerId
     INNER JOIN 
-        buyerGeo bg ON b.BuyerGeoID = bg.id;
+        geography bg ON b.BuyerGeoID = bg.id;
     """;
 
         return template.query(sql, (rs, rowNum) -> {

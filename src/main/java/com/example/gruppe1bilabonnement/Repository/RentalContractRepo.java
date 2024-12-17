@@ -76,7 +76,8 @@ public class RentalContractRepo {
                 rent.*, 
                 geo.Zipcode AS zipCode, 
                 geo.City AS city, 
-                geo.Country AS country
+                geo.Country AS country,
+                geo.Address AS address
             FROM 
                 renter rent
             INNER JOIN 

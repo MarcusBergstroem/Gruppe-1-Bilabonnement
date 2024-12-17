@@ -167,10 +167,6 @@ public class HomeController {
 
     @PostMapping("/opret_lejer")
     public String createRenter(Model model, @ModelAttribute Renter r) {
-        /*System.out.println("Renter received: " + r);
-        carService.addRenter(r);
-        return "redirect:/";
-       */
         try {
             System.out.println("Renter received: " + r);
             carService.addRenter(r);

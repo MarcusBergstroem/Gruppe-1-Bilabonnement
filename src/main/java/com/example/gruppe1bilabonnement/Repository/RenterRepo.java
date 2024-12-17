@@ -31,11 +31,11 @@ public class RenterRepo {
         return template.query(sql, rowMapper);
     }
     //Indsætter data i geography tabellen i databasen og genbruger existingId hvis databasen allerede har den geografi
-    public int addGeography(String country, String city, String zipCode) {
-        String selectSql = "SELECT ID FROM geography WHERE Country = ? AND City = ? AND ZipCode = ?";
+    public int addGeography(String country, String city, String zipCode, String address) {
+        String selectSql = "SELECT ID FROM geography WHERE Country = ? AND City = ? AND ZipCode = ? AND Address = ?";
         Integer existingId = null;
         try {
-            existingId = template.queryForObject(selectSql, new Object[]{country, city, zipCode}, Integer.class);
+            existingId = template.queryForObject(selectSql, new Object[]{country, city, zipCode, address}, Integer.class);
         } catch (EmptyResultDataAccessException e) {
             // Hvis den ikke returnere noget kaster den denne exception
         }
@@ -43,13 +43,14 @@ public class RenterRepo {
             return existingId; // Return the existing ID
         }
         // Insert a new geography record
-        String insertSql = "INSERT INTO geography (Country, City, ZipCode) VALUES (?, ?, ?)";
+        String insertSql = "INSERT INTO geography (Country, City, ZipCode, Address) VALUES (?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, country);
             ps.setString(2, city);
             ps.setString(3, zipCode);
+            ps.setString(4, address);
             return ps;
         }, keyHolder);
 
@@ -57,14 +58,13 @@ public class RenterRepo {
     }
     //Gemmer lejer i databasen inkl geografiID som er fremmednøgle for geotabellen
     public void addRenter(Renter r, int geographyId) {
-        String sql = "INSERT INTO renter (GeographyID, CPR, FirstName, LastName, Address, Blacklist, PhoneNumber) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO renter (GeographyID, CPR, FirstName, LastName, Blacklist, PhoneNumber) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         template.update(sql,
                 geographyId,
                 r.getCpr(),
                 r.getFirstName(),
                 r.getLastName(),
-                r.getAddress(),
                 r.isBlacklist(),
                 r.getPhoneNumber());
     }

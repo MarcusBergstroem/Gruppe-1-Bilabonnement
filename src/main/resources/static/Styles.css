@@ -180,6 +180,11 @@ form {
     cursor: default;
 }
 
+.cursor-pointer tbody tr:hover {
+    cursor: pointer;
+}
+
+
 .create-form {
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;

@@ -27,7 +27,7 @@ public class BuyerRepo {
     }
 
     public int addBuyerGeo(String country, String city, String zipCode, String address) {
-        String selectSql = "SELECT id FROM BuyerGeo WHERE Country = ? AND City = ? AND ZipCode = ? AND Address = ?";
+        String selectSql = "SELECT id FROM geography WHERE Country = ? AND City = ? AND ZipCode = ? AND Address = ?";
         Integer existingId = null;
 
         try {
@@ -40,7 +40,7 @@ public class BuyerRepo {
         }
 
         // Indsæter information i BuyerGeo-tabellen og finder primærnøglen
-        String insertSql = "INSERT INTO BuyerGeo (Country, City, ZipCode, Address) VALUES (?, ?, ?, ?)";
+        String insertSql = "INSERT INTO geography (Country, City, ZipCode, Address) VALUES (?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
