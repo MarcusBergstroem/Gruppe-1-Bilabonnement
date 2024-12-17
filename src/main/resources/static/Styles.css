@@ -403,6 +403,14 @@ button:hover {
     display: grid;
 }
 
+.onebutton{
+    padding: 2em 1em 2em !important;
+}
+
+.twobuttons {
+    padding: 12px 15px !important;
+}
+
 tr:hover .action-button {
     opacity: 1;
     visibility: visible;

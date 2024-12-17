@@ -37,8 +37,7 @@
                 <td th:utext="'<b>' + ${rentalContract.returnLocationName} + '</b><br>' + ${rentalContract.returnLocationAddress} + '<br>' + ${rentalContract.returnDate}"></td>
                 <td th:text="${rentalContract.rentalCar.carBrand}"></td>
                 <td th:text="${rentalContract.registrationNumber}"></td>
-                <td class="no-background"><button class=action-button th:data-url="@{'/opret_skadejournal?vehicleNumber=' + ${rentalContract.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Opret</button></td>
-                <td class="no-background"><button class=action-button th:data-url="@{'/skadejournal_detaljer?vehicleNumber=' + ${rentalContract.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Vis/Rediger</button></td>
+                <td class="no-background onebutton"><button class=action-button th:data-url="@{'/opret_skadejournal?vehicleNumber=' + ${rentalContract.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Opret</button></td>
             </tr>
         </tbody>
     </table>
@@ -59,8 +58,8 @@
             <td th:utext="'<b>' + ${rentalContract.returnLocationName} + '</b><br>' + ${rentalContract.returnLocationAddress} + '<br>' + ${rentalContract.returnDate}"></td>
             <td th:text="${rentalContract.rentalCar.carBrand}"></td>
             <td th:text="${rentalContract.registrationNumber}"></td>
-            <td class="no-background"><button class=action-button th:data-url="@{'/opret_skadejournal?vehicleNumber=' + ${rentalContract.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Opret</button></td>
-            <td class="no-background"><button class=action-button th:data-url="@{'/skadejournal_detaljer?vehicleNumber=' + ${rentalContract.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Vis/Rediger</button></td>
+            <td class="no-background twobuttons"><button class=action-button th:data-url="@{'/opret_skadejournal?vehicleNumber=' + ${rentalContract.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Opret</button></td>
+            <td class="no-background twobuttons"><button class=action-button th:data-url="@{'/skadejournal_detaljer?vehicleNumber=' + ${rentalContract.carVehicleNumber}}" th:onclick="|window.location.href=this.dataset.url|">Vis/Rediger</button></td>
         </tr>
         </tbody>
     </table>
