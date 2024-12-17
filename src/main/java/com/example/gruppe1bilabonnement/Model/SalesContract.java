@@ -13,7 +13,6 @@ public class SalesContract {
     private String options;
     private Boolean rochsTransport;
 
-    //Bruges til at lave innerjoins
     private Buyer buyer;
     private Car Car;
 
@@ -57,7 +56,6 @@ public class SalesContract {
         this.vin = vin;
     }
 
-    // Getters and Setters
     public int getContractId() {
         return contractId;
     }

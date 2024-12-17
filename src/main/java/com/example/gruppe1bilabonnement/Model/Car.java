@@ -9,12 +9,10 @@ public class Car {
     private String returnDate;
     private String rentalStatus;
 
-    //Default Constructor
     public Car(){
 
     }
 
-    // Constructor
     public Car(int id, int vehicleNumber, String carBrand, String carModel, String equipmentLevel, String vin, String returnDate, String rentalStatus) {
         this.vehicleNumber = vehicleNumber;
         this.carBrand = carBrand;
@@ -24,9 +22,6 @@ public class Car {
         this.returnDate = returnDate;
         this.rentalStatus = rentalStatus;
     }
-
-
-    // Getters and Setters
 
     public int getVehicleNumber() {
         return vehicleNumber;

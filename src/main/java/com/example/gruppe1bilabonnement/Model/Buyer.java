@@ -26,7 +26,6 @@ public class Buyer {
         this.country = country;
     }
 
-    // Getters and Setters
     public int getBuyerId() {
         return buyerId;
     }
