@@ -259,10 +259,6 @@ public class HomeController {
         return "redirect:/skadejournal_detaljer?vehicleNumber=" + vehicleNumber;
     }
 
-
-
-
-
     @GetMapping("/lejedetaljer")
     public String showRentalDetails(@RequestParam("regNumber") String regNumber, Model model) {
         // Finder rentalContract ved hjælp af regNumber

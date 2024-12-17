@@ -19,7 +19,7 @@ public class StatsRepo {
 
     private final JdbcTemplate template;
 
-    // Default konstruktør
+    // Konstruktør
     public StatsRepo(JdbcTemplate template){
         this.template = template;
     }
@@ -35,6 +35,7 @@ public class StatsRepo {
     // Metode som laver en liste af kontraktobjekter, som skal bruges til at skrive i HTML
     public List<RentalContract> fetchAllContractDetails() {
 
+        // Denne query laver en inner join så vi har data fra både rental contract og to hjælpetabeller
         String sql = """
                 SELECT 
                     rc.*, 
@@ -57,7 +58,10 @@ public class StatsRepo {
                 ORDER BY id;
                 """;
 
+        // Rowmapper opretter et Bean objekt som skal mappe sql data til et rentalcontract objekt
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
+
+        // Der laves en liste som indeholder rentalcontract objekterne
         List<RentalContract> rentalContractList = template.query(sql, rowMapper);
 
         // Da vi har med en liste af kontrakter at gøre, loopes over listen
@@ -65,8 +69,12 @@ public class StatsRepo {
 
             // Tilføjer et bil-objekt som felt i lejekontrakt-objektet
             String sqlCar = "SELECT * FROM car WHERE VehicleNumber = ?";
+
+            // Her mapper vi sql data til et car-objekt
             RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
             Car carTmp = template.queryForObject(sqlCar, rowMapper2, rentalContract.getCarVehicleNumber());
+
+            // Og gemmer objektet i rentalcontracten
             rentalContract.setRentalCar(carTmp);
 
             // Tilføjer et renter-objekt som felt i lejekontrakt-objektet
@@ -85,12 +93,16 @@ public class StatsRepo {
                 ORDER BY id;
                 """;
 
+            // Her mapper vi tilsvarende sql resultater til et renter-objekt
             RowMapper<Renter> rowMapper3 = new BeanPropertyRowMapper<>(Renter.class);
             Renter renterTmp = template.queryForObject(sqlRenter, rowMapper3, rentalContract.getRenterID());
+
+            // Og gemmer objektet i rentalcontracten
             rentalContract.setRentalRenter(renterTmp);
 
         }
 
+        // Den endelige liste af rentalcontract objekter inklusive dens underliggende car- og renter-objekter
         return rentalContractList;
     }
 
@@ -174,12 +186,14 @@ public class StatsRepo {
         yearTotals.add(sumOfInitial);
         yearTotals.add(sumOfMonthly);
 
+        // Laver en liste af lister og gemmer de 4 lister i den
         List<List<Double>> revenueList = new ArrayList<>();
         revenueList.add(initialList);
         revenueList.add(monthlyList);
         revenueList.add(totalList);
         revenueList.add(yearTotals);
 
+        // Returnerer listen af lister
         return revenueList;
     }
 
