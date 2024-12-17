@@ -82,13 +82,14 @@ public class HomeController {
     @GetMapping("/alle_salgsaftaler")
     public String alleSalgsaftaler(Model model, @RequestParam Map<String, String> vin) {
 
-        // Check if the request contains the VIN parameter
+
+        //Checker om request har et VIN parameter
         if (vin.containsKey("vin")) {
             model.addAttribute("salesContracts", carService.searchSalesContracts(vin.get("vin")));
             return "home/alle_salgsaftaler";
         }
 
-        // Otherwise, fetch all sales contracts
+        // fetch alle salgsaftaler
         model.addAttribute("salesContracts", carService.fetchAllSalesContracts());
         return "home/alle_salgsaftaler";
     }
@@ -128,6 +129,7 @@ public class HomeController {
         return "home/udlejede_biler";
     }
 
+    //Laver en en lejekontrakt vja.
     @GetMapping("/opret_lejekontrakt")
     public String createRentalContractForm(Model model) {
 

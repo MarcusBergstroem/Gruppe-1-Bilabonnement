@@ -59,7 +59,7 @@ public class CarService {
     }
     public void addBuyer(Buyer b) {
         // Add or retrieve the geography ID
-        int geoId = buyerRepo.addBuyerGeo(b.getCountry(), b.getCountry(), b.getCity(), b.getZipcode());
+        int geoId = buyerRepo.addBuyerGeo(b.getCountry(), b.getCity(), b.getZipcode(), b.getAddress());
 
         // Insert the buyer with the retrieved geography ID
         buyerRepo.addBuyer(b, geoId);
