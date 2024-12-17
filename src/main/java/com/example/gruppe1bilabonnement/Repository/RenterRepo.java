@@ -25,12 +25,12 @@ public class RenterRepo {
         this.template = template;
     }
 
-    public List<Renter> fetchAllRenters() {
+    public List<Renter> fetchAllRenters() { //Henter alle lejere fra databasen
         String sql = "SELECT * FROM renter";
         RowMapper<Renter> rowMapper = new BeanPropertyRowMapper<>(Renter.class);
         return template.query(sql, rowMapper);
     }
-
+    //Indsætter data i geography tabellen i databasen og genbruger existingId hvis databasen allerede har den geografi
     public int addGeography(String country, String city, String zipCode) {
         String selectSql = "SELECT ID FROM geography WHERE Country = ? AND City = ? AND ZipCode = ?";
         Integer existingId = null;
@@ -55,7 +55,7 @@ public class RenterRepo {
 
         return keyHolder.getKey().intValue(); // Return the newly generated ID
     }
-
+    //Gemmer lejer i databasen inkl geografiID som er fremmednøgle for geotabellen
     public void addRenter(Renter r, int geographyId) {
         String sql = "INSERT INTO renter (GeographyID, CPR, FirstName, LastName, Address, Blacklist, PhoneNumber) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";

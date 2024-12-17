@@ -19,7 +19,7 @@ public class SalesContractRepo {
     public SalesContractRepo(JdbcTemplate template) {
         this.template = template;
     }
-
+    //Gemmer salgsaftaler i databasen
     public void addSalesContract (SalesContract salesContract){
         String sql = "INSERT INTO salescontract (BuyerId, VehicleNumber, SaleDate, DeliveryAddress, SalePrice, " +
                 "TotalKilometers, Options, RochsTransport) " +
@@ -38,6 +38,7 @@ public class SalesContractRepo {
         String updateCarStatusSql = "UPDATE car SET RentalStatus = ? WHERE VehicleNumber = ?";
         template.update(updateCarStatusSql, "sold", salesContract.getVehicleNumber());
     }
+    //Henter og laver en liste med alle salgsaftaler i databasen
     public List<SalesContract> fetchSalesContracts() {
         String sql = """
     SELECT 
@@ -73,7 +74,7 @@ public class SalesContractRepo {
         return template.query(sql, (rs, rowNum) -> {
             SalesContract salesContract = new SalesContract();
 
-            // Populate SalesContract fields
+            // Indsætter salgsaftale dejtaler
             salesContract.setContractId(rs.getInt("ContractId"));
             salesContract.setSaleDate(rs.getDate("SaleDate").toLocalDate());
             salesContract.setSalePrice(rs.getDouble("SalePrice"));
@@ -82,7 +83,7 @@ public class SalesContractRepo {
             salesContract.setOptions(rs.getString("Options"));
             salesContract.setRochsTransport(rs.getBoolean("RochsTransport"));
 
-            // Populate Buyer details
+            // Indsætter køber detaljer
             Buyer buyer = new Buyer();
             buyer.setCompanyName(rs.getString("CompanyName"));
             buyer.setCvr(rs.getString("CVR"));
@@ -93,7 +94,7 @@ public class SalesContractRepo {
             buyer.setCountry(rs.getString("Country"));
             salesContract.setBuyer(buyer);
 
-            // Populate Car details
+            // Indsætter bil detaljer
             Car car = new Car();
             car.setVehicleNumber(rs.getInt("VehicleNumber"));
             car.setCarBrand(rs.getString("CarBrand"));
@@ -106,7 +107,7 @@ public class SalesContractRepo {
         });
     }
     public List<SalesContract> searchSalesContracts(String vin) {
-        //fetcher alle lejekontraker som matcher på vin nummeret
+        //fetcher alle salgsaftaler som matcher på vin nummeret
         String sql = """        
         SELECT 
             sc.ContractId,

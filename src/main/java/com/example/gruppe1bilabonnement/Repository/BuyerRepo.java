@@ -36,7 +36,7 @@ public class BuyerRepo {
         }
 
         if (existingId != null) {
-            return existingId; // Return the existing ID
+            return existingId; // Returnere existingId
         }
 
         // Indsæter information i BuyerGeo-tabellen og finder primærnøglen
@@ -53,6 +53,7 @@ public class BuyerRepo {
 
         return keyHolder.getKey().intValue(); // Returnere id
     }
+    //
     public void addBuyer(Buyer buyer, int buyerGeoId) {
         String sql = "INSERT INTO buyer (CompanyName, CVR, PhoneNumber, BuyerGeoID) VALUES (?, ?, ?, ?)";
         template.update(sql,
