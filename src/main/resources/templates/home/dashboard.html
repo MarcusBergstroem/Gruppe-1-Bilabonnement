@@ -12,9 +12,11 @@
 
 <h1><b>Statistik: Dashboard</b></h1>
 
-<p>Gennemsnitlig salgstid af biler efter de kommer retur:</p>
+<div class="revenue-container">
+    <p>Omsætning pr. måned i indeværende år, baseret på kontraktens startdato.</p>
+    <p><strong th:text="${#numbers.formatDecimal(avgSalesTime, 1, 0)} + ' dage'"></strong></p>
+</div>
 
-<p th:text="${#numbers.formatDecimal(avgSalesTime, 1, 0)} + ' dage'"></p>
 
 
 <table class="styled-table">

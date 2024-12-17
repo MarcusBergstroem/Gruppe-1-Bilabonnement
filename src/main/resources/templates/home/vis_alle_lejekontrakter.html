@@ -12,9 +12,10 @@
 
 <h1>Statistik: Alle lejekontrakter</h1>
 
-<p>Omsætning i indeværende måned fra udlejede biler, dvs. månedlig ydelse på biler som er udlejet i øjeblikket:</p>
-<p th:text="${#numbers.formatDecimal(rentedCarsThisMonthRevenue, 1, 0)} + ' kr.'"></p>
-
+<div class="revenue-container">
+    <p>Omsætning i indeværende måned fra udlejede biler, dvs. månedlig ydelse på biler som er udlejet i øjeblikket:</p>
+    <p><strong th:text="${#numbers.formatDecimal(rentedCarsThisMonthRevenue, 1, 0)} + ' kr.'"></strong></p>
+</div>
 <table class="styled-table">
     <thead>
     <tr>
