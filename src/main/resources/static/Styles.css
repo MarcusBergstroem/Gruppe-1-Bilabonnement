@@ -403,6 +403,14 @@ button:hover {
     display: grid;
 }
 
+.onebutton{
+    padding: 2em 1em 2em !important;
+}
+
+.twobuttons {
+    padding: 12px 15px !important;
+}
+
 tr:hover .action-button {
     opacity: 1;
     visibility: visible;
@@ -564,7 +572,9 @@ tr:hover .action-button {
 
 .alert{
     position: absolute;
-    top: 20%;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
     padding:2px 1em;
     text-align: center;
     color: white

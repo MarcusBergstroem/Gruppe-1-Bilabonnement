@@ -12,7 +12,6 @@ public class Renter {
     private boolean blacklist;
     private String phoneNumber;
 
-    // Constructor
     public Renter() {}
 
     public Renter(int id, String cpr, String firstName, String lastName, String address, String country,
@@ -29,7 +28,6 @@ public class Renter {
         this.phoneNumber = phoneNumber;
     }
 
-    // Getters and Setters
     public int getId() {
         return id;
     }

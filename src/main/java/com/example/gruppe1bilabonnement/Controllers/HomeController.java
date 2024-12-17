@@ -26,7 +26,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        //model.addAttribute("madvarer", carService.fetchAll())
         return "home/index";
     }
     @GetMapping("/bilsalg")
@@ -96,7 +95,6 @@ public class HomeController {
 
     @GetMapping("/salg_og_udlejning")
     public String sales_and_rentals(Model model) {
-        //model.addAttribute("madvarer", carService.fetchAll())
         return "home/salg_og_udlejning";
     }
 
@@ -241,6 +239,13 @@ public class HomeController {
         return "home/opret_skadejournal";
     }
 
+    @GetMapping("vis_alle_salgskontrakter")
+    public String showAllSalesContracts(Model model) {
+        // anvende samme metode som sælgeren allerede har i sit view
+        model.addAttribute("salesContracts", carService.fetchAllSalesContracts());
+        return "home/vis_alle_salgskontrakter";
+    }
+
     @PostMapping("opret_skadejournal")
     public String createDamageReport(@RequestParam Map<String, String> formData) throws UnsupportedEncodingException {
         carService.addDamageReport(formData);
@@ -261,42 +266,31 @@ public class HomeController {
         return "redirect:/skadejournal_detaljer?vehicleNumber=" + vehicleNumber;
     }
 
-
-
-
-
     @GetMapping("/lejedetaljer")
     public String showRentalDetails(@RequestParam("regNumber") String regNumber, Model model) {
-        // Finder rentalContract ved hjælp af regNumber
         RentalContract rentalContract = rentalContractRepo.findByRegistrationNumber(regNumber);
         if (rentalContract == null) {
-            // Håndter tilfælde hvor rentalContract ikke findes
             return "errorPage";
         }
 
-        // Henter totalDamagePrice ved hjælp af carVehicleNumber
         Double totalDamagePrice = rentalContractRepo.getTotalDamagePrice(rentalContract.getCarVehicleNumber());
         if (totalDamagePrice == null) {
-            totalDamagePrice = 0.0;  // Hvis totalDamagePrice er null, sæt det til 0
+            totalDamagePrice = 0.0;
         }
 
-        // Beregner prisen for overkørte kilometer
         Double additionalKMPrice = rentalContractRepo.calculateExtraKMPrice(rentalContract.getCarVehicleNumber());
         if (additionalKMPrice == null) {
-            additionalKMPrice = 0.0;  // Hvis additionalKMPrice er null, sæt det til 0
+            additionalKMPrice = 0.0;
         }
 
-        // Beregner den samlede pris ved at summere totalDamagePrice og additionalKMPrice
         Double totalPrice = totalDamagePrice + additionalKMPrice;
 
-        // Tilføjer data til model
         model.addAttribute("rentalContractDetails", carService.fetchRentalContractDetails(regNumber));
         model.addAttribute("totalDamagePrice", totalDamagePrice);
         model.addAttribute("additionalKMPrice", additionalKMPrice);
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("hasJournal", carService.hasJournal(regNumber));
 
-        // Returnerer Thymeleaf-template
         return "home/lejedetaljer";
     }
 

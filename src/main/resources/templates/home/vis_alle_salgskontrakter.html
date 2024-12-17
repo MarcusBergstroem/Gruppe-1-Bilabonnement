@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vis alle salgsaftaler</title>
+    <title>Alle salgskontrakter</title>
     <link rel="stylesheet" href="/Styles.css">
     <link rel="icon" type="image/png" href="/images/logo.png">
 </head>
@@ -10,15 +10,10 @@
 
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<h1>Alle salgsaftaler</h1>
+<h1>Statistik: Alle salgskontrakter</h1>
 
-<form method="GET" action="/alle_salgsaftaler">
-    <label>
-        Søg efter VIN:
-        <input type="text" name="vin" placeholder="Indtast VIN">
-    </label>
-    <input type="submit" value="Søg">
-</form>
+<p>Alle solgte biler og hvem der har købt dem.</p>
+
 
 <table class="styled-table">
     <thead>
@@ -69,6 +64,7 @@
         <td th:text="${oneContractDetail.rochsTransport ? 'Ja' : 'Nej'}"></td>
     </tr>
     </tbody>
+</table>
 </table>
 </body>
 </html>

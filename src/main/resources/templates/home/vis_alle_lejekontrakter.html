@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Alle lejekontrakter</title>
     <link rel="stylesheet" href="/Styles.css">
+    <link rel="icon" type="image/png" href="/images/logo.png">
 </head>
 <body>
 
@@ -44,7 +45,6 @@
         <th>Model</th>
         <th>Udstyrsniveau</th>
         <th>Stelnr.</th>
-        <th>Returneringsdato</th>
         <th>Bilstatus</th>
 
     </tr>
@@ -78,7 +78,6 @@
         <td th:text="${oneContractDetail.rentalCar.carModel}"></td>
         <td th:text="${oneContractDetail.rentalCar.equipmentLevel}"></td>
         <td th:text="${oneContractDetail.rentalCar.vin}"></td>
-        <td th:text="${oneContractDetail.rentalCar.returnDate}"></td>
         <td th:text="${oneContractDetail.rentalCar.rentalStatus}"></td>
     </tr>
     </tbody>

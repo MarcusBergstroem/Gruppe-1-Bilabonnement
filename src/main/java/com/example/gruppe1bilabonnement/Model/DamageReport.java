@@ -6,13 +6,13 @@ import java.util.List;
 
 public class DamageReport {
 
-    //Måske unødvendig
+
     private int carVehicleNumber;
     private int id;
 
     private List<Damage> damageList;
 
-    //Default Constructor
+
     public DamageReport(){
         damageList = new ArrayList<>();
     }
