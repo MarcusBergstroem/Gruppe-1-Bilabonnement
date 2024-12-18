@@ -114,7 +114,8 @@ public class StatsRepo {
                     rent.*, 
                     geo.Zipcode AS zipCode, 
                     geo.City AS city, 
-                    geo.Country AS country
+                    geo.Country AS country,
+                    geo.Address as address
                 FROM 
                     renter rent
                 INNER JOIN 
