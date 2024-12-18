@@ -17,35 +17,37 @@ import static org.mockito.Mockito.*;
 class CarServiceTest {
 
     @Mock
+    // Annotationen viser at dette er en mock af CarRepo (en simuleret udgave)
+    //bruges til at isolere testen og dermed undgå at den snakker med databassen
     private CarRepo carRepo;
-
     @InjectMocks
+    // Injicerer den mockede CarRepo ind i CarService
+    // Gør det muligt at teste CarService med den mockede version
     private CarService carService;
-
     @BeforeEach
+        // Metoden kører før hver test og initialiserer alle mocks der er i testklassen
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-
     @Test
     void testFetchAllAvailableCars() {
-
+        // Tester fetchAllAvailableCars-metoden i CarService
+        // Checker om at den returnerer korrekte biler og kalder repository korrekt
         List<Car> mockCars = List.of(
-                new Car(1, 123, "Toyota", "Corolla", "Basic", "VIN123", "2024-12-31", "available"),
-                new Car(2, 456, "Ford", "Focus", "Luxury", "VIN456", "2024-10-10", "available")
-        );
-
-
+                //Den simulerede liste af biler fra databasen
+                new Car(1, 123, "Toyota", "Corolla",
+                        "Basic", "VIN123", "2024-12-31", "available"),
+                new Car(2, 456, "Ford", "Focus", "Luxury",
+                        "VIN456", "2024-10-10", "available"));
+        // Stub opførsel: Når fetchAllAvailableCars() bliver kaldt, returneres den simulerede data (mocken) - mockCars
         when(carRepo.fetchAllAvailableCars()).thenReturn(mockCars);
-
-
+        // Kald metoden vi tester
         List<Car> result = carService.fetchAllAvailableCars();
-
-
+        // Checker om listen indeholder 2 biler
         assertEquals(2, result.size(), "Der burde være 2 biler i listen");
+        //Checker om den første bil er en Toyota
         assertEquals("Toyota", result.get(0).getCarBrand(), "Den første bil burde være Toyota");
-
-
+        //Checker om metoden bliver kørt kun en gang
         verify(carRepo, times(1)).fetchAllAvailableCars();
     }
     @Test
