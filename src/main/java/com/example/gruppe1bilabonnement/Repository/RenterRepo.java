@@ -40,9 +40,9 @@ public class RenterRepo {
             // Hvis den ikke returnere noget kaster den denne exception
         }
         if (existingId != null) {
-            return existingId; // Return the existing ID
+            return existingId; // Returnere id
         }
-        // Insert a new geography record
+        // Indsætter i geografi tabellen
         String insertSql = "INSERT INTO geography (Country, City, ZipCode, Address) VALUES (?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(connection -> {
