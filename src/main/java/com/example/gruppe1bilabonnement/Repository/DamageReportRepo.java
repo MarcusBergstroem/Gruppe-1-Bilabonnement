@@ -65,6 +65,7 @@ public class DamageReportRepo {
         if (!chunk.isEmpty()) {
             System.out.println("Processing extra chunk: " + chunk);
             damageReport.setCarVehicleNumber(Integer.parseInt(chunk.get(0)));
+            //Hvis der ikke er blevet indtastet en kilometerstand, skipper vi at tilføje den til databasen
             if(chunk.size() > 1) {
                 addMileage(Integer.parseInt(chunk.get(1)), damageReport.getCarVehicleNumber());
             }
