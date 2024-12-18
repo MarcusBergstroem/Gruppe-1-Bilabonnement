@@ -121,10 +121,6 @@ public class CarService {
         return statsRepo.revenueYearToDate();
     }
 
-    public List<DamageReport> fetchAllDamageReports() {
-        return damageReportRepo.fetchAllDamageReports();
-    }
-
     public void addDamageReport(Map<String, String> formData){
         damageReportRepo.addDamageReport(damageReportRepo.assembleDamageReport(formData));
     }
