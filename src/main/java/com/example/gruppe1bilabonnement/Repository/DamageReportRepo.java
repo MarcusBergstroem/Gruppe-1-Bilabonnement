@@ -2,7 +2,6 @@ package com.example.gruppe1bilabonnement.Repository;
 
 import com.example.gruppe1bilabonnement.Model.Damage;
 import com.example.gruppe1bilabonnement.Model.DamageReport;
-import com.example.gruppe1bilabonnement.Model.RentalContract;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

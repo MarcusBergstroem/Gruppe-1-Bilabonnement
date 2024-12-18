@@ -1,9 +1,6 @@
 package com.example.gruppe1bilabonnement.Repository;
 
 import com.example.gruppe1bilabonnement.Model.Buyer;
-import com.example.gruppe1bilabonnement.Model.RentalContract;
-import com.example.gruppe1bilabonnement.Model.Renter;
-import com.example.gruppe1bilabonnement.Model.SalesContract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
