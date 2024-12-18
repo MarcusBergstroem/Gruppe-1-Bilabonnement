@@ -28,7 +28,7 @@ public class RentalContractRepo {
     }
 
     public RentalContract fetchRentalContractDetails(String regNumber) {
-        // SQL-forespørgsel for at hente oplysninger om lejekontrakten
+        // SQL-forespørgsel for at hente oplysninger om lejekontrakten og locations
         String sql = """
             SELECT 
                 rc.*, 
@@ -52,25 +52,25 @@ public class RentalContractRepo {
                 rc.RegistrationNumber = ?;
             """;
 
-        // Brug `query` i stedet for `queryForObject` for at håndtere flere resultater
+        // Mapper resultaterne til en liste af rentalcontracts som indeholder 1 rentalcontract objekt
         RowMapper<RentalContract> rowMapper1 = new BeanPropertyRowMapper<>(RentalContract.class);
         List<RentalContract> rentalContracts = template.query(sql, rowMapper1, regNumber);
 
-        // Hvis der ikke er nogen resultater, returner null
+        // Hvis der ikke er nogen resultater, returneres null
         if (rentalContracts.isEmpty()) {
             return null;
         }
 
-        // Brug den første lejekontrakt i listen
+        // Bruger den første lejekontrakt i listen (der er kun 1)
         RentalContract rentalTmp = rentalContracts.get(0);
 
-        // Hent biloplysninger
+        // Henter biloplysninger ud fra den lejekontrakts vognnummer/vehiclenumber
         String sqlCar = "SELECT * FROM car WHERE VehicleNumber = ?";
         RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
         Car carTmp = template.queryForObject(sqlCar, rowMapper2, rentalTmp.getCarVehicleNumber());
         rentalTmp.setRentalCar(carTmp);
 
-        // Hent lejers oplysninger
+        // Hent lejers oplysninger ud fra den lejekontrakts lejerID
         String sqlRenter = """
             SELECT 
                 rent.*, 
