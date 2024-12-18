@@ -232,7 +232,7 @@ public class RentalContractRepo {
         String updateCarStatusSql = "UPDATE car SET RentalStatus = ? WHERE VehicleNumber = ?";
         template.update(updateCarStatusSql, "Leased", rentalContract.getCarVehicleNumber());
     }
-    public List<RentalContract> fetchAllLeasedCars(){
+    public List<RentalContract> fetchAllCarsWithoutDamageReport(){
 
         //SQL Query der finder alle lejekontraker med biler som har rentalstatus = leased
         String sql = """
@@ -257,7 +257,7 @@ public class RentalContractRepo {
             delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
         INNER JOIN
             car c on rc.carvehiclenumber = c.vehiclenumber
-        where rentalstatus='leased' or rentalstatus='sold'
+        where damagereportid is null
         order by returndate asc 
     """;
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
@@ -295,7 +295,7 @@ public class RentalContractRepo {
     }
 
     //Gør det samme som fetchAllLeasedCars(), men bruger wilcards til at lade brugeren søge
-    public List<RentalContract> searchAllLeasedCars(String regNumber){
+    public List<RentalContract> searchAllCarsWithoutDamageReport(String regNumber){
 
         String sql = """
         SELECT 
@@ -319,7 +319,7 @@ public class RentalContractRepo {
             delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
         INNER JOIN
             car c on rc.carvehiclenumber = c.vehiclenumber
-        where rentalstatus='leased' and registrationNumber like concat('%', ?, '%')
+        where damagereportid is null and registrationNumber like concat('%', ?, '%')
         order by returndate asc 
     """;
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
