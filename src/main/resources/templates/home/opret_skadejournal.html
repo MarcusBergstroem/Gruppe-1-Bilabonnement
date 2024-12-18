@@ -12,6 +12,7 @@
 
 <h1>Opret Skadejournal</h1>
 <form action="/opret_skadejournal" method="post" class="create-form" style="max-width: 100%">
+    <div class="damage-header">
     <h2>Skade information</h2>
     <!-- Man tilføjer kun på denne side, så hvis man vil have flere skdaer end 10, kan man genåbne siden efter at have oprettet de første 10  -->
 
@@ -41,6 +42,7 @@
         </tr>
         </tbody>
     </table>
+    </div>
     <input type="hidden" name="vehicleNumber" th:value="${vehicleNumber}">
     <label class="mileage" for="mileage">Kilometerstand: </label>
     <input id="mileage" type="number" name="mileage">
