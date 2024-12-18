@@ -519,6 +519,7 @@ public class RentalContractRepo {
         }
     }
 
+    //beregner pris for overkørt kilometer, og den gør det kun hvis bilen har overkørt de kilometer som der er blevet tastet ind af brugeren
     public Double calculateExtraKMPrice(int carVehicleNumber) {
         double totalKilometers = fetchTotalKilometers(carVehicleNumber);
 
