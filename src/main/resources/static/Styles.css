@@ -460,6 +460,8 @@ tr:hover .action-button {
 
 .summary {
     width: 50%;
+    margin: 0 auto;
+    text-align: left;
 }
 
 .summary div {
@@ -657,4 +659,10 @@ tr:hover .action-button {
     font-size: 2.5rem;
     font-weight: bold;
     color: #4caf50;
+}
+
+.damage-header {
+    margin: 20px auto;
+    color: #333;
+    text-align: center;
 }
