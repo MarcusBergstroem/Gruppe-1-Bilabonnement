@@ -131,7 +131,7 @@ public class DamageReportRepo {
         int id = template.queryForObject(sql, Integer.class, vehicleNumber);
 
         //Finder totale pris på alle skader, vec hjælp af SUM funktion i mysql
-        String sqlPrice = "select SUM(price) from damage where damagereportid = ?";
+        String sqlPrice = "select IFNULL(SUM(price), 0) from damage where damagereportid = ?";
         return template.queryForObject(sqlPrice, Double.class, id);
     }
 }

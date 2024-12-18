@@ -147,7 +147,7 @@ public class SalesContractRepo {
         FROM 
             buyer b
         INNER JOIN 
-            buyergeo bg ON b.BuyerGeoID = bg.id;
+            geoography bg ON b.BuyerGeoID = bg.id;
     """;
         RowMapper<Buyer> buyerRowMapper = new BeanPropertyRowMapper<>(Buyer.class);
         List<Buyer> buyerList = template.query(sqlBuyer, buyerRowMapper);
