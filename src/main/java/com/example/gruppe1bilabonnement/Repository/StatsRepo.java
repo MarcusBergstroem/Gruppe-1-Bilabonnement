@@ -80,7 +80,8 @@ public class StatsRepo {
             // Tilføjer et renter-objekt som felt i lejekontrakt-objektet
             String sqlRenter = """
                 SELECT 
-                    rent.*, 
+                    rent.*,
+                    geo.Address AS address,
                     geo.Zipcode AS zipCode, 
                     geo.City AS city, 
                     geo.Country AS country
