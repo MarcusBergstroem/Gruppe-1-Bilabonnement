@@ -125,8 +125,8 @@ public class CarService {
         damageReportRepo.addDamageReport(damageReportRepo.assembleDamageReport(formData));
     }
 
-    public List<RentalContract> fetchAllLeasedCars() {
-        return rentalContractRepo.fetchAllLeasedCars();
+    public List<RentalContract> fetchAllCarsWithoutDamageReport() {
+        return rentalContractRepo.fetchAllCarsWithoutDamageReport();
     }
 
     public DamageReport fetchDamageReport(int vehicleNumber){
@@ -162,8 +162,8 @@ public class CarService {
         return rentalContractRepo.hasJournal(regNumber);
     }
 
-    public List<RentalContract> searchAllLeasedCars(String regNumber){
-        return rentalContractRepo.searchAllLeasedCars(regNumber);
+    public List<RentalContract> searchAllCarsWithoutDamageReport(String regNumber){
+        return rentalContractRepo.searchAllCarsWithoutDamageReport(regNumber);
     }
     public List<RentalContract> searchAllContracts_With_DamageReport(String regNubmer){
         return rentalContractRepo.searchAllContractsWithDamageReport(regNubmer);

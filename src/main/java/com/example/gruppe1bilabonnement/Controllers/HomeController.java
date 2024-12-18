@@ -220,11 +220,11 @@ public class HomeController {
     public String damageReportOverview(Model model, @RequestParam Map<String, String> regNumber) {
 
         if (regNumber.containsKey("regNumber")) {
-            model.addAttribute("rentalContractsLeased", carService.searchAllLeasedCars(regNumber.get("regNumber")));
+            model.addAttribute("rentalContractsLeased", carService.searchAllCarsWithoutDamageReport(regNumber.get("regNumber")));
             model.addAttribute("rentalContractsWithDamageReport", carService.searchAllContracts_With_DamageReport(regNumber.get("regNumber")));
             return "home/skadeshåndtering";
         }
-        model.addAttribute("rentalContractsLeased", carService.fetchAllLeasedCars());
+        model.addAttribute("rentalContractsLeased", carService.fetchAllCarsWithoutDamageReport());
         model.addAttribute("rentalContractsWithDamageReport", carService.fetchAllContracts_With_DamageReport());
         return "home/skadeshåndtering";
     }
