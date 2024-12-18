@@ -257,7 +257,7 @@ public class RentalContractRepo {
             delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
         INNER JOIN
             car c on rc.carvehiclenumber = c.vehiclenumber
-        where rentalstatus='leased' and rentalstatus='sold'
+        where rentalstatus='leased' or rentalstatus='sold'
         order by returndate asc 
     """;
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
