@@ -57,6 +57,9 @@
     </div>
     <div class="form-group">
         <label>
+            <!-- Checkbox som ikke er checked sender normalt null som value.
+            Vi laver derfor en gemt checkbox, som har value 0. Derfor bliver 0 sendt i stedet, hvis den ikke er checked -->
+            <input type="hidden" name="rochsTransport" value="0">
             <input type="checkbox" name="rochsTransport"> Roch's Transport leverer bilen
         </label>
     </div>
