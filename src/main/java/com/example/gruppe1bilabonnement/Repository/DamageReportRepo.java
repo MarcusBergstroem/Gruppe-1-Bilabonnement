@@ -65,7 +65,9 @@ public class DamageReportRepo {
         if (!chunk.isEmpty()) {
             System.out.println("Processing extra chunk: " + chunk);
             damageReport.setCarVehicleNumber(Integer.parseInt(chunk.get(0)));
-            addMileage(Integer.parseInt(chunk.get(1)), damageReport.getCarVehicleNumber());
+            if(chunk.size() > 1) {
+                addMileage(Integer.parseInt(chunk.get(1)), damageReport.getCarVehicleNumber());
+            }
         }
         return damageReport;
     }
@@ -85,19 +87,19 @@ public class DamageReportRepo {
 
         //Finder id på den allerede eksisterende eller nylavet række
         String sqlReport = "select id from damagereport where CarVehicleNumber = ?";
-        int id = template.queryForObject(sqlReport, Integer.class, damageReport.getCarVehicleNumber());
+        damageReport.setId(template.queryForObject(sqlReport, Integer.class, damageReport.getCarVehicleNumber()));
 
         //Sætter bilens status til at være atstorage
         String sqlStatus = "update car set rentalstatus = 'atstorage' where vehiclenumber=?";
         template.update(sqlStatus, damageReport.getCarVehicleNumber());
 
         //Indsætter id på skadejournalen i rentalcontract tabellen, hvor vehiclenumber passer
-        String sqlReportID = "update rentalcontract set damagereportid = ? where vehiclenumber=?";
+        String sqlReportID = "update rentalcontract set damagereportid = ? where carvehiclenumber=?";
         template.update(sqlReportID, damageReport.getId(), damageReport.getCarVehicleNumber());
 
         //Indsæter alle skader i damage tabellen
         for (Damage damage : damageReport.getDamageList()){
-            addDamage(damage, id);
+            addDamage(damage, damageReport.getId());
         }
 
     }

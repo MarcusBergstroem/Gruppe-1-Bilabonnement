@@ -96,7 +96,7 @@ public class RentalContractRepo {
 
     public List<RentalContract> searchRentalContracts(String regNumber){
 
-        //SQL query som finder alle Rental Contract oplysninger, men med en where clause, hvor hvad brugeren søger efter er omringet af wildcard symboler
+        //SQL query som finder alle lejekontrakt oplysninger, men med en where clause, hvor hvad brugeren søger efter er omringet af wildcard symboler
         String sql = """
             SELECT 
                 rc.*, 
@@ -118,7 +118,7 @@ public class RentalContractRepo {
                 delivery_return_location drl2 ON rc.ReturnLocationID = drl2.id
             where registrationNumber like concat('%', ?, '%')
         """;
-        //Oprettet rowmapper for et RentalContract object
+        //Oprettet rowmapper for et RentalContract objekt
         RowMapper<RentalContract> rowMapper = new BeanPropertyRowMapper<>(RentalContract.class);
         List<RentalContract> rentalContractList = template.query(sql, rowMapper, regNumber);
 
@@ -132,7 +132,7 @@ public class RentalContractRepo {
         RowMapper<DamageReport> rowMapper3 = new BeanPropertyRowMapper<>(DamageReport.class);
         List<DamageReport> damageReportTmp = template.query(sqlDamageReport, rowMapper3);
 
-        //Itererer over alle RentalContract og Car objekter som er fundet, og tildeler RentalContracts car field til det Car objekt som har ens vehiclenumber
+        //Itererer over alle RentalContract og Car objekter som er fundet, og tildeler RentalContract's car field til det Car objekt, som har ens vehiclenumber
         for (RentalContract rentalContract : rentalContractList) {
             for (Car car : carTmp) {
                 if (car.getVehicleNumber() == rentalContract.getCarVehicleNumber()) {
