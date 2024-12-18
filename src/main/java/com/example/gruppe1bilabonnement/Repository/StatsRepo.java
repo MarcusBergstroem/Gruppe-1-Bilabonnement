@@ -249,10 +249,16 @@ public class StatsRepo {
     }
 
     // Metode returnerer gennemsnitlig salgstid på solgte biler
+    // Hvis en
     public double avgSalesTime(){
         String sql = """
             SELECT
-                AVG(DATEDIFF(salescontract.saledate, rentalcontract.returndate)) AS AverageDaysDifference
+                AVG(
+                    CASE 
+                        WHEN DATEDIFF(salescontract.saledate, rentalcontract.returndate) < 0 THEN 0
+                        ELSE DATEDIFF(salescontract.saledate, rentalcontract.returndate)
+                    END
+                ) AS AverageDaysDifference
             FROM 
                 salescontract
             JOIN 
