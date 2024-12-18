@@ -127,7 +127,7 @@ public class HomeController {
         return "home/udlejede_biler";
     }
 
-    //Laver en en lejekontrakt vja.
+    //Laver en en lejekontrakt vha.
     @GetMapping("/opret_lejekontrakt")
     public String createRentalContractForm(Model model) {
 

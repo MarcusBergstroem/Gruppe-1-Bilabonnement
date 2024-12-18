@@ -249,7 +249,7 @@ public class StatsRepo {
     }
 
     // Metode returnerer gennemsnitlig salgstid på solgte biler
-    // Hvis en
+    // Hvis en salgstid er negativ, skal den sættes til 0
     public double avgSalesTime(){
         String sql = """
             SELECT

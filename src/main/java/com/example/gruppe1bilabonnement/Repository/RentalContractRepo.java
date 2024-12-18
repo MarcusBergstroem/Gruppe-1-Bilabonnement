@@ -268,7 +268,6 @@ public class RentalContractRepo {
         RowMapper<Car> rowMapper2 = new BeanPropertyRowMapper<>(Car.class);
         List<Car> carTmp = template.query(sqlCar, rowMapper2);
 
-
         //finder alle skadejournaler
         String sqlDamageReport = "select * from damagereport";
         RowMapper<DamageReport> rowMapper3 = new BeanPropertyRowMapper<>(DamageReport.class);

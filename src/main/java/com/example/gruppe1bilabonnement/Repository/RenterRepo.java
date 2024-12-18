@@ -25,7 +25,8 @@ public class RenterRepo {
         this.template = template;
     }
 
-    public List<Renter> fetchAllRenters() { //Henter alle lejere fra databasen
+    //Henter alle lejere fra databasen
+    public List<Renter> fetchAllRenters() {
         String sql = "SELECT * FROM renter";
         RowMapper<Renter> rowMapper = new BeanPropertyRowMapper<>(Renter.class);
         return template.query(sql, rowMapper);
@@ -37,7 +38,7 @@ public class RenterRepo {
         try {
             existingId = template.queryForObject(selectSql, new Object[]{country, city, zipCode, address}, Integer.class);
         } catch (EmptyResultDataAccessException e) {
-            // Hvis den ikke returnere noget kaster den denne exception
+            // Hvis den ikke returnerer noget, kaster den denne exception
         }
         if (existingId != null) {
             return existingId; // Returnere id
@@ -54,7 +55,7 @@ public class RenterRepo {
             return ps;
         }, keyHolder);
 
-        return keyHolder.getKey().intValue(); // Return the newly generated ID
+        return keyHolder.getKey().intValue(); // Returnerer den nye ID
     }
     //Gemmer lejer i databasen inkl geografiID som er fremmednøgle for geotabellen
     public void addRenter(Renter r, int geographyId) {
