@@ -127,7 +127,7 @@ public class HomeController {
         return "home/udlejede_biler";
     }
 
-    //Laver en en lejekontrakt vha.
+    //Laver en lejekontrakt
     @GetMapping("/opret_lejekontrakt")
     public String createRentalContractForm(Model model) {
 
@@ -262,6 +262,8 @@ public class HomeController {
         return "redirect:/skadejournal_detaljer?vehicleNumber=" + vehicleNumber;
     }
 
+    //Står for at få pris og overkørt kilometer pris til vores html "lejedetaljer"
+    //sammen med nogen attributer som rentalContractDetails og hasJournal
     @GetMapping("/lejedetaljer")
     public String showRentalDetails(@RequestParam("regNumber") String regNumber, Model model) {
         RentalContract rentalContract = rentalContractRepo.findByRegistrationNumber(regNumber);
