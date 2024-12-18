@@ -544,11 +544,11 @@ public class RentalContractRepo {
 
     public Boolean hasJournal(String regNumber) {
 
-        //Finder vehiclenumber på den kontrakt, som har det passeret registreringsnummer
+        //Finder vehiclenumber på den kontrakt, som har det givet registreringsnummer
         String sqlContract = "select carvehiclenumber from rentalcontract where registrationNumber = ?";
         int carVNumber = template.queryForObject(sqlContract, Integer.class, regNumber);
 
-        //Bruger det fundet vehiclenumber til at se hvor mange rows der findes i damagereport tabellen, som har det fundet vehiclenumber
+        //Finder hvor mange rows der er i damagereport tabellen, hvor kotraktens carvehiclenumber bruges
         //Vores system tillader ikke flere skadejournaler pr. bil, så count vil altid svare til en boolean, om skadejournalen findes eller ej.
         String sqlDamageReport = "select count(*) from damagereport where carvehiclenumber=?";
         return template.queryForObject(sqlDamageReport, Boolean.class, carVNumber);
